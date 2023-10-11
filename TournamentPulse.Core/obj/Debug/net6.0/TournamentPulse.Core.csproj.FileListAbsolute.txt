@@ -1,0 +1,11 @@
+C:\GfL\TournamentPulse\TournamentPulse.Core\bin\Debug\net6.0\TournamentPulse.Core.deps.json
+C:\GfL\TournamentPulse\TournamentPulse.Core\bin\Debug\net6.0\TournamentPulse.Core.dll
+C:\GfL\TournamentPulse\TournamentPulse.Core\bin\Debug\net6.0\TournamentPulse.Core.pdb
+C:\GfL\TournamentPulse\TournamentPulse.Core\obj\Debug\net6.0\TournamentPulse.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\GfL\TournamentPulse\TournamentPulse.Core\obj\Debug\net6.0\TournamentPulse.Core.AssemblyInfoInputs.cache
+C:\GfL\TournamentPulse\TournamentPulse.Core\obj\Debug\net6.0\TournamentPulse.Core.AssemblyInfo.cs
+C:\GfL\TournamentPulse\TournamentPulse.Core\obj\Debug\net6.0\TournamentPulse.Core.csproj.CoreCompileInputs.cache
+C:\GfL\TournamentPulse\TournamentPulse.Core\obj\Debug\net6.0\TournamentPulse.Core.dll
+C:\GfL\TournamentPulse\TournamentPulse.Core\obj\Debug\net6.0\refint\TournamentPulse.Core.dll
+C:\GfL\TournamentPulse\TournamentPulse.Core\obj\Debug\net6.0\TournamentPulse.Core.pdb
+C:\GfL\TournamentPulse\TournamentPulse.Core\obj\Debug\net6.0\ref\TournamentPulse.Core.dll

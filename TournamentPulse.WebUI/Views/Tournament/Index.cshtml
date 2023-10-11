@@ -1,0 +1,44 @@
+﻿@model List<TournamentViewModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List of Tournaments</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <h1>List of Tournaments</h1>
+
+    @if (Model.Any())
+    {
+        <div class="container">
+            <div class="row">
+                @foreach (var tournament in Model)
+                {
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <img src="~Images\tms-2023-lviv.png" class="card-img-top" alt="@tournament.Name">
+                            <div class="card-body">
+                                <h5 class="card-title">@tournament.Name</h5>
+                                <p class="card-text">@tournament.Description</p>
+                                <p class="card-text"><strong>Location:</strong> @tournament.Location</p>
+                                <p class="card-text"><strong>Date:</strong> @tournament.Date.ToString("yyyy-MM-dd")</p>
+                                <a href="@Url.Action("Details", "Tournament", new { id = tournament.Id })" class="btn btn-primary">View Details</a>
+                                <a href="@Url.Action("Register", "Tournament", new { id = tournament.Id })" class="btn btn-success">Register</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>No tournaments found.</p>
+    }
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
