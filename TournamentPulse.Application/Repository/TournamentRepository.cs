@@ -17,6 +17,12 @@ namespace TournamentPulse.Application.Repository
         {
             _context = context;
         }
+
+        public Tournament GetById(int id)
+        {
+            return _context.Tournaments.Where(t => t.Id == id).FirstOrDefault();
+        }
+
         public ICollection<Tournament> GetTournaments()
         {
             return _context.Tournaments.OrderBy(t => t.Id).ToList();

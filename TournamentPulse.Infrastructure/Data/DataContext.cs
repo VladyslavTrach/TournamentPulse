@@ -12,7 +12,6 @@ namespace TournamentPulse.Infrastructure.Data
         {
 
         }
-
         // DbSet properties
         public DbSet<Fighter> Fighters { get; set; }
         public DbSet<Category> Categories { get; set; }
