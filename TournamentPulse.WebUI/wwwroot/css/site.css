@@ -1,18 +1,37 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+.custom-card {
+    background-color: #f2f2f2;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.card-img {
+    margin: 20px; /* Add margin to the image */
+}
+
+.card-body {
+    margin-left: 20px; /* Add margin to the card body */
+}
+
+.second-card-container {
+    margin-top: 20px; /* Adjust the margin-top value as needed */
+    margin-bottom: 20px;
 }

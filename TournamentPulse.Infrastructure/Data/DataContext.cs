@@ -13,16 +13,16 @@ namespace TournamentPulse.Infrastructure.Data
 
         }
         // DbSet properties
-        public DbSet<Fighter> Fighters { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<FighterCategoryTournament> FighterCategoryTournaments { get; set; }
-        public DbSet<Academy> Academies { get; set; }
-        public DbSet<AgeClass> AgeClasses { get; set; }
-        public DbSet<Association> Associations { get; set; }
-        public DbSet<Country> Countries { get; set; }
-        public DbSet<RankClass> RankClasses { get; set; }
-        public DbSet<WeightClass> WeightClasses { get; set; }
-        public DbSet<User> Users { get; set; }
+        //public DbSet<Fighter> Fighters { get; set; }
+        //public DbSet<Category> Categories { get; set; }
+        //public DbSet<FighterCategoryTournament> FighterCategoryTournaments { get; set; }
+        //public DbSet<Academy> Academies { get; set; }
+        //public DbSet<AgeClass> AgeClasses { get; set; }
+        //public DbSet<Association> Associations { get; set; }
+        //public DbSet<Country> Countries { get; set; }
+        //public DbSet<RankClass> RankClasses { get; set; }
+        //public DbSet<WeightClass> WeightClasses { get; set; }
+        //public DbSet<User> Users { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,17 +30,17 @@ namespace TournamentPulse.Infrastructure.Data
             base.OnModelCreating(modelBuilder);
 
             // Apply entity configurations
-            modelBuilder.ApplyConfiguration(new FighterEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new CategoryEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new FighterCategoryTournamentsEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new AcademyEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new AgeClassEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new AssociationEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new CountryEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new RankClassEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new WeightClassEntityConfiguration());
+            //modelBuilder.ApplyConfiguration(new FighterEntityConfiguration());
+            //modelBuilder.ApplyConfiguration(new CategoryEntityConfiguration());
+            //modelBuilder.ApplyConfiguration(new FighterCategoryTournamentsEntityConfiguration());
+            //modelBuilder.ApplyConfiguration(new AcademyEntityConfiguration());
+            //modelBuilder.ApplyConfiguration(new AgeClassEntityConfiguration());
+            //modelBuilder.ApplyConfiguration(new AssociationEntityConfiguration());
+            //modelBuilder.ApplyConfiguration(new CountryEntityConfiguration());
+            //modelBuilder.ApplyConfiguration(new RankClassEntityConfiguration());
+            //modelBuilder.ApplyConfiguration(new WeightClassEntityConfiguration());
             modelBuilder.ApplyConfiguration(new TournamentEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+            //modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
         }
     }
 }

@@ -3,7 +3,7 @@ using TournamentPulse.Application.Interface;
 using TournamentPulse.Application.Repository;
 using TournamentPulse.WebUI.Models;
 using System;
-
+using TournamentPulse.Core.Entities;
 
 namespace TournamentPulse.WebUI.Controllers
 {
@@ -18,22 +18,50 @@ namespace TournamentPulse.WebUI.Controllers
 
         public IActionResult Index()
         {
-            var tournamentsFromRepository = _tournamentRepository.GetTournaments(); // Retrieve tournaments from your repository
+            var tournaments = TournamentMapper(_tournamentRepository.GetTournaments());
 
-            // Map the entity data to DTO
-            var tournamentsViewModel = tournamentsFromRepository.Select(t => new TournamentViewModel
+            return View(tournaments);
+        }
+
+        public IActionResult Detail(int id)
+        {
+            var tournament = TournamentMapper(_tournamentRepository.GetById(id));
+
+            return View(tournament);
+        }
+
+        public TournamentViewModel TournamentMapper(Tournament tournament)
+        {
+            return new TournamentViewModel
+            {
+                Id = tournament.Id,
+                Name = tournament.Name,
+                Description = tournament.Description,
+                Country = tournament.Country,
+                City = tournament.City,
+                Date = tournament.Date,
+                ImageName = tournament.ImageName ?? "https://evolve-mma.com/wp-content/uploads/2022/09/gordon-ryan.jpg",
+                MaxParticipants = tournament.MaxParticipants,
+                Email = tournament.Email,
+                Phone = tournament.Phone ?? "Not Provided"
+            };
+        }
+        public List<TournamentViewModel> TournamentMapper(IEnumerable<Tournament> tournaments)
+        {
+            return tournaments.Select(t => new TournamentViewModel
             {
                 Id = t.Id,
                 Name = t.Name,
                 Description = t.Description,
-                Location = t.Location,
+                Country = t.Country,
+                City = t.City,
                 Date = t.Date,
-                ImageName = t.ImageName ?? "defaultImage.jpg"
-
+                ImageName = t.ImageName ?? "https://evolve-mma.com/wp-content/uploads/2022/09/gordon-ryan.jpg",
+                MaxParticipants = t.MaxParticipants,
+                Email = t.Email,
+                Phone = t.Phone ?? "Not Provided"
             }).ToList();
-
-            return View(tournamentsViewModel);
         }
-
     }
+
 }

@@ -21,8 +21,11 @@ namespace TournamentPulse.Infrastructure.Data.EntityTypeConfiguration
             builder.Property(t => t.Description)
                 .IsRequired(); // Description is required
 
-            builder.Property(t => t.Location)
-                .IsRequired(); // Location is required
+            builder.Property(t => t.Country)
+                .IsRequired(); // Country is required
+
+            builder.Property(t => t.City)
+                .IsRequired(); // City is required
 
             builder.Property(t => t.Date)
                 .IsRequired(); // Date is required
@@ -33,11 +36,11 @@ namespace TournamentPulse.Infrastructure.Data.EntityTypeConfiguration
             builder.Property(t => t.Email)
               .IsRequired(); // Email is required
 
-            builder
-                .HasMany(t => t.Fighters)
-                .WithOne(f => f.Tournament)
-                .HasForeignKey(f => f.TournamentId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder
+            //    .HasMany(t => t.Fighters)
+            //    .WithOne(f => f.Tournament)
+            //    .HasForeignKey(f => f.TournamentId)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
         }
     }
