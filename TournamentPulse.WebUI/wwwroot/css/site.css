@@ -33,6 +33,13 @@ body {
     margin: 20px; /* Add margin to the image */
 }
 
+/* CSS-стиль для обмеження розміру зображень в карточках */
+.events-card-img {
+    width: 100%; /* Фіксована ширина (змініть за потребою) */
+    height: 120px; /* Фіксована висота (змініть за потребою) */
+    object-fit: cover;
+}
+
 .card-body {
     margin-left: 20px; /* Add margin to the card body */
 }
@@ -40,4 +47,8 @@ body {
 .second-card-container {
     margin-top: 20px; /* Adjust the margin-top value as needed */
     margin-bottom: 20px;
+}
+
+.custom-card-add-tournament {
+    background-color: #999999;
 }

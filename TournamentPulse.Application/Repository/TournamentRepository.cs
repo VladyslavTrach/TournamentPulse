@@ -18,6 +18,21 @@ namespace TournamentPulse.Application.Repository
             _context = context;
         }
 
+        public string CreateTournament(Tournament tournament)
+        {
+            try
+            {
+                _context.Tournaments.Add(tournament);
+                _context.SaveChanges();
+                return "Succes";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+
         public Tournament GetById(int id)
         {
             return _context.Tournaments.Where(t => t.Id == id).FirstOrDefault();

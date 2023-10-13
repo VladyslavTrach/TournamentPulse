@@ -36,6 +36,9 @@ namespace TournamentPulse.Infrastructure.Data.EntityTypeConfiguration
             builder.Property(t => t.Email)
               .IsRequired(); // Email is required
 
+            builder.Property(t => t.Price)
+              .IsRequired(); // Price is required
+
             //builder
             //    .HasMany(t => t.Fighters)
             //    .WithOne(f => f.Tournament)
