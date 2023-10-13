@@ -25,7 +25,8 @@ namespace TournamentPulse.WebUI.Controllers
 
         public IActionResult Detail(int id)
         {
-            var tournament = TournamentMapper(_tournamentRepository.GetById(id));
+            var tournamentFromDB = _tournamentRepository.GetById(id);
+            var tournament = TournamentMapper(tournamentFromDB);
 
             return View(tournament);
         }

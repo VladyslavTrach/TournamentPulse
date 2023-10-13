@@ -6,23 +6,18 @@
     <title>Centered Card Layout</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-12">
-                <!-- Increase the column width (e.g., col-md-10) for a wider card -->
-                <div class="custom-card">
+                <div class="custom-card-main">
                     <div class="row no-gutters">
                         <div class="col-md-7">
-                            <!-- Adjust the width (e.g., col-md-7) for the image -->
                             <img src="@Model.ImageName" class="card-img" alt="Image">
                         </div>
-
                         <div class="col-md-5">
-                            <!-- Adjust the width (e.g., col-md-5) for the card content -->
                             <div class="card-body">
                                 <h5 class="card-title">Date of Holding</h5>
                                 <p class="card-text">@Model.Date</p>
@@ -37,17 +32,50 @@
         </div>
     </div>
 
-    <!-- Add a class to the second card's container -->
     <div class="container second-card-container">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-4 offset-md-8">
-                <!-- Use 'offset-md-8' to align the second card to the right -->
-                <div class="custom-card">
+            <div class="col-12 col-md-7">
+                <div class="custom-card-secondary">
                     <div class="row no-gutters">
                         <div class="col-md-12">
-                            <!-- Adjust the width (e.g., col-md-5) for the card content -->
                             <div class="card-body">
-                                <h4 class="card-title">Contact Organiser</h4>
+                                <h4 class="card-title">@Model.Name Description</h4>
+                                <p class="card-text">@Model.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-5">
+                <div class="custom-card-secondary  mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <h4 class="card-title">Location</h4>
+                                <h5 class="card-title">@Model.Country</h5>
+                                <h6 class="card-title">@Model.City</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="custom-card-secondary  mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <h4 class="card-title">Price</h4>
+                                <p class="card-text">@Model.Phone</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="custom-card-secondary">
+                    <div class="row no-gutters">
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <h4 class="card-title">Contact Organisator</h4>
                                 <h6 class="card-title">Email</h6>
                                 <p class="card-text">@Model.Email</p>
                                 <h6 class="card-title">Phone</h6>
@@ -59,46 +87,6 @@
             </div>
         </div>
     </div>
-
-    <div class="container second-card-container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-4 offset-md-8">
-                <!-- Use 'offset-md-8' to align the second card to the right -->
-                <div class="custom-card">
-                    <div class="row no-gutters">
-                        <div class="col-md-12">
-                            <!-- Adjust the width (e.g., col-md-5) for the card content -->
-                            <div class="card-body">
-                                <h4 class="card-title">Location</h4>
-                                <h5 class="card-title">Email</h5>
-                                <h6 class="card-title">Phone</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container second-card-container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-4 offset-md-8">
-                <!-- Use 'offset-md-8' to align the second card to the right -->
-                <div class="custom-card">
-                    <div class="row no-gutters">
-                        <div class="col-md-12">
-                            <!-- Adjust the width (e.g., col-md-5) for the card content -->
-                            <div class="card-body">
-                                <h4 class="card-title">Price</h4>
-                                <p class="card-text">@Model.Phone</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

@@ -18,10 +18,9 @@
                 {
                     <div class="col-md-4 mb-3">
                         <div class="card">
-                            <img src="~Images\tms-2023-lviv.png" class="card-img-top" alt="@tournament.Name">
+                            <img src="@tournament.ImageName" class="card-img-top" alt="@tournament.Name">
                             <div class="card-body">
                                 <h5 class="card-title">@tournament.Name</h5>
-                                <p class="card-text">@tournament.Description</p>
                                 <p class="card-text"><strong>Location:</strong> @tournament.Country, @tournament.City</p>
                                 <p class="card-text"><strong>Date:</strong> @tournament.Date.ToString("yyyy-MM-dd")</p>
                                 <a href="@Url.Action("Detail", "Tournament", new { id = tournament.Id })" class="btn btn-primary">View Details</a>

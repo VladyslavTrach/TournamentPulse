@@ -17,8 +17,14 @@ body {
     margin-bottom: 60px;
 }
 
-.custom-card {
-    background-color: #f2f2f2;
+.custom-card-main {
+    background-color: #696969;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.custom-card-secondary {
+    background-color: #999999;
     border-radius: 20px;
     overflow: hidden;
 }
