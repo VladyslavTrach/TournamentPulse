@@ -10,6 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
+builder.Services.AddScoped<IAcademyRepository, AcademyRepository>();
+builder.Services.AddScoped<IAssociationRepository, AssociationRepository>();
+builder.Services.AddScoped<ICountryRepositry, CountryRepositry>();
+
 
 builder.Services.AddDbContext<DataContext>(options =>
 {

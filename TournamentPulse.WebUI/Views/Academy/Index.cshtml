@@ -1,0 +1,49 @@
+﻿@using TournamentPulse.WebUI.Models.Academy;
+@model List<AcademyListViewModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List of Academies</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <h1>List of Academies</h1>
+
+    <a href="@Url.Action("Add", "Academy")" class="btn btn-success mb-3">Add New Academy</a>
+
+    @if (Model.Any())
+    {
+        <div class="container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Association</th>
+                        <th>Country</th>
+                        <th>Figthers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var academy in Model)
+                    {
+                        <tr>
+                            <td>@academy.Name</td>
+                            <td>@academy.Association</td>
+                            <td>@academy.Country</td>
+                            <td>1488</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p>No academies found.</p>
+    }
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

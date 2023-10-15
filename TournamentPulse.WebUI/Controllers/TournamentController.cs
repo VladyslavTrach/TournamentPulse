@@ -18,7 +18,8 @@ namespace TournamentPulse.WebUI.Controllers
 
         public IActionResult Index()
         {
-            var tournaments = TournamentMapper(_tournamentRepository.GetTournaments());
+            var tournamentFromDb = _tournamentRepository.GetTournaments();
+            var tournaments = TournamentMapper(tournamentFromDb);
 
             return View(tournaments);
         }
