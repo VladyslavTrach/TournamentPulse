@@ -12,10 +12,25 @@ namespace TournamentPulse.Application.Repository
     public class AssociationRepository : IAssociationRepository
     {
         private readonly DataContext _context;
+        private readonly IFighterRepository _fighterRepository;
 
-        public AssociationRepository(DataContext context)
+        public AssociationRepository(DataContext context, IFighterRepository fighterRepository)
         {
             _context = context;
+            _fighterRepository = fighterRepository;
+        }
+
+        public int CountFightersByAssociation(int id)
+        {
+            int cnt = 0;
+            var academies = _context.Academies.Where(a => a.AssociationId == id).ToList(); // Materialize the query result
+
+            foreach (var academie in academies)
+            {
+                cnt += _fighterRepository.CountFightersByAcademy(academie.Id);
+            }
+
+            return cnt;
         }
 
         public ICollection<Association> GetAllAssociations()

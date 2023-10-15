@@ -7,10 +7,10 @@ using TournamentPulse.Core.Entities;
 
 namespace TournamentPulse.Application.Interface
 {
-    public interface IAssociationRepository
+    public interface IFighterRepository
     {
-        ICollection<Association> GetAllAssociations();
-        Association GetAssociationById(int id);
-        int CountFightersByAssociation(int id);
+        ICollection<Fighter> GetAllFighters();
+        Fighter GetFighterById(int id);
+        int CountFightersByAcademy(int id);
     }
 }

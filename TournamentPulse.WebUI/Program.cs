@@ -13,6 +13,7 @@ builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
 builder.Services.AddScoped<IAcademyRepository, AcademyRepository>();
 builder.Services.AddScoped<IAssociationRepository, AssociationRepository>();
 builder.Services.AddScoped<ICountryRepositry, CountryRepositry>();
+builder.Services.AddScoped<IFighterRepository, FighterRepository>();
 
 
 builder.Services.AddDbContext<DataContext>(options =>

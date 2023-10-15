@@ -31,7 +31,8 @@ namespace TournamentPulse.WebUI.Controllers
             {
                 Id = association.Id,
                 Name = association.Name,
-                AcademiesCnt = _academyRepository.CountAcademiesByAssociation(association.Id)
+                AcademiesCnt = _academyRepository.CountAcademiesByAssociation(association.Id),
+                FightersCnt = _associationRepository.CountFightersByAssociation(association.Id),
             }).ToList();
         }
     }

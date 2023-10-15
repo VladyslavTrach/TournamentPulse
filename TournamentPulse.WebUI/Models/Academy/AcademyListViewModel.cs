@@ -6,5 +6,6 @@
         public string Name { get; set; }
         public string Association { get; set; }
         public string Country { get; set; }
+        public int FightersCnt { get; set; }
     }
 }

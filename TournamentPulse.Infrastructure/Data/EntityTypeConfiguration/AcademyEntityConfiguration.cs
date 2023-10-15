@@ -25,5 +25,9 @@ internal class AcademyEntityConfiguration : IEntityTypeConfiguration<Academy>
         builder.HasOne(academy => academy.Country)
             .WithMany(country => country.Academies)
             .HasForeignKey(academy => academy.CountryId);
+
+        builder.HasMany(academy => academy.Fighters)
+           .WithOne(fighter => fighter.Academy)
+           .HasForeignKey(fighter => fighter.AcademyId);
     }
 }

@@ -1,16 +1,14 @@
-﻿@using TournamentPulse.WebUI.Models.Association;
-@model List<AssociationListViewModel>
+﻿@using TournamentPulse.WebUI.Models.Fighter;
+@model List<FighterListViewModel>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>List of Associations</title>
+    <title>List of Fighters</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>List of Associations</h1>
-
-    <a href="@Url.Action("Add", "Association")" class="btn btn-success mb-3">Add New Association</a>
+    <h1>List of Fighters</h1>
 
     @if (Model.Any())
     {
@@ -19,17 +17,21 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Figthers</th>
-                        <th>Associations</th>
+                        <th>Academy</th>
+                        <th>Age</th>
+                        <th>Rank</th>
+                        <th>Weight</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var association in Model)
+                    @foreach (var fighter in Model)
                     {
                         <tr>
-                            <td>@association.Name</td>
-                            <td>@association.FightersCnt</td>
-                            <td>@association.AcademiesCnt</td>
+                            <td>@fighter.FullName</td>
+                            <td>@fighter.Academy</td>
+                            <td>@fighter.Age</td>
+                            <td>@fighter.Rank</td>
+                            <td>@fighter.Weight</td>
                         </tr>
                     }
                 </tbody>
@@ -38,7 +40,7 @@
     }
     else
     {
-        <p>No Associations found.</p>
+        <p>No fighters found.</p>
     }
 
     <!-- Include Bootstrap JS (optional) -->

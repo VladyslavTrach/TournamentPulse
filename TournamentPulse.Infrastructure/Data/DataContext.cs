@@ -18,9 +18,9 @@ namespace TournamentPulse.Infrastructure.Data
         public DbSet<Association> Associations { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
+        public DbSet<Fighter> Fighters { get; set; }
 
 
-        //public DbSet<Fighter> Fighters { get; set; }
         //public DbSet<Category> Categories { get; set; }
         //public DbSet<FighterCategoryTournament> FighterCategoryTournaments { get; set; }
         //public DbSet<AgeClass> AgeClasses { get; set; }
@@ -34,7 +34,7 @@ namespace TournamentPulse.Infrastructure.Data
             base.OnModelCreating(modelBuilder);
 
             // Apply entity configurations
-            //modelBuilder.ApplyConfiguration(new FighterEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new FighterEntityConfiguration());
             //modelBuilder.ApplyConfiguration(new CategoryEntityConfiguration());
             //modelBuilder.ApplyConfiguration(new FighterCategoryTournamentsEntityConfiguration());
             modelBuilder.ApplyConfiguration(new AcademyEntityConfiguration());

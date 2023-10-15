@@ -11,12 +11,14 @@ namespace TournamentPulse.WebUI.Controllers
         private readonly IAcademyRepository _academyRepository;
         private readonly IAssociationRepository _associationRepository;
         private readonly ICountryRepositry _countryRepositry;
+        private readonly IFighterRepository _fighterRepository;
 
-        public AcademyController(IAcademyRepository academyRepository, IAssociationRepository associationRepository, ICountryRepositry countryRepositry)
+        public AcademyController(IAcademyRepository academyRepository, IAssociationRepository associationRepository, ICountryRepositry countryRepositry, IFighterRepository fighterRepository)
         {
             _academyRepository = academyRepository;
             _associationRepository = associationRepository;
             _countryRepositry = countryRepositry;
+            _fighterRepository = fighterRepository;
         }
 
         public IAcademyRepository AcademyRepository { get; }
@@ -36,7 +38,8 @@ namespace TournamentPulse.WebUI.Controllers
                 Id = academy.Id,
                 Name = academy.Name,
                 Association = _associationRepository.GetAssociationById(academy.AssociationId).Name,
-                Country = _countryRepositry.GetCountryById(academy.CountryId).Name                
+                Country = _countryRepositry.GetCountryById(academy.CountryId).Name,
+                FightersCnt = _fighterRepository.CountFightersByAcademy(academy.Id)
             }).ToList();
         }
     }

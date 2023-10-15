@@ -17,5 +17,7 @@ namespace TournamentPulse.Core.Entities
 
         public Association Association { get; set; }
         public Country Country { get; set; }
+
+        public ICollection<Fighter> Fighters { get; set; }
     }
 }

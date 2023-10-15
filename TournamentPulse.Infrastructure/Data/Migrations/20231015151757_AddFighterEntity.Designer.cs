@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TournamentPulse.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TournamentPulse.Infrastructure.Data;
 namespace TournamentPulse.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231015151757_AddFighterEntity")]
+    partial class AddFighterEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,13 +105,11 @@ namespace TournamentPulse.Infrastructure.Data.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Rank")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Weight")
                         .HasColumnType("real");
@@ -117,7 +118,7 @@ namespace TournamentPulse.Infrastructure.Data.Migrations
 
                     b.HasIndex("AcademyId");
 
-                    b.ToTable("Fighters", (string)null);
+                    b.ToTable("Fighters");
                 });
 
             modelBuilder.Entity("TournamentPulse.Core.Entities.Tournament", b =>
