@@ -1,7 +1,4 @@
 # TournamentPulse
-## Entities List
-![SharpComp](https://github.com/VladyslavTrach/TournamentPulse/assets/99955062/51358c56-c68a-42ba-96fe-307466c980b5)
-
 
 TournamentPulse is a web app that simplifies tournament organization for martial arts enthusiasts.
 ## Key Features and Functionality:
