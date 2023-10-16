@@ -1,39 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TournamentPulse.Application.Interface;
-using TournamentPulse.Application.Repository;
-using TournamentPulse.Core.Entities;
-using TournamentPulse.WebUI.Models.Academy;
 using TournamentPulse.WebUI.Models.Association;
+using AutoMapper;
+using System.Collections.Generic;
 
 namespace TournamentPulse.WebUI.Controllers
 {
     public class AssociationController : Controller
     {
-        private readonly IAcademyRepository _academyRepository;
         private readonly IAssociationRepository _associationRepository;
+        private readonly IMapper _mapper;
 
-        public AssociationController(IAssociationRepository associationRepository, IAcademyRepository academyRepository)
+        public AssociationController(IAssociationRepository associationRepository, IMapper mapper)
         {
-            _academyRepository = academyRepository;
             _associationRepository = associationRepository;
+            _mapper = mapper;
         }
+
         public IActionResult Index()
         {
             var associationsFromDb = _associationRepository.GetAllAssociations();
-            var associations = AsscoiationListMapper(associationsFromDb);
+            var associations = _mapper.Map<List<AssociationListViewModel>>(associationsFromDb);
 
             return View(associations);
-        }
-
-        public List<AssociationListViewModel> AsscoiationListMapper(IEnumerable<Association> associations)
-        {
-            return associations.Select(association => new AssociationListViewModel
-            {
-                Id = association.Id,
-                Name = association.Name,
-                AcademiesCnt = _academyRepository.CountAcademiesByAssociation(association.Id),
-                FightersCnt = _associationRepository.CountFightersByAssociation(association.Id),
-            }).ToList();
         }
     }
 }

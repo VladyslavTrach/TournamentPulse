@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace TournamentPulse.Application.Repository
 
         public ICollection<Fighter> GetAllFighters()
         {
-            return _context.Fighters.OrderBy(f => f.Id).ToList();
+            return _context.Fighters.Include(f => f.Academy).ToList();
         }
 
         public Fighter GetFighterById(int id)

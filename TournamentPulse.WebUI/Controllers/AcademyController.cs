@@ -1,46 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TournamentPulse.Application.Interface;
-using TournamentPulse.Core.Entities;
 using TournamentPulse.WebUI.Models.Academy;
-using TournamentPulse.WebUI.Models.Tournament;
+using AutoMapper;
+using System.Collections.Generic;
 
 namespace TournamentPulse.WebUI.Controllers
 {
     public class AcademyController : Controller
     {
         private readonly IAcademyRepository _academyRepository;
-        private readonly IAssociationRepository _associationRepository;
-        private readonly ICountryRepositry _countryRepositry;
-        private readonly IFighterRepository _fighterRepository;
+        private readonly IMapper _mapper;
 
-        public AcademyController(IAcademyRepository academyRepository, IAssociationRepository associationRepository, ICountryRepositry countryRepositry, IFighterRepository fighterRepository)
+        public AcademyController(IAcademyRepository academyRepository, IMapper mapper)
         {
             _academyRepository = academyRepository;
-            _associationRepository = associationRepository;
-            _countryRepositry = countryRepositry;
-            _fighterRepository = fighterRepository;
+            _mapper = mapper;
         }
-
-        public IAcademyRepository AcademyRepository { get; }
 
         public IActionResult Index()
         {
             var academiesFromDb = _academyRepository.GetAllAcademies();
-            var academies = AcademyListMapper(academiesFromDb);
+            var academies = _mapper.Map<List<AcademyListViewModel>>(academiesFromDb);
 
             return View(academies);
-        }
-
-        public List<AcademyListViewModel> AcademyListMapper(IEnumerable<Academy> academies)
-        {
-            return academies.Select(academy => new AcademyListViewModel
-            {
-                Id = academy.Id,
-                Name = academy.Name,
-                Association = _associationRepository.GetAssociationById(academy.AssociationId).Name,
-                Country = _countryRepositry.GetCountryById(academy.CountryId).Name,
-                FightersCnt = _fighterRepository.CountFightersByAcademy(academy.Id)
-            }).ToList();
         }
     }
 }

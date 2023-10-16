@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,11 @@ namespace TournamentPulse.Application.Repository
 
         public ICollection<Academy> GetAllAcademies()
         {
-            return _context.Academies.OrderBy(a => a.Id).ToList();
+            return _context.Academies
+                .Include(a => a.Association)
+                .Include(a => a.Country)
+                .Include(a => a.Fighters)
+                .ToList();
         }
     }
 }

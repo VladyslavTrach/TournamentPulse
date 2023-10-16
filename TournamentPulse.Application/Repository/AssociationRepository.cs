@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,10 @@ namespace TournamentPulse.Application.Repository
 
         public ICollection<Association> GetAllAssociations()
         {
-            return _context.Associations.OrderBy(a => a.Id).ToList();
+            return _context.Associations
+                .Include(a => a.Academies)
+                .ThenInclude(a => a.Fighters)
+                .ToList();
         }
 
         public Association GetAssociationById(int id)
