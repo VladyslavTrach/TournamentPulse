@@ -11,6 +11,6 @@ namespace TournamentPulse.Application.Interface
     {
         ICollection<Tournament> GetTournaments();
         Tournament GetById(int id);
-        string CreateTournament(Tournament tournament);
+        bool CreateTournament(Tournament tournament);
     }
 }

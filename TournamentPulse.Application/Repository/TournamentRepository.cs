@@ -18,17 +18,17 @@ namespace TournamentPulse.Application.Repository
             _context = context;
         }
 
-        public string CreateTournament(Tournament tournament)
+        public bool CreateTournament(Tournament tournament)
         {
             try
             {
                 _context.Tournaments.Add(tournament);
                 _context.SaveChanges();
-                return "Succes";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return false;
             }
         }
 

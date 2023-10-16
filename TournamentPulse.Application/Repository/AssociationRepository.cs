@@ -22,16 +22,9 @@ namespace TournamentPulse.Application.Repository
 
         public int CountFightersByAssociation(int id)
         {
-            int cnt = 0;
-            var academies = _context.Academies.Where(a => a.AssociationId == id).ToList(); // Materialize the query result
-
-            foreach (var academie in academies)
-            {
-                cnt += _fighterRepository.CountFightersByAcademy(academie.Id);
-            }
-
-            return cnt;
+            return _context.Fighters.Count(f => _context.Academies.Any(a => a.AssociationId == id && a.Id == f.AcademyId));
         }
+
 
         public ICollection<Association> GetAllAssociations()
         {
