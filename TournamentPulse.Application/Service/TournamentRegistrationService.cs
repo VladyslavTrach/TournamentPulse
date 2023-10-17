@@ -55,6 +55,10 @@ namespace TournamentPulse.Application.Service
             _tournamentCategoryFighterRepository.AddTCFRecord(tournamentCategoryFighter);
         }
 
+        public ICollection<TournamentCategoryFighter> GetCategoryFighter(int tournamentId)
+        {
+            return _tournamentCategoryFighterRepository.GetCategoryFighter(tournamentId);
+        }
 
         private Category DetermineSuitableCategory(Fighter fighter, ICollection<Category> categories)
         {

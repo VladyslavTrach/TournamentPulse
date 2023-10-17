@@ -5,5 +5,6 @@ namespace TournamentPulse.Application.Interface
     public interface ITournamentCategoryFighterRepository
     {
         bool AddTCFRecord(TournamentCategoryFighter tcf);
+        ICollection<TournamentCategoryFighter> GetCategoryFighter(int tournamentId);
     }
 }

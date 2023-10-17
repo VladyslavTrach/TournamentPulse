@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TournamentPulse.Application.Interface;
 using TournamentPulse.Application.Service;
 using TournamentPulse.Core.Entities;
+using TournamentPulse.WebUI.Models.CategoryFighter;
 using TournamentPulse.WebUI.Models.Tournament;
 
 namespace TournamentPulse.WebUI.Controllers
@@ -30,15 +31,26 @@ namespace TournamentPulse.WebUI.Controllers
 
         public IActionResult Detail(int id)
         {
-            var tournamentFromDB = _tournamentRepository.GetById(id);
-            var tournament = _mapper.Map<TournamentDetailsViewModel>(tournamentFromDB);
+            var tournamentFromDb = _tournamentRepository.GetById(id);
+            var tournament = _mapper.Map<TournamentDetailsViewModel>(tournamentFromDb);
 
-            return View(tournament);
+            var categoryFightersFromDb = _tournamentRegistrationService.GetCategoryFighter(id);
+
+            //Need To Fix
+            //var categoryFighters = _mapper.Map<CategoryFighterListViewModel>(categoryFightersFromDb);
+
+            var tournamentAndcategoryFighters = new TournamentDetailsPageViewModel
+            {
+                tournamentDetailsViewModel = tournament,
+                categoryFighterListViewModel = categoryFightersFromDb
+            };
+
+            return View(tournamentAndcategoryFighters);
         }
 
         public IActionResult Register(int Id)
         {
-            _tournamentRegistrationService.RegisterFighterForTournament(Id, 1);
+            _tournamentRegistrationService.RegisterFighterForTournament(Id, 2);
 
             return View("Detail");
         }

@@ -1,6 +1,5 @@
 ﻿@using TournamentPulse.WebUI.Models.Tournament;
-@model TournamentDetailsViewModel
-
+@model TournamentDetailsPageViewModel
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,61 +7,140 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Function to show/hide content sections based on the data attribute
+            function showContent(target) {
+                $("#content-container > div").hide();
+                $("#" + target).show();
+            }
+
+            // Event handler for menu options
+            $(".nav-link").click(function () {
+                var target = $(this).data("target");
+                showContent(target);
+            });
+
+            // Initialize by showing the default content (e.g., Home)
+            showContent("tournament-details-page");
+        });
+    </script>
+
+
 </head>
 <body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-12">
-                @if (Model != null)
-                {
-                    <!-- Check if a model has been passed -->
-                    <div class="custom-card-main">
-                        <div class="row no-gutters">
-                            <div class="col-md-7">
-                                <img src="@Model.ImageName" class="card-img" alt="Image">
-                            </div>
-                            <div class="col-md-5">
-                                <div class="card-body">
-                                    <h5 class="card-title">Date of Holding</h5>
-                                    <p class="card-text">@Model.Date</p>
-                                    <h5 class="card-title">Number of Participants</h5>
-                                    <p class="card-text">@Model.MaxParticipants</p>
-                                    <a href="#" class="btn btn-primary">Register to Event</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    <p>No model data available.</p> <!-- Display a message when no model is available -->
-                }
-            </div>
+    <!-- Navigation Menu -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" data-target="tournament-details-page">Tournament Details <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="participants-page">Participants</a>
+                </li>
+                <!-- Add more menu options with data attributes -->
+            </ul>
         </div>
-    </div>
+    </nav>
 
-    @if (Model != null)
-    {
-        <!-- Check if a model has been passed -->
-        <div class="container second-card-container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-7">
-                    <div class="custom-card-secondary">
-                        <div class="row no-gutters">
-                            <div class="col-md-12">
-                                <div class="card-body">
-                                    <h4 class="card-title">@Model.Name Description</h4>
-                                    <p class="card-text">@Model.Description</p>
+    <div class="container" id="content-container">
+        <div id="tournament-details-page">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-12">
+                            <div class="custom-card-main">
+                                <div class="row no-gutters">
+                                    <div class="col-md-7">
+                                        <img src="@Model.tournamentDetailsViewModel.ImageName" class="card-img" alt="Image">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Date of Holding</h5>
+                                        <p class="card-text">@Model.tournamentDetailsViewModel.Date</p>
+                                            <h5 class="card-title">Number of Participants</h5>
+                                        <p class="card-text">@Model.tournamentDetailsViewModel.MaxParticipants</p>
+                                            <a href="#" class="btn btn-primary">Register to Event</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Rest of your code for displaying details -->
+                <div class="container second-card-container">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-7">
+                            <div class="custom-card-secondary">
+                                <div class="row no-gutters">
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                        <h4 class="card-title">@Model.tournamentDetailsViewModel.Name Description</h4>
+                                        <p class="card-text">@Model.tournamentDetailsViewModel.Description</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-5">
+                            <div class="custom-card-secondary  mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Location</h4>
+                                        <h5 class="card-title">@Model.tournamentDetailsViewModel.Country</h5>
+                                        <h6 class="card-title">@Model.tournamentDetailsViewModel.City</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="custom-card-secondary  mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Price</h4>
+                                        <p class="card-text">@Model.tournamentDetailsViewModel.Price UAH</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="custom-card-secondary">
+                                <div class="row no-gutters">
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Contact Organisator</h4>
+                                            <h6 class="card-title">Email</h6>
+                                        <p class="card-text">@Model.tournamentDetailsViewModel.Email</p>
+                                            <h6 class="card-title">Phone</h6>
+                                        <p class="card-text">@Model.tournamentDetailsViewModel.Phone</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        <div id="participants-page">
+            <h1>Upcoming Events</h1>
+            <ul>
+                <li>Event 1</li>
+                <li>Event 2</li>
+                <li>Event 3</li>
+                <!-- Add more event details here -->
+            </ul>
         </div>
-    }
+        <!-- Add more content sections for other menu options -->
+    </div>
+
+
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+</html>

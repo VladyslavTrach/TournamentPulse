@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,5 +33,13 @@ namespace TournamentPulse.Application.Repository
             }
         }
 
+        public ICollection<TournamentCategoryFighter> GetCategoryFighter(int tournamentId)
+        {
+            return _context.TournamentCategoryFighter.Where(tcf => tcf.TournamentId == tournamentId)
+                .Include(tcf => tcf.Category) // Include the Tournament navigation property
+                .Include(tcf => tcf.Fighter)   // Include the Category navigation property
+                .ToList();
+
+        }
     }
 }
