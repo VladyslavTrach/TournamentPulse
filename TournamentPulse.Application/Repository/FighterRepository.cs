@@ -30,7 +30,17 @@ namespace TournamentPulse.Application.Repository
 
         public Fighter GetFighterById(int id)
         {
-            return _context.Fighters.Where(f => f.Id == id).First();
+            var fighter = _context.Fighters.FirstOrDefault(f => f.Id == id);
+
+            if (fighter != null)
+            {
+                return fighter;
+            }
+            else
+            {
+                return null; // In this example, we return null to indicate that no fighter was found.
+            }
         }
+
     }
 }

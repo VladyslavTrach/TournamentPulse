@@ -20,10 +20,5 @@ namespace TournamentPulse.Core.Entities
         public string Email { get; set; }
         public string? Phone { get; set; }
         public int Price { get; set; }
-
-
-        //public ICollection<Fighter> Fighters { get; set; }
-
-        //public ICollection<FighterCategoryTournament> FighterCategoryTournaments { get; set; }
     }
 }

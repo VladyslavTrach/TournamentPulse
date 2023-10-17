@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TournamentPulse.Application.Interface;
 using TournamentPulse.Application.Repository;
+using TournamentPulse.Application.Service;
 using TournamentPulse.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,12 @@ builder.Services.AddScoped<IAcademyRepository, AcademyRepository>();
 builder.Services.AddScoped<IAssociationRepository, AssociationRepository>();
 builder.Services.AddScoped<ICountryRepositry, CountryRepositry>();
 builder.Services.AddScoped<IFighterRepository, FighterRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+builder.Services.AddScoped<ITournamentCategoryFighterRepository, TournamentCategoryFighterRepository>();
+
+builder.Services.AddScoped<TournamentRegistrationService>();
+
 
 
 builder.Services.AddDbContext<DataContext>(options =>

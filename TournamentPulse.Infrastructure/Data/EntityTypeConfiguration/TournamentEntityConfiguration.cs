@@ -39,12 +39,6 @@ namespace TournamentPulse.Infrastructure.Data.EntityTypeConfiguration
             builder.Property(t => t.Price)
               .IsRequired(); // Price is required
 
-            //builder
-            //    .HasMany(t => t.Fighters)
-            //    .WithOne(f => f.Tournament)
-            //    .HasForeignKey(f => f.TournamentId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
         }
     }
 }

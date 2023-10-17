@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TournamentPulse.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TournamentPulse.Infrastructure.Data;
 namespace TournamentPulse.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231017152320_AddCategory")]
+    partial class AddCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -204,26 +207,6 @@ namespace TournamentPulse.Infrastructure.Data.Migrations
                     b.ToTable("Tournaments");
                 });
 
-            modelBuilder.Entity("TournamentPulse.Core.Entities.TournamentCategoryFighter", b =>
-                {
-                    b.Property<int>("TournamentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FighterId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TournamentId", "CategoryId", "FighterId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("FighterId");
-
-                    b.ToTable("TournamentCategoryFighter");
-                });
-
             modelBuilder.Entity("TournamentPulse.Core.Entities.Academy", b =>
                 {
                     b.HasOne("TournamentPulse.Core.Entities.Association", "Association")
@@ -252,33 +235,6 @@ namespace TournamentPulse.Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Academy");
-                });
-
-            modelBuilder.Entity("TournamentPulse.Core.Entities.TournamentCategoryFighter", b =>
-                {
-                    b.HasOne("TournamentPulse.Core.Entities.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TournamentPulse.Core.Entities.Fighter", "Fighter")
-                        .WithMany()
-                        .HasForeignKey("FighterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TournamentPulse.Core.Entities.Tournament", "Tournament")
-                        .WithMany()
-                        .HasForeignKey("TournamentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Fighter");
-
-                    b.Navigation("Tournament");
                 });
 
             modelBuilder.Entity("TournamentPulse.Core.Entities.Academy", b =>

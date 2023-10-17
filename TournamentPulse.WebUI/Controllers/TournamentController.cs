@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TournamentPulse.Application.Interface;
+using TournamentPulse.Application.Service;
 using TournamentPulse.Core.Entities;
 using TournamentPulse.WebUI.Models.Tournament;
 
@@ -10,11 +11,13 @@ namespace TournamentPulse.WebUI.Controllers
     {
         private readonly ITournamentRepository _tournamentRepository;
         private readonly IMapper _mapper;
+        private readonly TournamentRegistrationService _tournamentRegistrationService;
 
-        public TournamentController(ITournamentRepository tournamentRepository, IMapper mapper)
+        public TournamentController(ITournamentRepository tournamentRepository, IMapper mapper, TournamentRegistrationService tournamentRegistrationService)
         {
             _tournamentRepository = tournamentRepository;
             _mapper = mapper;
+            _tournamentRegistrationService = tournamentRegistrationService;
         }
 
         public IActionResult Index()
@@ -31,6 +34,13 @@ namespace TournamentPulse.WebUI.Controllers
             var tournament = _mapper.Map<TournamentDetailsViewModel>(tournamentFromDB);
 
             return View(tournament);
+        }
+
+        public IActionResult Register(int Id)
+        {
+            _tournamentRegistrationService.RegisterFighterForTournament(Id, 1);
+
+            return View("Detail");
         }
     }
 }

@@ -19,10 +19,8 @@ namespace TournamentPulse.Infrastructure.Data
         public DbSet<Country> Countries { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
         public DbSet<Fighter> Fighters { get; set; }
-
-
-        //public DbSet<Category> Categories { get; set; }
-        //public DbSet<FighterCategoryTournament> FighterCategoryTournaments { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<TournamentCategoryFighter> TournamentCategoryFighter { get; set; }
         //public DbSet<AgeClass> AgeClasses { get; set; }
         //public DbSet<RankClass> RankClasses { get; set; }
         //public DbSet<WeightClass> WeightClasses { get; set; }
@@ -35,8 +33,8 @@ namespace TournamentPulse.Infrastructure.Data
 
             // Apply entity configurations
             modelBuilder.ApplyConfiguration(new FighterEntityConfiguration());
-            //modelBuilder.ApplyConfiguration(new CategoryEntityConfiguration());
-            //modelBuilder.ApplyConfiguration(new FighterCategoryTournamentsEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new TournamentCategoryFighterEntityConfiguration());
             modelBuilder.ApplyConfiguration(new AcademyEntityConfiguration());
             //modelBuilder.ApplyConfiguration(new AgeClassEntityConfiguration());
             modelBuilder.ApplyConfiguration(new AssociationEntityConfiguration());
