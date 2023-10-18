@@ -8,6 +8,6 @@ public class CategoryFighterProfile : Profile
     {
         CreateMap<TournamentCategoryFighter, CategoryFighterListViewModel>()
             .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name))
-            .ForMember(dest => dest.Fighter, opt => opt.MapFrom(src => src.Fighter.FullName));
+            .ForMember(dest => dest.Fighters, opt => opt.MapFrom(src => src.Fighter.FullName));
     }
 }

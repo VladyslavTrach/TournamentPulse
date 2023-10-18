@@ -36,10 +36,11 @@ namespace TournamentPulse.Application.Repository
         public ICollection<TournamentCategoryFighter> GetCategoryFighter(int tournamentId)
         {
             return _context.TournamentCategoryFighter.Where(tcf => tcf.TournamentId == tournamentId)
-                .Include(tcf => tcf.Category) // Include the Tournament navigation property
-                .Include(tcf => tcf.Fighter)   // Include the Category navigation property
+                .Include(tcf => tcf.Category)
+                .Include(tcf => tcf.Fighter)
+                .ThenInclude(fighter => fighter.Academy) // Correct the ThenInclude statement
                 .ToList();
-
         }
+
     }
 }

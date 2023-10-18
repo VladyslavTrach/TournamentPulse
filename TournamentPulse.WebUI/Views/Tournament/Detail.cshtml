@@ -127,17 +127,56 @@
                     </div>
                 </div>
             </div>
+
+
         <div id="participants-page">
-            <h1>Upcoming Events</h1>
-            <ul>
-                <li>Event 1</li>
-                <li>Event 2</li>
-                <li>Event 3</li>
-                <!-- Add more event details here -->
-            </ul>
+            <h1>Participants</h1>
+            @foreach (var categoryFighter in Model.categoryFighterListViewModel)
+            {
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>@categoryFighter.Category</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table fighter-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 20%;">Full Name</th>
+                                                <th style="width: 30%;">Academy</th>
+                                                <th style="width: 10%;">Age</th>
+                                                <th style="width: 10%;">Weight</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var fighter in categoryFighter.Fighters)
+                                            {
+                                                <tr>
+                                                    <td>@fighter.FullName</td>
+                                                    <td>@fighter.Academy</td>
+                                                    <td>@fighter.Age</td>
+                                                    <td>@fighter.Weight</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
-        <!-- Add more content sections for other menu options -->
-    </div>
+
+
+
+
+
+
+
+
 
 
 
