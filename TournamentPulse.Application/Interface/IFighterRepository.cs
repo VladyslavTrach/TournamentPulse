@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,7 @@ namespace TournamentPulse.Application.Interface
         ICollection<Fighter> GetAllFighters();
         Fighter GetFighterById(int id);
         int CountFightersByAcademy(int id);
+        public bool AddFighter(Fighter fighter);
+        public bool AddFighters(IEnumerable<Fighter> fighters);
     }
 }

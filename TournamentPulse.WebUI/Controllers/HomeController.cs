@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using TournamentPulse.Infrastructure.Data.Generator;
 using TournamentPulse.WebUI.Models;
 
 namespace TournamentPulse.WebUI.Controllers

@@ -3,6 +3,7 @@ using TournamentPulse.Application.Interface;
 using TournamentPulse.Application.Repository;
 using TournamentPulse.Application.Service;
 using TournamentPulse.Infrastructure.Data;
+using TournamentPulse.Infrastructure.Data.Generator;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddTransient<DataGenerator>();
 
 builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
 builder.Services.AddScoped<IAcademyRepository, AcademyRepository>();
@@ -21,6 +23,8 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ITournamentCategoryFighterRepository, TournamentCategoryFighterRepository>();
 
 builder.Services.AddScoped<TournamentRegistrationService>();
+builder.Services.AddScoped<SeedFightersInDbService>();
+
 
 
 

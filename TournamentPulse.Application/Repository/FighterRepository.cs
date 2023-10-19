@@ -18,6 +18,38 @@ namespace TournamentPulse.Application.Repository
         {
             _context = context;
         }
+
+        public bool AddFighter(Fighter fighter)
+        {
+            try
+            {
+                _context.Fighters.Add(fighter);
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool AddFighters(IEnumerable<Fighter> fighters)
+        {
+            try
+            {
+                _context.Fighters.AddRange(fighters);
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+
         public int CountFightersByAcademy(int id)
         {
             return _context.Fighters.Where(f => f.AcademyId == id).Count();

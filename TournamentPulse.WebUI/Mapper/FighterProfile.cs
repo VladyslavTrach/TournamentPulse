@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Entity = TournamentPulse.Core.Entities;
 using TournamentPulse.WebUI.Models.Fighter;
+using TournamentPulse.Core.Entities;
+using TournamentPulse.Infrastructure.Data.Generator;
 
 namespace TournamentPulse.WebUI.Mapper
 {
@@ -8,8 +10,13 @@ namespace TournamentPulse.WebUI.Mapper
     {
         public FighterProfile()
         {
-            CreateMap<Entity.Fighter, FighterListViewModel>()
+            CreateMap<Fighter, FighterListViewModel>()
                 .ForMember(dest => dest.Academy, opt => opt.MapFrom(src => src.Academy.Name));
+
+            CreateMap<Fighter, FighterRecordModel>();
+
+            CreateMap<FighterRecordModel, Fighter>();
         }
     }
+
 }
