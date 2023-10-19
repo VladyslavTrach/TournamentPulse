@@ -69,12 +69,11 @@ namespace TournamentPulse.WebUI.Controllers
 
         public IActionResult Register(int Id)
         {
-            _tournamentRegistrationService.RegisterFighterForTournament(Id, 4);
+            _tournamentRegistrationService.RegisterFighterForTournament(Id, 9);
+            //_tournamentRegistrationService.UnregisterFighterFromTournament(Id, 1); //Unregister
 
-            return View("Detail");
+            return RedirectToAction("Detail", new { id = Id });
         }
-
-       
 
     }
 }

@@ -42,5 +42,16 @@ namespace TournamentPulse.Application.Repository
                 .ToList();
         }
 
+        public void UnregisterFighterFromTournament(int tournamentId, int fighterId)
+        {
+            var entry = _context.TournamentCategoryFighter
+                .FirstOrDefault(tc => tc.TournamentId == tournamentId && tc.FighterId == fighterId);
+
+            if (entry != null)
+            {
+                _context.TournamentCategoryFighter.Remove(entry);
+                _context.SaveChanges();
+            }
+        }
     }
 }

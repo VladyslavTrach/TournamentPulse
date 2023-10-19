@@ -6,5 +6,6 @@ namespace TournamentPulse.Application.Interface
     {
         bool AddTCFRecord(TournamentCategoryFighter tcf);
         ICollection<TournamentCategoryFighter> GetCategoryFighter(int tournamentId);
+        void UnregisterFighterFromTournament(int tournamentId, int fighterId);
     }
 }

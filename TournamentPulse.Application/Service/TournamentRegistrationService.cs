@@ -55,6 +55,11 @@ namespace TournamentPulse.Application.Service
             _tournamentCategoryFighterRepository.AddTCFRecord(tournamentCategoryFighter);
         }
 
+        public void UnregisterFighterFromTournament(int tournamentId, int fighterId)
+        {
+            _tournamentCategoryFighterRepository.UnregisterFighterFromTournament(tournamentId, fighterId);
+        }
+
         public ICollection<TournamentCategoryFighter> GetCategoryFighter(int tournamentId)
         {
             return _tournamentCategoryFighterRepository.GetCategoryFighter(tournamentId);
@@ -66,7 +71,8 @@ namespace TournamentPulse.Application.Service
             {
                 if (fighter.Weight >= category.MinWeight && fighter.Weight < category.MaxWeight
                     && fighter.Age >= category.MinAge && fighter.Age < category.MaxAge
-                    && fighter.Weight >= category.MinWeight && fighter.Weight < category.MaxWeight)
+                    && fighter.Weight >= category.MinWeight && fighter.Weight < category.MaxWeight
+                    && fighter.Rank == category.Rank)
                     return category;
             }
             return null;
