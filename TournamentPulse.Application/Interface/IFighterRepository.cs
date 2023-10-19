@@ -15,5 +15,6 @@ namespace TournamentPulse.Application.Interface
         int CountFightersByAcademy(int id);
         public bool AddFighter(Fighter fighter);
         public bool AddFighters(IEnumerable<Fighter> fighters);
+        public bool FighterExists(Fighter fighter);
     }
 }

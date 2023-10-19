@@ -22,9 +22,13 @@ namespace TournamentPulse.Application.Repository
         {
             try
             {
-                _context.Tournaments.Add(tournament);
-                _context.SaveChanges();
-                return true;
+                if(!TournamentExist(tournament))
+                {
+                    _context.Tournaments.Add(tournament);
+                    _context.SaveChanges();
+                    return true;
+                }
+                return false;
             }
             catch (Exception ex)
             {
@@ -41,6 +45,13 @@ namespace TournamentPulse.Application.Repository
         public ICollection<Tournament> GetTournaments()
         {
             return _context.Tournaments.OrderBy(t => t.Id).ToList();
+        }
+
+        public bool TournamentExist(Tournament tournament)
+        {
+            var existingTournament = _context.Tournaments.FirstOrDefault(t => t.Name == tournament.Name);
+
+            return existingTournament != null;
         }
     }
 }
