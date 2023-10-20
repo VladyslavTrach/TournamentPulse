@@ -1,4 +1,9 @@
+using Localization.Services;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Globalization;
+using System.Reflection;
 using TournamentPulse.Application.Interface;
 using TournamentPulse.Application.Repository;
 using TournamentPulse.Application.Service;
@@ -6,6 +11,27 @@ using TournamentPulse.Infrastructure.Data;
 using TournamentPulse.Infrastructure.Data.Generator;
 
 var builder = WebApplication.CreateBuilder(args);
+#region Localization
+//Step 1
+builder.Services.AddSingleton<LanguageService>();
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddMvc().AddViewLocalization().AddDataAnnotationsLocalization(options => {
+    options.DataAnnotationLocalizerProvider = (type, factory) => {
+        var assemblyName = new AssemblyName(typeof(SharedResource).GetTypeInfo().Assembly.FullName);
+        return factory.Create("ShareResource", assemblyName.Name);
+    };
+});
+builder.Services.Configure<RequestLocalizationOptions>(options => {
+    var supportedCultures = new List<CultureInfo> {
+        new CultureInfo("uk-UA"),
+        new CultureInfo("en-US")
+    };
+    options.DefaultRequestCulture = new RequestCulture(culture: "uk-UA", uiCulture: "uk-UA");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+});
+#endregion
 
 
 // Add services to the container.
@@ -48,6 +74,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
 app.UseRouting();
 
