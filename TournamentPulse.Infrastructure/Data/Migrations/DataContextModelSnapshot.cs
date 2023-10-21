@@ -153,6 +153,58 @@ namespace TournamentPulse.Infrastructure.Data.Migrations
                     b.ToTable("Fighters", (string)null);
                 });
 
+            modelBuilder.Entity("TournamentPulse.Core.Entities.Match", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Fighter1Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Fighter2Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MatchStatus")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("Score1")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Score2")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TournamentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WinnerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WinningMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("Fighter1Id");
+
+                    b.HasIndex("Fighter2Id");
+
+                    b.HasIndex("TournamentId");
+
+                    b.HasIndex("WinnerId");
+
+                    b.ToTable("Matches", (string)null);
+                });
+
             modelBuilder.Entity("TournamentPulse.Core.Entities.Tournament", b =>
                 {
                     b.Property<int>("Id")
@@ -254,6 +306,49 @@ namespace TournamentPulse.Infrastructure.Data.Migrations
                     b.Navigation("Academy");
                 });
 
+            modelBuilder.Entity("TournamentPulse.Core.Entities.Match", b =>
+                {
+                    b.HasOne("TournamentPulse.Core.Entities.Category", "Category")
+                        .WithMany("Matches")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TournamentPulse.Core.Entities.Fighter", "Fighter1")
+                        .WithMany()
+                        .HasForeignKey("Fighter1Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("TournamentPulse.Core.Entities.Fighter", "Fighter2")
+                        .WithMany()
+                        .HasForeignKey("Fighter2Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("TournamentPulse.Core.Entities.Tournament", "Tournament")
+                        .WithMany("Matches")
+                        .HasForeignKey("TournamentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TournamentPulse.Core.Entities.Fighter", "Winner")
+                        .WithMany()
+                        .HasForeignKey("WinnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Fighter1");
+
+                    b.Navigation("Fighter2");
+
+                    b.Navigation("Tournament");
+
+                    b.Navigation("Winner");
+                });
+
             modelBuilder.Entity("TournamentPulse.Core.Entities.TournamentCategoryFighter", b =>
                 {
                     b.HasOne("TournamentPulse.Core.Entities.Category", "Category")
@@ -291,9 +386,19 @@ namespace TournamentPulse.Infrastructure.Data.Migrations
                     b.Navigation("Academies");
                 });
 
+            modelBuilder.Entity("TournamentPulse.Core.Entities.Category", b =>
+                {
+                    b.Navigation("Matches");
+                });
+
             modelBuilder.Entity("TournamentPulse.Core.Entities.Country", b =>
                 {
                     b.Navigation("Academies");
+                });
+
+            modelBuilder.Entity("TournamentPulse.Core.Entities.Tournament", b =>
+                {
+                    b.Navigation("Matches");
                 });
 #pragma warning restore 612, 618
         }

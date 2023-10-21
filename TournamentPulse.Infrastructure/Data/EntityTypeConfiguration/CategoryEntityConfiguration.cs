@@ -21,6 +21,10 @@ namespace TournamentPulse.Infrastructure.Data.EntityTypeConfiguration
             builder.Property(c => c.MinWeight).IsRequired();
             builder.Property(c => c.MaxWeight).IsRequired();
             builder.Property(c => c.Rank).IsRequired();
+
+            builder.HasMany(c => c.Matches)
+            .WithOne(m => m.Category)
+            .HasForeignKey(m => m.CategoryId);
         }
     }
 }

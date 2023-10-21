@@ -20,6 +20,7 @@ namespace TournamentPulse.Infrastructure.Data
         public DbSet<Tournament> Tournaments { get; set; }
         public DbSet<Fighter> Fighters { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Match> Matches { get; set; }
         public DbSet<TournamentCategoryFighter> TournamentCategoryFighter { get; set; }
         //public DbSet<AgeClass> AgeClasses { get; set; }
         //public DbSet<RankClass> RankClasses { get; set; }
@@ -42,6 +43,7 @@ namespace TournamentPulse.Infrastructure.Data
             //modelBuilder.ApplyConfiguration(new RankClassEntityConfiguration());
             //modelBuilder.ApplyConfiguration(new WeightClassEntityConfiguration());
             modelBuilder.ApplyConfiguration(new TournamentEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new MatchEntityConfiguration());
             //modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
         }
     }

@@ -1,4 +1,6 @@
-﻿using TournamentPulse.WebUI.Models.CategoryFighter;
+﻿using TournamentPulse.Core.Entities;
+using TournamentPulse.WebUI.Models.CategoryFighter;
+using TournamentPulse.WebUI.Models.Match;
 
 namespace TournamentPulse.WebUI.Models.Tournament
 {
@@ -6,5 +8,6 @@ namespace TournamentPulse.WebUI.Models.Tournament
     {
         public TournamentDetailsViewModel tournamentDetailsViewModel { get; set; }
         public List<CategoryFighterListViewModel> categoryFighterListViewModel { get; set; }
+        public List<MatchViewModel> matchListViewModel { get; set; }
     }
 }

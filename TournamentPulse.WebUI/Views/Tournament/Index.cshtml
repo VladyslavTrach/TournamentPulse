@@ -9,9 +9,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <h1>List of Tournaments</h1>
+    <h1>@_localization.Getkey("ep_ListOfTournaments")</h1>
 
-    <a href="@Url.Action("Add", "Tournament")" class="btn btn-success mb-3">Add New Tournament</a>
+    <a href="@Url.Action("Add", "Tournament")" class="btn btn-success mb-3">@_localization.Getkey("ep_AddNewTournament")</a>
 
     @if (Model.Any())
     {
@@ -24,10 +24,10 @@
                             <img src="@tournament.ImageName" class="card-img-top events-card-img" alt="@tournament.Name">
                             <div class="card-body">
                                 <h5 class="card-title">@tournament.Name</h5>
-                                <p class="card-text"><strong>Location:</strong> @tournament.Country, @tournament.City</p>
-                                <p class="card-text"><strong>Date:</strong> @tournament.Date.ToString("yyyy-MM-dd")</p>
-                                <a href="@Url.Action("Detail", "Tournament", new { id = tournament.Id })" class="btn btn-primary">View Details</a>
-                                <a href="@Url.Action("Register", "Tournament", new { id = tournament.Id })" class="btn btn-success">Register</a>
+                                <p class="card-text"><strong>@_localization.Getkey("ep_Location"):</strong> @tournament.Country, @tournament.City</p>
+                                <p class="card-text"><strong>@_localization.Getkey("ep_Date"):</strong> @tournament.Date.ToString("yyyy-MM-dd")</p>
+                                <a href="@Url.Action("Detail", "Tournament", new { id = tournament.Id })" class="btn btn-primary">@_localization.Getkey("ep_ViewDetails")</a>
+                                <a href="@Url.Action("Register", "Tournament", new { id = tournament.Id })" class="btn btn-success">@_localization.Getkey("ep_Register")</a>
                             </div>
                         </div>
                     </div>

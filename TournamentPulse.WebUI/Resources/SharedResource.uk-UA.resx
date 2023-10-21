@@ -117,6 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ep_AddNewTournament" xml:space="preserve">
+    <value>Створити турнір</value>
+  </data>
+  <data name="ep_Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="ep_ListOfTournaments" xml:space="preserve">
+    <value>Список турнірів</value>
+  </data>
+  <data name="ep_Location" xml:space="preserve">
+    <value>Розташування</value>
+  </data>
+  <data name="ep_Register" xml:space="preserve">
+    <value>Зареєструватись</value>
+  </data>
+  <data name="ep_ViewDetails" xml:space="preserve">
+    <value>Деталі</value>
+  </data>
   <data name="nb_Academies" xml:space="preserve">
     <value>Академії</value>
   </data>

@@ -15,5 +15,7 @@ namespace TournamentPulse.Core.Entities
         public float MinWeight { get; set; }
         public float MaxWeight { get; set; }
         public string Rank { get; set; }
+
+        public ICollection<Match> Matches { get; set; }
     }
 }

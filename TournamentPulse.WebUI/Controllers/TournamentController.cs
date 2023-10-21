@@ -6,6 +6,7 @@ using TournamentPulse.Application.Service;
 using TournamentPulse.Core.Entities;
 using TournamentPulse.WebUI.Models.CategoryFighter;
 using TournamentPulse.WebUI.Models.Fighter;
+using TournamentPulse.WebUI.Models.Match;
 using TournamentPulse.WebUI.Models.Tournament;
 
 namespace TournamentPulse.WebUI.Controllers
@@ -13,14 +14,23 @@ namespace TournamentPulse.WebUI.Controllers
     public class TournamentController : Controller
     {
         private readonly ITournamentRepository _tournamentRepository;
+        private readonly IMatchRepository _matchRepository;
         private readonly IMapper _mapper;
         private readonly TournamentRegistrationService _tournamentRegistrationService;
+        private readonly BracketGenerationService _bracketGenerationService;
 
-        public TournamentController(ITournamentRepository tournamentRepository, IMapper mapper, TournamentRegistrationService tournamentRegistrationService)
+        public TournamentController(
+            ITournamentRepository tournamentRepository,
+            IMatchRepository matchRepository,
+            IMapper mapper, 
+            TournamentRegistrationService tournamentRegistrationService,
+            BracketGenerationService bracketGenerationService)
         {
             _tournamentRepository = tournamentRepository;
+            _matchRepository = matchRepository;
             _mapper = mapper;
             _tournamentRegistrationService = tournamentRegistrationService;
+            _bracketGenerationService = bracketGenerationService;
         }
 
         public IActionResult Index()
@@ -52,16 +62,19 @@ namespace TournamentPulse.WebUI.Controllers
                        Academy = tc.Fighter.Academy?.Name ?? "Unknown"
                    }).ToList()
                })
-                .ToList();
+                .ToList();        
 
+            var matchesFromDb = _matchRepository.GetMatchesForTournament(id);
+            var matches = _mapper.Map<List<MatchViewModel>>(matchesFromDb);
 
-            var tournamentAndcategoryFighters = new TournamentDetailsPageViewModel
+            var tournamentAndCategoryFighters = new TournamentDetailsPageViewModel
             {
                 tournamentDetailsViewModel = tournament,
-                categoryFighterListViewModel = categoryFighterGroups
+                categoryFighterListViewModel = categoryFighterGroups,
+                matchListViewModel = matches
             };
 
-            return View(tournamentAndcategoryFighters);
+            return View(tournamentAndCategoryFighters);
         }
 
 
@@ -69,7 +82,8 @@ namespace TournamentPulse.WebUI.Controllers
 
         public IActionResult Register(int Id)
         {
-            _tournamentRegistrationService.RegisterFighterForTournament(Id, 9);
+            _bracketGenerationService.GenerateMatchesForCategory(Id, 8);
+            //_tournamentRegistrationService.RegisterFighterForTournament(Id, 12);
             //_tournamentRegistrationService.UnregisterFighterFromTournament(Id, 1); //Unregister
 
             return RedirectToAction("Detail", new { id = Id });

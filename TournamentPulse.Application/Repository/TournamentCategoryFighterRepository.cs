@@ -42,6 +42,23 @@ namespace TournamentPulse.Application.Repository
                 .ToList();
         }
 
+        public ICollection<Fighter> GetFightersInCategoryAndTournament(int tournamentId, int categoryId)
+        {
+            // Retrieve the list of fighter IDs for the given tournament and category
+            var fighterIds = _context.TournamentCategoryFighter
+                .Where(tcf => tcf.TournamentId == tournamentId && tcf.CategoryId == categoryId)
+                .Select(tcf => tcf.FighterId)
+                .ToList();
+
+            // Retrieve the fighters with the matching IDs
+            var fighters = _context.Fighters
+                .Where(f => fighterIds.Contains(f.Id))
+                .ToList();
+
+            return fighters;
+        }
+
+
         public void UnregisterFighterFromTournament(int tournamentId, int fighterId)
         {
             var entry = _context.TournamentCategoryFighter

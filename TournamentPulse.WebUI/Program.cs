@@ -12,7 +12,6 @@ using TournamentPulse.Infrastructure.Data.Generator;
 
 var builder = WebApplication.CreateBuilder(args);
 #region Localization
-//Step 1
 builder.Services.AddSingleton<LanguageService>();
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.AddMvc().AddViewLocalization().AddDataAnnotationsLocalization(options => {
@@ -45,10 +44,12 @@ builder.Services.AddScoped<IAssociationRepository, AssociationRepository>();
 builder.Services.AddScoped<ICountryRepositry, CountryRepositry>();
 builder.Services.AddScoped<IFighterRepository, FighterRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IMatchRepository, MatchRepository>();
 
 builder.Services.AddScoped<ITournamentCategoryFighterRepository, TournamentCategoryFighterRepository>();
 
 builder.Services.AddScoped<TournamentRegistrationService>();
+builder.Services.AddScoped<BracketGenerationService>();
 builder.Services.AddScoped<SeedFightersInDbService>();
 
 

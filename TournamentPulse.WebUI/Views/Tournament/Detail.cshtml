@@ -41,6 +41,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-target="participants-page">Participants</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="brackets-page">Brackets</a>
+                </li>
                 <!-- Add more menu options with data attributes -->
             </ul>
         </div>
@@ -128,7 +132,6 @@
                 </div>
             </div>
 
-
         <div id="participants-page">
             <h1>Participants</h1>
             @foreach (var categoryFighter in Model.categoryFighterListViewModel)
@@ -170,12 +173,15 @@
             }
         </div>
 
+        <div id="brackets-page">
+            <h1>Participants</h1>
 
-
-
-
-
-
+            @foreach (var match in Model.matchListViewModel)
+            {
+                <p>@match.Fighter1Id vs @match.Fighter2Id in @match.CategoryId</p>
+            }
+        </div>
+    </div>
 
 
 
