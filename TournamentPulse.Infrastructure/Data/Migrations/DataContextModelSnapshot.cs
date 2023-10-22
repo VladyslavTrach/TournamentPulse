@@ -175,6 +175,9 @@ namespace TournamentPulse.Infrastructure.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<int>("Round")
+                        .HasColumnType("int");
+
                     b.Property<int?>("Score1")
                         .HasColumnType("int");
 

@@ -42,18 +42,20 @@
                                     <table class="table fighter-table">
                                         <thead>
                                             <tr>
-                                                <th style="width: 10%;">Match Id</th>
+                                                <th style="width: 10%;">Round</th>
                                                 <th style="width: 20%;">F1</th>
-                                                <th style="width: 30%;">F2</th>
+                                                <th style="width: 20%;">F2</th>
+                                                <th style="width: 15%;">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach (var match in categoryMatch.Matches)
                                             {
                                                 <tr>
-                                                    <td>@match.Id</td>
+                                                    <td>@match.Round</td>
                                                     <td>@match.Fighter1</td>
                                                     <td>@match.Fighter2</td>
+                                                    <td>@match.MatchStatus</td>
                                                 </tr>
                                             }
                                         </tbody>

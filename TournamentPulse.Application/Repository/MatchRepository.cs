@@ -70,6 +70,27 @@ namespace TournamentPulse.Application.Repository
                 return false;
             }
         }
+        public void ArchiveMatchesForCategory(ICollection<Match> matches)
+        {
+            foreach (var match in matches)
+            {
+                if (match.MatchStatus == "Occurred" && match.Score1 != null && match.Score2 != null && match.WinningMethod != null)
+                    match.MatchStatus = "Archived";
+
+                _context.Matches.Update(match);
+            }
+            _context.SaveChanges();
+        }
+
+        public ICollection<Match> GetOccurredMatchesForCategory(int tournamentId, int categoryId)
+        {
+            return _context.Matches
+                .Include(m => m.Category)
+                .Include(m => m.Fighter1)
+                .Include(m => m.Fighter2)
+                .Where(m => m.TournamentId == tournamentId && m.CategoryId == categoryId && m.MatchStatus == "Occurred").ToList();
+        }
+
         public ICollection<Match> GetMatchesForTournament(int tournamentId)
         {
             return _context.Matches

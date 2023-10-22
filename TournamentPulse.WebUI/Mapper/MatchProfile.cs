@@ -10,6 +10,7 @@ namespace TournamentPulse.WebUI.Mapper
         {
             CreateMap<Match, MatchViewModel>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Round, opt => opt.MapFrom(src => src.Round))
                 .ForMember(dest => dest.Score1, opt => opt.MapFrom(src => src.Score1))
                 .ForMember(dest => dest.Score2, opt => opt.MapFrom(src => src.Score2))
                 .ForMember(dest => dest.MatchStatus, opt => opt.MapFrom(src => src.MatchStatus))

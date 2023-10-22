@@ -36,7 +36,7 @@ namespace TournamentPulse.Application.Service
 
         public void GenerateFighters()
         {
-            IEnumerable<FighterRecordModel> fighterRecordModels = _dataGenerator.GenerateFighters().Take(5);
+            IEnumerable<FighterRecordModel> fighterRecordModels = _dataGenerator.GenerateFighters().Take(10);
 
             IEnumerable<Fighter> fighters = fighterRecordModels.Select(fr => _mapper.Map<Fighter>(fr));
 

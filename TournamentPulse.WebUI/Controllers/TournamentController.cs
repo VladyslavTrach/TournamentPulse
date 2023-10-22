@@ -81,7 +81,6 @@ namespace TournamentPulse.WebUI.Controllers
         {
             var matchesFromDb = _matchRepository.GetMatchesForTournament(id);
 
-            // Use AutoMapper to map the entities to view models within your LINQ query
             var matches = matchesFromDb
                 .GroupBy(tc => tc.CategoryId)
                 .Select(group => new CategoryMatchListViewModel
@@ -99,8 +98,10 @@ namespace TournamentPulse.WebUI.Controllers
 
         public IActionResult Register(int Id)
         {
-            _bracketGenerationService.GenerateMatchesForCategory(Id, 8);
-            //_tournamentRegistrationService.RegisterFighterForTournament(Id, 12);
+            _bracketGenerationService.GenerateMatchesForFirstRound(Id, 1006);
+            //_bracketGenerationService.GenerateMatchesForNextRound(Id, 8);
+
+            //_tournamentRegistrationService.RegisterFighterForTournament(Id, 22);
             //_tournamentRegistrationService.UnregisterFighterFromTournament(Id, 1); //Unregister
 
             return RedirectToAction("Detail", new { id = Id });

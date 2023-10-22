@@ -10,6 +10,9 @@ internal class MatchEntityConfiguration : IEntityTypeConfiguration<Match>
 
         builder.HasKey(match => match.Id);
 
+        builder.Property(match => match.Round)
+            .IsRequired();
+
         builder.Property(match => match.MatchStatus)
             .IsRequired()
             .HasMaxLength(255);

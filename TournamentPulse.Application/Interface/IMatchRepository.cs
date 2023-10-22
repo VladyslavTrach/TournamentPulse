@@ -10,8 +10,11 @@ namespace TournamentPulse.Application.Interface
     public interface IMatchRepository
     {
         bool AddMatch(Match match);
-
         bool AddMatches(ICollection<Match> matches);
+
         ICollection<Match> GetMatchesForTournament(int tournamentId);
+        ICollection<Match> GetOccurredMatchesForCategory(int tournamentId, int categoryId);
+
+        void ArchiveMatchesForCategory(ICollection<Match> matches);
     }
 }
