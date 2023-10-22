@@ -15,6 +15,7 @@ namespace TournamentPulse.WebUI.Controllers
     {
         private readonly ITournamentRepository _tournamentRepository;
         private readonly IMatchRepository _matchRepository;
+        private readonly IFighterRepository _fighterRepository;
         private readonly IMapper _mapper;
         private readonly TournamentRegistrationService _tournamentRegistrationService;
         private readonly BracketGenerationService _bracketGenerationService;
@@ -22,12 +23,14 @@ namespace TournamentPulse.WebUI.Controllers
         public TournamentController(
             ITournamentRepository tournamentRepository,
             IMatchRepository matchRepository,
+            IFighterRepository fighterRepository,
             IMapper mapper, 
             TournamentRegistrationService tournamentRegistrationService,
             BracketGenerationService bracketGenerationService)
         {
             _tournamentRepository = tournamentRepository;
             _matchRepository = matchRepository;
+            _fighterRepository = fighterRepository;
             _mapper = mapper;
             _tournamentRegistrationService = tournamentRegistrationService;
             _bracketGenerationService = bracketGenerationService;
@@ -46,6 +49,12 @@ namespace TournamentPulse.WebUI.Controllers
             var tournamentFromDb = _tournamentRepository.GetById(id);
             var tournament = _mapper.Map<TournamentDetailsViewModel>(tournamentFromDb);
 
+            ViewData["TournamentId"] = id;
+            return View(tournament);
+        }
+
+        public IActionResult Category(int id)
+        {
             var categoryFightersFromDb = _tournamentRegistrationService.GetCategoryFighter(id);
             var categoryFighterGroups = categoryFightersFromDb
                 .GroupBy(tc => tc.CategoryId)
@@ -62,21 +71,29 @@ namespace TournamentPulse.WebUI.Controllers
                        Academy = tc.Fighter.Academy?.Name ?? "Unknown"
                    }).ToList()
                })
-                .ToList();        
+                .ToList();
 
-            var matchesFromDb = _matchRepository.GetMatchesForTournament(id);
-            var matches = _mapper.Map<List<MatchViewModel>>(matchesFromDb);
-
-            var tournamentAndCategoryFighters = new TournamentDetailsPageViewModel
-            {
-                tournamentDetailsViewModel = tournament,
-                categoryFighterListViewModel = categoryFighterGroups,
-                matchListViewModel = matches
-            };
-
-            return View(tournamentAndCategoryFighters);
+            ViewData["TournamentId"] = id;
+            return View(categoryFighterGroups);
         }
 
+        public IActionResult Bracket(int id)
+        {
+            var matchesFromDb = _matchRepository.GetMatchesForTournament(id);
+
+            // Use AutoMapper to map the entities to view models within your LINQ query
+            var matches = matchesFromDb
+                .GroupBy(tc => tc.CategoryId)
+                .Select(group => new CategoryMatchListViewModel
+                {
+                    Category = group.First().Category.Name,
+                    Matches = group.Select(cm => _mapper.Map<MatchViewModel>(cm)).ToList()
+                })
+                .ToList();
+
+            ViewData["TournamentId"] = id;
+            return View(matches);
+        }
 
 
 

@@ -1,5 +1,5 @@
 ﻿@using TournamentPulse.WebUI.Models.Tournament;
-@model TournamentDetailsPageViewModel
+@model TournamentDetailsViewModel
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,47 +8,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Function to show/hide content sections based on the data attribute
-            function showContent(target) {
-                $("#content-container > div").hide();
-                $("#" + target).show();
-            }
-
-            // Event handler for menu options
-            $(".nav-link").click(function () {
-                var target = $(this).data("target");
-                showContent(target);
-            });
-
-            // Initialize by showing the default content (e.g., Home)
-            showContent("tournament-details-page");
-        });
-    </script>
-
-
 </head>
 <body>
     <!-- Navigation Menu -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#" data-target="tournament-details-page">Tournament Details <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Detail", "Tournament", new { id = ViewData["TournamentId"] })">Detail</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-target="participants-page">Participants</a>
+                    <a class="nav-link" href="@Url.Action("Category", "Tournament", new { id = ViewData["TournamentId"] })">Category</a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-target="brackets-page">Brackets</a>
+                    <a class="nav-link" href="@Url.Action("Bracket", "Tournament", new { id = ViewData["TournamentId"] })">Bracket</a>
                 </li>
-                <!-- Add more menu options with data attributes -->
             </ul>
         </div>
     </nav>
+
 
     <div class="container" id="content-container">
         <div id="tournament-details-page">
@@ -58,14 +36,14 @@
                             <div class="custom-card-main">
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
-                                        <img src="@Model.tournamentDetailsViewModel.ImageName" class="card-img" alt="Image">
+                                        <img src="@Model.ImageName" class="card-img" alt="Image">
                                     </div>
                                     <div class="col-md-5">
                                         <div class="card-body">
                                             <h5 class="card-title">Date of Holding</h5>
-                                        <p class="card-text">@Model.tournamentDetailsViewModel.Date</p>
+                                        <p class="card-text">@Model.Date</p>
                                             <h5 class="card-title">Number of Participants</h5>
-                                        <p class="card-text">@Model.tournamentDetailsViewModel.MaxParticipants</p>
+                                        <p class="card-text">@Model.MaxParticipants</p>
                                             <a href="#" class="btn btn-primary">Register to Event</a>
                                         </div>
                                     </div>
@@ -82,8 +60,8 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-12">
                                         <div class="card-body">
-                                        <h4 class="card-title">@Model.tournamentDetailsViewModel.Name Description</h4>
-                                        <p class="card-text">@Model.tournamentDetailsViewModel.Description</p>
+                                        <h4 class="card-title">@Model.Name Description</h4>
+                                        <p class="card-text">@Model.Description</p>
                                         </div>
                                     </div>
                                 </div>
@@ -96,8 +74,8 @@
                                     <div class="col-md-12">
                                         <div class="card-body">
                                             <h4 class="card-title">Location</h4>
-                                        <h5 class="card-title">@Model.tournamentDetailsViewModel.Country</h5>
-                                        <h6 class="card-title">@Model.tournamentDetailsViewModel.City</h6>
+                                        <h5 class="card-title">@Model.Country</h5>
+                                        <h6 class="card-title">@Model.City</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -108,7 +86,7 @@
                                     <div class="col-md-12">
                                         <div class="card-body">
                                             <h4 class="card-title">Price</h4>
-                                        <p class="card-text">@Model.tournamentDetailsViewModel.Price UAH</p>
+                                        <p class="card-text">@Model.Price UAH</p>
                                         </div>
                                     </div>
                                 </div>
@@ -120,9 +98,9 @@
                                         <div class="card-body">
                                             <h4 class="card-title">Contact Organisator</h4>
                                             <h6 class="card-title">Email</h6>
-                                        <p class="card-text">@Model.tournamentDetailsViewModel.Email</p>
+                                        <p class="card-text">@Model.Email</p>
                                             <h6 class="card-title">Phone</h6>
-                                        <p class="card-text">@Model.tournamentDetailsViewModel.Phone</p>
+                                        <p class="card-text">@Model.Phone</p>
                                         </div>
                                     </div>
                                 </div>
@@ -131,56 +109,6 @@
                     </div>
                 </div>
             </div>
-
-        <div id="participants-page">
-            <h1>Participants</h1>
-            @foreach (var categoryFighter in Model.categoryFighterListViewModel)
-            {
-                <div class="row mb-4">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header">
-                                <h2>@categoryFighter.Category</h2>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table fighter-table">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 20%;">Full Name</th>
-                                                <th style="width: 30%;">Academy</th>
-                                                <th style="width: 10%;">Age</th>
-                                                <th style="width: 10%;">Weight</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach (var fighter in categoryFighter.Fighters)
-                                            {
-                                                <tr>
-                                                    <td>@fighter.FullName</td>
-                                                    <td>@fighter.Academy</td>
-                                                    <td>@fighter.Age</td>
-                                                    <td>@fighter.Weight</td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-
-        <div id="brackets-page">
-            <h1>Participants</h1>
-
-            @foreach (var match in Model.matchListViewModel)
-            {
-                <p>@match.Fighter1Id vs @match.Fighter2Id in @match.CategoryId</p>
-            }
-        </div>
     </div>
 
 

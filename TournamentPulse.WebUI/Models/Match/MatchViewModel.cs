@@ -15,10 +15,10 @@ namespace TournamentPulse.WebUI.Models.Match
 
         public int CategoryId { get; set; }
 
-        public int Fighter1Id { get; set; }
+        public string Fighter1 { get; set; }
 
-        public int Fighter2Id { get; set; }
+        public string Fighter2 { get; set; }
 
-        public int? WinnerId { get; set; }
+        public string? Winner { get; set; }
     }
 }

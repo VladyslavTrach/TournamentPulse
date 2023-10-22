@@ -36,7 +36,7 @@ namespace TournamentPulse.Application.Service
 
             List<Match> matches = new List<Match>();
 
-            for (int i = 0; i < fighters.Count/2; i++)
+            for (int i = 0; i <= fighters.Count/2; i += 2)
             {
                 var match = new Match
                 {

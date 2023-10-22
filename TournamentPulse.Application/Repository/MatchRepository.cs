@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -71,7 +72,11 @@ namespace TournamentPulse.Application.Repository
         }
         public ICollection<Match> GetMatchesForTournament(int tournamentId)
         {
-            return _context.Matches.Where(m => m.TournamentId == tournamentId).ToList();
+            return _context.Matches
+                .Include(m => m.Category)
+                .Include(m => m.Fighter1)
+                .Include(m => m.Fighter2)
+                .Where(m => m.TournamentId == tournamentId).ToList();
         }
 
 
