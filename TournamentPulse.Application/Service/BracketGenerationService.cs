@@ -28,15 +28,18 @@ namespace TournamentPulse.Application.Service
 
         public void GenerateMatchesForFirstRound(int tournamentId, int categoryId)
         {
-            //Creates matches for first Round
             IList<Fighter> fighters = (IList<Fighter>)_tournamentCategoryFighterRepository.GetFightersInCategoryAndTournament(tournamentId, categoryId);
+
             List<Match> matches = new List<Match>();
 
-
-            if (fighters.Count <2) { }
+            if (fighters.Count < 2)
+            {
+                // Handle cases with fewer than 2 fighters.
+                // You can add custom logic here as needed.
+            }
             else if (fighters.Count == 3)
             {
-                // Generate matches for a round-robin format.
+                // Generate matches for a round-robin format if there are exactly 3 fighters.
                 for (int i = 0; i < fighters.Count; i++)
                 {
                     for (int j = i + 1; j < fighters.Count; j++)
@@ -53,41 +56,67 @@ namespace TournamentPulse.Application.Service
                         matches.Add(match);
                     }
                 }
-
-                _matchRepository.AddMatches(matches);
             }
             else
             {
-                for (int i = 0; i < fighters.Count / 2; i++)
+                // Handle cases with non-power-of-two number of fighters.
+                // Introduce "bye" matches for some fighters.
+                int byes = (fighters.Count % 2 == 0) ? 0 : 1;
+
+
+                // Generate matches for the first round.
+                for (int i = 0; i < fighters.Count - byes; i += 2)
                 {
-                    int j = i * 2;
                     var match = new Match
                     {
                         Round = 1,
                         TournamentId = tournamentId,
                         CategoryId = categoryId,
-                        Fighter1Id = fighters[j].Id,
-                        Fighter2Id = fighters[j + 1].Id,
+                        Fighter1Id = fighters[i].Id,
+                        Fighter2Id = fighters[i + 1].Id,
                         MatchStatus = "Scheduled"
                     };
                     matches.Add(match);
                 }
 
-                _matchRepository.AddMatches(matches);
+                if(byes != 0)
+                {
+                    var byeMatch = new Match
+                    {
+                        Round = 1,
+                        Score1 = 0,
+                        Score2 = 0,
+                        WinningMethod = "No Opponent",
+                        TournamentId = tournamentId,
+                        CategoryId = categoryId,
+                        Fighter1Id = fighters[fighters.Count - 1].Id,
+                        Fighter2Id = 7,
+                        WinnerId = fighters[fighters.Count - 1].Id,
+                        MatchStatus = "Occurred"
+                    };
+                    matches.Add(byeMatch);
+                }
             }
+
+            _matchRepository.AddMatches(matches);
         }
+
 
         public void GenerateMatchesForNextRound(int tournamentId, int categoryId)
         {
             // Get the matches from the previous round.
             List<Match> previousRoundMatches = (List<Match>)_matchRepository.GetOccurredMatchesForCategory(tournamentId, categoryId);
+            int byes = (previousRoundMatches.Count % 2 == 0) ? 0 : 1;
+
             _matchRepository.ArchiveMatchesForCategory(previousRoundMatches);
+
+
 
             // Create a list to store the matches for the next round.
             List<Match> nextRoundMatches = new List<Match>();
 
             // Logic to determine winners and generate matches for the next round.
-            for (int i = 0; i < previousRoundMatches.Count; i += 2)
+            for (int i = 0; i < previousRoundMatches.Count - byes; i += 2)
             {
                 var match = new Match
                 {
@@ -99,6 +128,24 @@ namespace TournamentPulse.Application.Service
                     MatchStatus = "Scheduled"
                 };
                 nextRoundMatches.Add(match);
+            }
+
+            if (byes != 0)
+            {
+                var byeMatch = new Match
+                {
+                    Round = previousRoundMatches[(previousRoundMatches.Count - 1)].Round + 1,
+                    Score1 = 0,
+                    Score2 = 0,
+                    WinningMethod = "No Opponent",
+                    TournamentId = tournamentId,
+                    CategoryId = categoryId,
+                    Fighter1Id = (int)previousRoundMatches[(previousRoundMatches.Count - 1)].WinnerId,
+                    Fighter2Id = 7,
+                    WinnerId = (int)previousRoundMatches[(previousRoundMatches.Count - 1)].WinnerId,
+                    MatchStatus = "Occurred"
+                };
+                nextRoundMatches.Add(byeMatch);
             }
 
             _matchRepository.AddMatches(nextRoundMatches);

@@ -79,6 +79,10 @@ namespace TournamentPulse.Application.Repository
 
                 _context.Matches.Update(match);
             }
+
+            var matchesToRemove = _context.Matches.Where(m => m.WinningMethod == "No Opponent").ToList();
+            _context.Matches.RemoveRange(matchesToRemove);
+
             _context.SaveChanges();
         }
 

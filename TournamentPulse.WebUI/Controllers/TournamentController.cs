@@ -98,10 +98,10 @@ namespace TournamentPulse.WebUI.Controllers
 
         public IActionResult Register(int Id)
         {
-            _bracketGenerationService.GenerateMatchesForFirstRound(Id, 1006);
-            //_bracketGenerationService.GenerateMatchesForNextRound(Id, 8);
+            //_bracketGenerationService.GenerateMatchesForFirstRound(Id, 8);
+            _bracketGenerationService.GenerateMatchesForNextRound(Id, 8);
 
-            //_tournamentRegistrationService.RegisterFighterForTournament(Id, 22);
+            //_tournamentRegistrationService.RegisterFighterForTournament(Id, 25);
             //_tournamentRegistrationService.UnregisterFighterFromTournament(Id, 1); //Unregister
 
             return RedirectToAction("Detail", new { id = Id });
