@@ -15,6 +15,6 @@ namespace TournamentPulse.Application.Interface
         ICollection<Match> GetMatchesForTournament(int tournamentId);
         ICollection<Match> GetOccurredMatchesForCategory(int tournamentId, int categoryId);
 
-        void ArchiveMatchesForCategory(ICollection<Match> matches);
+        int ArchiveMatchesForCategory(ICollection<Match> matches);
     }
 }

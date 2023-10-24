@@ -70,21 +70,32 @@ namespace TournamentPulse.Application.Repository
                 return false;
             }
         }
-        public void ArchiveMatchesForCategory(ICollection<Match> matches)
+        public int ArchiveMatchesForCategory(ICollection<Match> matches)
         {
+            int noOpponentWinnerId = 0;
+
             foreach (var match in matches)
             {
                 if (match.MatchStatus == "Occurred" && match.Score1 != null && match.Score2 != null && match.WinningMethod != null)
+                {
                     match.MatchStatus = "Archived";
+                    _context.Matches.Update(match);
+                }
 
-                _context.Matches.Update(match);
+                if (match.WinningMethod == "No Oponent")
+                {
+                    noOpponentWinnerId = (int)match.WinnerId;
+                }
             }
 
-            var matchesToRemove = _context.Matches.Where(m => m.WinningMethod == "No Opponent").ToList();
-            _context.Matches.RemoveRange(matchesToRemove);
+            var noOpponentMatchesToRemove = _context.Matches.Where(m => m.WinningMethod == "No Opponent");
+            _context.Matches.RemoveRange(noOpponentMatchesToRemove);
 
             _context.SaveChanges();
+
+            return noOpponentWinnerId;
         }
+
 
         public ICollection<Match> GetOccurredMatchesForCategory(int tournamentId, int categoryId)
         {
