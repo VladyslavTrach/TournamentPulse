@@ -9,7 +9,7 @@ namespace TournamentPulse.WebUI.Models.Match
 
         public int? Score1 { get; set; }
         public int? Score2 { get; set; }
-        public string MatchStatus { get; set; } // Scheduled / Occurred(someone won) / Canceled(both fighters didnt appear)
+        public string MatchStatus { get; set; } // Scheduled / Occurred(someone won) / Canceled(both fighters did not appear)
         public string? WinningMethod { get; set; } //By : submition, points, walkover, disqualification
 
         public int TournamentId { get; set; }

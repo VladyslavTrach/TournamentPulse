@@ -9,7 +9,7 @@ using TournamentPulse.Core.Entities;
 
 namespace TournamentPulse.Application.Service
 {
-    public class TournamentRegistrationService
+    public class TournamentRegistrationService : ITournamentRegistrationService
     {
         private readonly ITournamentRepository _tournamentRepository;
         private readonly IFighterRepository _fighterRepository;
@@ -69,9 +69,12 @@ namespace TournamentPulse.Application.Service
         {
             foreach (var category in categories)
             {
-                if (fighter.Weight >= category.MinWeight && fighter.Weight < category.MaxWeight
-                    && fighter.Age >= category.MinAge && fighter.Age < category.MaxAge
-                    && fighter.Weight >= category.MinWeight && fighter.Weight < category.MaxWeight
+                if (fighter.Weight >= category.MinWeight 
+                    && fighter.Weight < category.MaxWeight
+                    && fighter.Age >= category.MinAge 
+                    && fighter.Age < category.MaxAge
+                    && fighter.Weight >= category.MinWeight 
+                    && fighter.Weight < category.MaxWeight
                     && fighter.Rank == category.Rank)
                     return category;
             }

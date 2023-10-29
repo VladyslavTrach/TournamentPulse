@@ -43,33 +43,35 @@ namespace TournamentPulse.Application.Repository
         {
             try
             {
-                bool allMatchesAdded = true; // Initialize a flag to track if all matches were added successfully
+                // Materialize the existing matches as a list
+                var existingMatches = _context.Matches.ToList();
 
-                foreach (var match in matches)
-                {
-                    if (!MatchExists(match))
-                    {
-                        _context.Matches.Add(match);
-                    }
-                    else
-                    {
-                        allMatchesAdded = false; // If any match already exists, set the flag to false
-                    }
-                }
+                // Perform the necessary comparison client-side to find new matches
+                var newMatches = matches.Where(match =>
+                    !existingMatches.Any(existingMatch =>
+                        existingMatch.Fighter1Id == match.Fighter1Id &&
+                        existingMatch.Fighter2Id == match.Fighter2Id &&
+                        existingMatch.Round == match.Round &&
+                        existingMatch.TournamentId == match.TournamentId
+                    )
+                ).ToList();
 
-                if (allMatchesAdded)
+                if (newMatches.Any())
                 {
+                    _context.Matches.AddRange(newMatches);
                     _context.SaveChanges();
-                    return true; // All matches were added successfully
+                    return true;
                 }
 
-                return false; // At least one match already exists or an exception occurred
+                return false;
             }
             catch (Exception ex)
             {
                 return false;
             }
         }
+
+
         public int ArchiveMatchesForCategory(ICollection<Match> matches)
         {
             int noOpponentWinnerId = 0;
@@ -82,14 +84,16 @@ namespace TournamentPulse.Application.Repository
                     _context.Matches.Update(match);
                 }
 
-                if (match.WinningMethod == "No Oponent")
+                
+
+                if (match.WinningMethod == "No Opponent")
                 {
                     noOpponentWinnerId = (int)match.WinnerId;
                 }
             }
 
-            var noOpponentMatchesToRemove = _context.Matches.Where(m => m.WinningMethod == "No Opponent");
-            _context.Matches.RemoveRange(noOpponentMatchesToRemove);
+            //var noOpponentMatchesToRemove = _context.Matches.Where(m => m.WinningMethod == "No Opponent");
+            //_context.Matches.RemoveRange(noOpponentMatchesToRemove);
 
             _context.SaveChanges();
 

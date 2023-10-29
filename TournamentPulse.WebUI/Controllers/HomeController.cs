@@ -7,8 +7,14 @@ using TournamentPulse.WebUI.Models;
 
 namespace TournamentPulse.WebUI.Controllers
 {
+
     public class HomeController : Controller
     {
+        private static class Constants
+        {
+            public const string WelcomeMessage = "str_welcome_message";
+        }
+
         private readonly ILogger<HomeController> _logger;
         private LanguageService _localization;
 
@@ -20,9 +26,7 @@ namespace TournamentPulse.WebUI.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.WelcomeMessage = _localization.Getkey("str_welcome_message");
-            //get culture information
-            var currentCulture = Thread.CurrentThread.CurrentUICulture.Name;
+            ViewBag.WelcomeMessage = _localization.Getkey(Constants.WelcomeMessage);
             return View();
         }
 

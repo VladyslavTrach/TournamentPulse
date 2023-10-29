@@ -49,9 +49,8 @@ namespace TournamentPulse.Application.Repository
 
         public bool TournamentExist(Tournament tournament)
         {
-            var existingTournament = _context.Tournaments.FirstOrDefault(t => t.Name == tournament.Name);
-
-            return existingTournament != null;
+            return _context.Tournaments.Any(t => t.Name == tournament.Name);
         }
+
     }
 }

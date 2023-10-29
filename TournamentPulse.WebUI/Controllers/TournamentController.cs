@@ -17,16 +17,16 @@ namespace TournamentPulse.WebUI.Controllers
         private readonly IMatchRepository _matchRepository;
         private readonly IFighterRepository _fighterRepository;
         private readonly IMapper _mapper;
-        private readonly TournamentRegistrationService _tournamentRegistrationService;
-        private readonly BracketGenerationService _bracketGenerationService;
+        private readonly ITournamentRegistrationService _tournamentRegistrationService;
+        private readonly IBracketGenerationService _bracketGenerationService;
 
         public TournamentController(
             ITournamentRepository tournamentRepository,
             IMatchRepository matchRepository,
             IFighterRepository fighterRepository,
             IMapper mapper, 
-            TournamentRegistrationService tournamentRegistrationService,
-            BracketGenerationService bracketGenerationService)
+            ITournamentRegistrationService tournamentRegistrationService,
+            IBracketGenerationService bracketGenerationService)
         {
             _tournamentRepository = tournamentRepository;
             _matchRepository = matchRepository;
@@ -101,7 +101,7 @@ namespace TournamentPulse.WebUI.Controllers
             //_bracketGenerationService.GenerateMatchesForFirstRound(Id, 8);
             _bracketGenerationService.GenerateMatchesForNextRound(Id, 8);
 
-            //_tournamentRegistrationService.RegisterFighterForTournament(Id, 25);
+            _tournamentRegistrationService.RegisterFighterForTournament(Id, 25);
             //_tournamentRegistrationService.UnregisterFighterFromTournament(Id, 1); //Unregister
 
             return RedirectToAction("Detail", new { id = Id });

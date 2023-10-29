@@ -13,9 +13,9 @@ namespace TournamentPulse.WebUI.Controllers
     {
         private readonly IFighterRepository _fighterRepository;
         private readonly IMapper _mapper;
-        private readonly SeedFightersInDbService _seedFightersInDbService;
+        private readonly ISeedFightersInDbService _seedFightersInDbService;
 
-        public FighterController(IFighterRepository fighterRepository, IMapper mapper, SeedFightersInDbService seedFightersInDbService)
+        public FighterController(IFighterRepository fighterRepository, IMapper mapper, ISeedFightersInDbService seedFightersInDbService)
         {
             _fighterRepository = fighterRepository;
 

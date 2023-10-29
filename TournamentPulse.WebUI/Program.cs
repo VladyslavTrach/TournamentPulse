@@ -38,6 +38,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddTransient<DataGenerator>();
 
+
+
+
 builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
 builder.Services.AddScoped<IAcademyRepository, AcademyRepository>();
 builder.Services.AddScoped<IAssociationRepository, AssociationRepository>();
@@ -48,9 +51,9 @@ builder.Services.AddScoped<IMatchRepository, MatchRepository>();
 
 builder.Services.AddScoped<ITournamentCategoryFighterRepository, TournamentCategoryFighterRepository>();
 
-builder.Services.AddScoped<TournamentRegistrationService>();
-builder.Services.AddScoped<BracketGenerationService>();
-builder.Services.AddScoped<SeedFightersInDbService>();
+builder.Services.AddScoped<ITournamentRegistrationService, TournamentRegistrationService>();
+builder.Services.AddScoped<IBracketGenerationService, BracketGenerationService>();
+builder.Services.AddScoped<ISeedFightersInDbService, SeedFightersInDbService>();
 
 
 

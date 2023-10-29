@@ -29,6 +29,7 @@ namespace TournamentPulse.Application.Repository
             }
             catch (Exception ex)
             {
+                // ADD Logger
                 return false; // Failed to add the record
             }
         }
@@ -44,19 +45,19 @@ namespace TournamentPulse.Application.Repository
 
         public ICollection<Fighter> GetFightersInCategoryAndTournament(int tournamentId, int categoryId)
         {
-            // Retrieve the list of fighter IDs for the given tournament and category
-            var fighterIds = _context.TournamentCategoryFighter
+            var fighters = _context.TournamentCategoryFighter
                 .Where(tcf => tcf.TournamentId == tournamentId && tcf.CategoryId == categoryId)
-                .Select(tcf => tcf.FighterId)
-                .ToList();
-
-            // Retrieve the fighters with the matching IDs
-            var fighters = _context.Fighters
-                .Where(f => fighterIds.Contains(f.Id))
+                .Join(
+                    _context.Fighters,
+                    tcf => tcf.FighterId,
+                    f => f.Id,
+                    (tcf, f) => f
+                )
                 .ToList();
 
             return fighters;
         }
+
 
 
         public void UnregisterFighterFromTournament(int tournamentId, int fighterId)

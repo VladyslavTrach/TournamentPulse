@@ -11,7 +11,7 @@ using TournamentPulse.Infrastructure.Data.Generator;
 
 namespace TournamentPulse.Application.Service
 {
-    public class SeedFightersInDbService
+    public class SeedFightersInDbService : ISeedFightersInDbService
     {
         private readonly IFighterRepository _fighterRepository;
         private readonly DataGenerator _dataGenerator;

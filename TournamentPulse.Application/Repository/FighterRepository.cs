@@ -58,12 +58,15 @@ namespace TournamentPulse.Application.Repository
             return _context.Fighters.Where(f => f.AcademyId == id).Count();
         }
 
-        public bool FighterExists(Fighter fighter)
-        {
-            var existingFighter = _context.Fighters.FirstOrDefault(f => f.FullName == fighter.FullName && f.AcademyId == fighter.AcademyId && f.Age == fighter.Age);
+    public bool FighterExists(Fighter fighter)
+    {
+        return _context.Fighters.Any(f => 
+            f.FullName == fighter.FullName && 
+            f.AcademyId == fighter.AcademyId && 
+            f.Age == fighter.Age
+        );
+    }
 
-            return existingFighter != null;
-        }
 
 
         public ICollection<Fighter> GetAllFighters()
@@ -74,15 +77,7 @@ namespace TournamentPulse.Application.Repository
         public Fighter GetFighterById(int id)
         {
             var fighter = _context.Fighters.FirstOrDefault(f => f.Id == id);
-
-            if (fighter != null)
-            {
                 return fighter;
-            }
-            else
-            {
-                return null; // In this example, we return null to indicate that no fighter was found.
-            }
         }
 
     }
