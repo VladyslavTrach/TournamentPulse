@@ -9,6 +9,7 @@ using TournamentPulse.Application.Repository;
 using TournamentPulse.Application.Service;
 using TournamentPulse.Infrastructure.Data;
 using TournamentPulse.Infrastructure.Data.Generator;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 #region Localization
@@ -40,7 +41,6 @@ builder.Services.AddTransient<DataGenerator>();
 
 
 
-
 builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
 builder.Services.AddScoped<IAcademyRepository, AcademyRepository>();
 builder.Services.AddScoped<IAssociationRepository, AssociationRepository>();
@@ -58,11 +58,17 @@ builder.Services.AddScoped<ISeedFightersInDbService, SeedFightersInDbService>();
 
 
 
-builder.Services.AddDbContext<DataContext>(options =>
+
+builder.Services.AddDbContext<ApplicationDataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
         b => b.MigrationsAssembly("TournamentPulse.Infrastructure"));
 });
+
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddDefaultTokenProviders()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDataContext>();
 
 
 
@@ -82,8 +88,11 @@ app.UseStaticFiles();
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
+
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",

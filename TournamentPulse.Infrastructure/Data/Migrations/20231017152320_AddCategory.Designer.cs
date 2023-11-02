@@ -11,7 +11,7 @@ using TournamentPulse.Infrastructure.Data;
 
 namespace TournamentPulse.Infrastructure.Data.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(ApplicationDataContext))]
     [Migration("20231017152320_AddCategory")]
     partial class AddCategory
     {

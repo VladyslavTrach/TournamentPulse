@@ -12,9 +12,9 @@ namespace TournamentPulse.Application.Repository
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly DataContext _context;
+        private readonly ApplicationDataContext _context;
 
-        public CategoryRepository(DataContext context)
+        public CategoryRepository(ApplicationDataContext context)
         {
             _context = context;
         }

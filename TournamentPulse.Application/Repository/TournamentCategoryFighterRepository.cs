@@ -12,9 +12,9 @@ namespace TournamentPulse.Application.Repository
 {
     public class TournamentCategoryFighterRepository : ITournamentCategoryFighterRepository
     {
-        private readonly DataContext _context;
+        private readonly ApplicationDataContext _context;
 
-        public TournamentCategoryFighterRepository(DataContext context)
+        public TournamentCategoryFighterRepository(ApplicationDataContext context)
         {
             _context = context;
         }

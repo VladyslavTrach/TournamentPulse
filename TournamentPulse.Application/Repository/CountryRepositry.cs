@@ -11,9 +11,9 @@ namespace TournamentPulse.Application.Repository
 {
     public class CountryRepositry : ICountryRepositry
     {
-        private readonly DataContext _context;
+        private readonly ApplicationDataContext _context;
 
-        public CountryRepositry(DataContext context)
+        public CountryRepositry(ApplicationDataContext context)
         {
             _context = context;
         }

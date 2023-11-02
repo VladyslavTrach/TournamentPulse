@@ -12,10 +12,10 @@ namespace TournamentPulse.Application.Repository
 {
     public class AssociationRepository : IAssociationRepository
     {
-        private readonly DataContext _context;
+        private readonly ApplicationDataContext _context;
         private readonly IFighterRepository _fighterRepository;
 
-        public AssociationRepository(DataContext context, IFighterRepository fighterRepository)
+        public AssociationRepository(ApplicationDataContext context, IFighterRepository fighterRepository)
         {
             _context = context;
             _fighterRepository = fighterRepository;

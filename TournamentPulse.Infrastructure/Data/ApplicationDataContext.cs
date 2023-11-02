@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using TournamentPulse.Core.Entities;
 using TournamentPulse.Infrastructure.Data.EntityTypeConfiguration;
 
@@ -6,12 +8,20 @@ using TournamentPulse.Infrastructure.Data.EntityTypeConfiguration;
 
 namespace TournamentPulse.Infrastructure.Data
 {
-    public class DataContext : DbContext
+    public class ApplicationDataContext : IdentityDbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        //-----Fix "Unable to create an object of type DataContext" Bug-----//
+
+        public ApplicationDataContext()
         {
 
         }
+        public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options)
+        {
+
+        }
+
+
 
         // DbSet properties
         public DbSet<Academy> Academies { get; set; }
@@ -25,7 +35,8 @@ namespace TournamentPulse.Infrastructure.Data
         //public DbSet<AgeClass> AgeClasses { get; set; }
         //public DbSet<RankClass> RankClasses { get; set; }
         //public DbSet<WeightClass> WeightClasses { get; set; }
-        //public DbSet<User> Users { get; set; }
+
+        public DbSet<User> Users { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -44,7 +55,32 @@ namespace TournamentPulse.Infrastructure.Data
             //modelBuilder.ApplyConfiguration(new WeightClassEntityConfiguration());
             modelBuilder.ApplyConfiguration(new TournamentEntityConfiguration());
             modelBuilder.ApplyConfiguration(new MatchEntityConfiguration());
-            //modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+        }
+
+        //-----Fix "Unable to create an object of type DataContext" Bug-----//
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-PTAHNE9\\SQLEXPRESS;Initial Catalog=TournamentPulse;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            }
         }
     }
+
+
+
+    //-----FIX of Scaffolding Bug-----//
+
+    //public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<DataContext>
+    //{
+    //    public DataContext CreateDbContext(string[] args)
+    //    {
+    //        var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
+    //        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=EcommerceDb;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+    //        return new DataContext(optionsBuilder.Options);
+    //    }
+    //}
 }

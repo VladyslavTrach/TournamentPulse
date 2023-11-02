@@ -14,9 +14,9 @@ namespace TournamentPulse.Application.Repository
 {
     public class MatchRepository : IMatchRepository
     {
-        private readonly DataContext _context;
+        private readonly ApplicationDataContext _context;
 
-        public MatchRepository(DataContext context)
+        public MatchRepository(ApplicationDataContext context)
         {
             _context = context;
         }

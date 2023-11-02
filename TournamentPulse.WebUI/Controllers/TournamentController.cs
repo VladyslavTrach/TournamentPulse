@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TournamentPulse.Application.Interface;
@@ -95,17 +96,19 @@ namespace TournamentPulse.WebUI.Controllers
         }
 
 
-
+        [Authorize(Roles = "User")]
         public IActionResult Register(int Id)
         {
             //_bracketGenerationService.GenerateMatchesForFirstRound(Id, 8);
-            _bracketGenerationService.GenerateMatchesForNextRound(Id, 8);
+            //_bracketGenerationService.GenerateMatchesForNextRound(Id, 8);
 
-            _tournamentRegistrationService.RegisterFighterForTournament(Id, 25);
+            //_tournamentRegistrationService.RegisterFighterForTournament(Id, 25);
             //_tournamentRegistrationService.UnregisterFighterFromTournament(Id, 1); //Unregister
 
             return RedirectToAction("Detail", new { id = Id });
         }
+
+        [Authorize(Roles = "Admin,Organizer")]
         public IActionResult Add()
         {
             return View();

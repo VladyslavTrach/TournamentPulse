@@ -11,7 +11,7 @@ using TournamentPulse.Infrastructure.Data;
 
 namespace TournamentPulse.Infrastructure.Data.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(ApplicationDataContext))]
     [Migration("20231015152737_AddFighterEntityConfiguration")]
     partial class AddFighterEntityConfiguration
     {
