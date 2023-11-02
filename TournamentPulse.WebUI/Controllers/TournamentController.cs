@@ -106,6 +106,10 @@ namespace TournamentPulse.WebUI.Controllers
 
             return RedirectToAction("Detail", new { id = Id });
         }
+        public IActionResult Add()
+        {
+            return View();
+        }
 
     }
 }
