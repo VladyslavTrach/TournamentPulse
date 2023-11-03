@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TournamentPulse.Application.Interface;
 using TournamentPulse.Core.Entities;
+using TournamentPulse.Core.Enums;
 using TournamentPulse.Infrastructure.Data;
 using Match = TournamentPulse.Core.Entities.Match;
 
@@ -76,23 +77,19 @@ namespace TournamentPulse.Application.Repository
 
             foreach (var match in matches)
             {
-                if (match.MatchStatus == "Occurred" && match.Score1 != null && match.Score2 != null && match.WinningMethod != null)
+                if (match.MatchStatus == MatchStatusEnum.Occurred.ToString() && match.Score1 != null && match.Score2 != null && match.WinningMethod != null)
                 {
-                    match.MatchStatus = "Archived";
+                    match.MatchStatus = MatchStatusEnum.Archived.ToString();
                     _context.Matches.Update(match);
                 }
 
 
 
-                if (match.WinningMethod == "No Opponent")
+                if (match.WinningMethod == WinningMethodEnum.NoOpponent.ToString())
                 {
                     noOpponentWinnerId = (int)match.WinnerId;
                 }
             }
-
-            //var noOpponentMatchesToRemove = _context.Matches.Where(m => m.WinningMethod == "No Opponent");
-            //_context.Matches.RemoveRange(noOpponentMatchesToRemove);
-
             _context.SaveChanges();
 
             return noOpponentWinnerId;
@@ -103,7 +100,7 @@ namespace TournamentPulse.Application.Repository
                 .Include(m => m.Category)
                 .Include(m => m.Fighter1)
                 .Include(m => m.Fighter2)
-                .Where(m => m.TournamentId == tournamentId && m.CategoryId == categoryId && m.MatchStatus == "Occurred").ToList();
+                .Where(m => m.TournamentId == tournamentId && m.CategoryId == categoryId && m.MatchStatus == MatchStatusEnum.Occurred.ToString()).ToList();
         }
         public ICollection<Match> GetMatchesForTournament(int tournamentId)
         {
@@ -113,15 +110,16 @@ namespace TournamentPulse.Application.Repository
                 .Include(m => m.Fighter2)
                 .Where(m => m.TournamentId == tournamentId).ToList();
         }
-
-
         public bool MatchExists(Match match)
         {
-            var existingMatch = _context.Matches.FirstOrDefault(m => m.Fighter1Id == match.Fighter1Id && m.Fighter2Id == match.Fighter2Id && m.TournamentId == match.TournamentId && m.CategoryId == match.CategoryId);
+            var existingMatch = _context.Matches.FirstOrDefault(
+                m => m.Fighter1Id == match.Fighter1Id && 
+                m.Fighter2Id == match.Fighter2Id && 
+                m.TournamentId == match.TournamentId && 
+                m.CategoryId == match.CategoryId);
 
             return existingMatch != null;
         }
-
         public Match GetMatchById(int id)
         {
             return _context.Matches
@@ -129,7 +127,6 @@ namespace TournamentPulse.Application.Repository
                 .Include(m => m.Fighter2)
                 .Where(m => m.Id == id).First();
         }
-
         public void UpdateMatch(Match match)
         {
             if (match == null)

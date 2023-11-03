@@ -2,6 +2,7 @@
 using TournamentPulse.Application.Interface;
 using TournamentPulse.Application.Repository;
 using TournamentPulse.Core.Entities;
+using TournamentPulse.Core.Enums;
 using TournamentPulse.WebUI.Models.Match;
 
 namespace TournamentPulse.WebUI.Mapper
@@ -24,7 +25,7 @@ namespace TournamentPulse.WebUI.Mapper
                 .ForMember(dest => dest.Winner, opt => opt.MapFrom(src => src.Winner.FullName))
                 .ForMember(dest => dest.Score1, opt => opt.NullSubstitute(0))
                 .ForMember(dest => dest.Score2, opt => opt.NullSubstitute(0))
-                .ForMember(dest => dest.WinningMethod, opt => opt.NullSubstitute("No Winner Yet"));
+                .ForMember(dest => dest.WinningMethod, opt => opt.NullSubstitute(WinningMethodEnum.NoWinYet.ToString()));
 
         }
     }

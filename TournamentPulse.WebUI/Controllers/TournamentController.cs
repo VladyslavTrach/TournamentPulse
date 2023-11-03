@@ -185,21 +185,19 @@ namespace TournamentPulse.WebUI.Controllers
 
         private int CountTotalFighters(List<Match> matches)
         {
-            int count = 0;
+            HashSet<int> uniqueFighters = new HashSet<int>();
+
             foreach (Match match in matches)
             {
-                if (match.Fighter2Id == 7)
+                if (match.Fighter2Id != 7)
                 {
-                    count += 1; // Handle "Bye-Matches" correctly
-                }
-                else
-                {
-                    count += 2;
+                    uniqueFighters.Add(match.Fighter1Id);
+                    uniqueFighters.Add(match.Fighter2Id);
                 }
             }
 
-            return count;
-
+            return uniqueFighters.Count;
         }
+
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TournamentPulse.Application.Interface;
 using TournamentPulse.Application.Repository;
 using TournamentPulse.Core.Entities;
+using TournamentPulse.Core.Enums;
 using Match = TournamentPulse.Core.Entities.Match;
 
 namespace TournamentPulse.Application.Service
@@ -87,7 +88,7 @@ namespace TournamentPulse.Application.Service
                         CategoryId = categoryId,
                         Fighter1Id = fighters[i].Id,
                         Fighter2Id = fighters[j].Id,
-                        MatchStatus = "Scheduled"
+                        MatchStatus = MatchStatusEnum.Scheduled.ToString(),
                     };
                     matches.Add(match);
                 }
@@ -109,13 +110,13 @@ namespace TournamentPulse.Application.Service
                     Round = 1,
                     Score1 = 0,
                     Score2 = 0,
-                    WinningMethod = "No Opponent",
+                    WinningMethod = WinningMethodEnum.NoOpponent.ToString(),
                     TournamentId = tournamentId,
                     CategoryId = categoryId,
                     Fighter1Id = fighters[byeFighterIndex].Id,
                     Fighter2Id = 7,
                     WinnerId = fighters[byeFighterIndex].Id,
-                    MatchStatus = "Occurred"
+                    MatchStatus = MatchStatusEnum.Occurred.ToString(),
                 };
                 matches.Add(byeMatch);
                 fighters.Remove(fighters[byeFighterIndex]);
@@ -131,7 +132,7 @@ namespace TournamentPulse.Application.Service
                     CategoryId = categoryId,
                     Fighter1Id = fighters[i].Id,
                     Fighter2Id = fighters[i + 1].Id,
-                    MatchStatus = "Scheduled"
+                    MatchStatus = MatchStatusEnum.Scheduled.ToString(),
                 };
                 matches.Add(match);
             }
@@ -167,13 +168,13 @@ namespace TournamentPulse.Application.Service
                     Round = previousRoundMatches[(previousRoundMatches.Count - 1)].Round + 1,
                     Score1 = 0,
                     Score2 = 0,
-                    WinningMethod = "No Opponent",
+                    WinningMethod = WinningMethodEnum.NoOpponent.ToString(),
                     TournamentId = tournamentId,
                     CategoryId = categoryId,
                     Fighter1Id = (int)previousRoundMatches[(byeFighterIndex)].WinnerId,
                     Fighter2Id = 7,
                     WinnerId = (int)previousRoundMatches[(byeFighterIndex)].WinnerId,
-                    MatchStatus = "Occurred"
+                    MatchStatus = MatchStatusEnum.Occurred.ToString()
                 };
                 previousRoundMatches.Remove(previousRoundMatches[byeFighterIndex]);
                 nextRoundMatches.Add(byeMatch);
@@ -189,7 +190,7 @@ namespace TournamentPulse.Application.Service
                     CategoryId = categoryId,
                     Fighter1Id = (int)previousRoundMatches[i].WinnerId,
                     Fighter2Id = (int)previousRoundMatches[i + 1].WinnerId,
-                    MatchStatus = "Scheduled"
+                    MatchStatus = MatchStatusEnum.Scheduled.ToString()
                 };
                 nextRoundMatches.Add(match);
             }

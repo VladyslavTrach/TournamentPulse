@@ -1,4 +1,5 @@
 ﻿@using TournamentPulse.WebUI.Models.Match;
+@using TournamentPulse.Core.Enums;
 @model MatchViewModel
 
 @{
@@ -25,13 +26,24 @@
 
     <div class="form-group">
         <label asp-for="MatchStatus">Match Status:</label>
-        <input asp-for="MatchStatus" class="form-control" />
+        <select asp-for="MatchStatus" class="form-control">
+            @foreach (var ms in Enum.GetValues(typeof(MatchStatusEnum)).Cast<MatchStatusEnum>())
+            {
+                <option value="@ms">@ms</option>
+            }
+        </select>
     </div>
 
     <div class="form-group">
         <label asp-for="WinningMethod">Winning Method:</label>
-        <input asp-for="WinningMethod" class="form-control" />
+        <select asp-for="WinningMethod" class="form-control">
+            @foreach (var wm in Enum.GetValues(typeof(WinningMethodEnum)).Cast<WinningMethodEnum>())
+            {
+                <option value="@wm">@wm</option>
+            }
+        </select>
     </div>
+
 
     <div class="form-group">
         <label asp-for="Winner">Winner:</label>
