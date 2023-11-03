@@ -1,7 +1,7 @@
 # Ignore bin and obj folders
 **/bin/
 **/obj/
-/.vs/ProjectEvaluation/tournamentpulse.metadata.v7.bin
-/.vs/ProjectEvaluation/tournamentpulse.projects.v7.bin
-/.vs/ProjectEvaluation/tournamentpulse.metadata.v7.bin
-/.vs/ProjectEvaluation/tournamentpulse.projects.v7.bin
+*.bin
+*.vsidx
+*.suo
+*.vsuo
