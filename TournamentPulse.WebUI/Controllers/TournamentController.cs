@@ -25,7 +25,7 @@ namespace TournamentPulse.WebUI.Controllers
             ITournamentRepository tournamentRepository,
             IMatchRepository matchRepository,
             IFighterRepository fighterRepository,
-            IMapper mapper, 
+            IMapper mapper,
             ITournamentRegistrationService tournamentRegistrationService,
             IBracketGenerationService bracketGenerationService)
         {
@@ -87,7 +87,8 @@ namespace TournamentPulse.WebUI.Controllers
                 .Select(group => new CategoryMatchListViewModel
                 {
                     Category = group.First().Category.Name,
-                    Matches = group.Select(cm => _mapper.Map<MatchViewModel>(cm)).ToList()
+                    Matches = group.Select(cm => _mapper.Map<MatchViewModel>(cm)).ToList(),
+                    TotalRounds = CountTotalRounds(CountTotalFighters(group.ToList()))
                 })
                 .ToList();
 
@@ -95,14 +96,66 @@ namespace TournamentPulse.WebUI.Controllers
             return View(matches);
         }
 
+        public IActionResult GenerateFirstRoundBracket(int tournamentId, string categoryName)
+        {
+            _bracketGenerationService.GenerateMatchesForFirstRound(tournamentId, categoryName);
 
-        [Authorize(Roles = "User")]
+            return RedirectToAction("Bracket", new { id = tournamentId });
+        }
+
+        public IActionResult GenerateNextRoundBracket(int tournamentId, string categoryName)
+        {
+            _bracketGenerationService.GenerateMatchesForNextRound(tournamentId, categoryName);
+
+            return RedirectToAction("Bracket", new { id = tournamentId });
+        }
+
+        public IActionResult EditMatch(int matchId)
+        {
+            var match = _mapper.Map<MatchViewModel>(_matchRepository.GetMatchById(matchId));
+            return View(match);
+        }
+
+        [HttpPost]
+        public IActionResult EditMatch(MatchViewModel match)
+        {
+            if (ModelState.IsValid)
+            {
+                var matchEntity = new Match
+                {
+                    Id = match.Id,
+                    Round = match.Round,
+                    Score1 = match.Score1,
+                    Score2 = match.Score2,
+                    MatchStatus = match.MatchStatus,
+                    WinningMethod = match.WinningMethod,
+                    TournamentId = match.TournamentId,
+                    CategoryId = match.CategoryId,
+                    Fighter1Id = _fighterRepository.GetFighterIdByFullName(match.Fighter1),
+                    Fighter2Id = _fighterRepository.GetFighterIdByFullName(match.Fighter2),
+                    WinnerId = _fighterRepository.GetFighterIdByFullName(match.Winner),
+                };
+
+                // Update the match using _matchRepository
+                _matchRepository.UpdateMatch(matchEntity);
+
+                // Redirect to a page or action that shows the updated match details
+                return RedirectToAction("Bracket", new { id = match.TournamentId });
+            }
+
+            // If the model state is not valid, return to the edit form with validation errors
+            return View(match);
+        }
+
+
+
+        //[Authorize(Roles = "User")]
         public IActionResult Register(int Id)
         {
             //_bracketGenerationService.GenerateMatchesForFirstRound(Id, 8);
             //_bracketGenerationService.GenerateMatchesForNextRound(Id, 8);
 
-            //_tournamentRegistrationService.RegisterFighterForTournament(Id, 25);
+            //_tournamentRegistrationService.RegisterFighterForTournament(Id, 16);
             //_tournamentRegistrationService.UnregisterFighterFromTournament(Id, 1); //Unregister
 
             return RedirectToAction("Detail", new { id = Id });
@@ -114,5 +167,39 @@ namespace TournamentPulse.WebUI.Controllers
             return View();
         }
 
+
+
+        //-----------------------------------------//
+
+        private int CountTotalRounds(int fightersCnt)
+        {
+            if (fightersCnt < 2)
+            {
+                return 0;
+            }
+
+            int closestPowerOf2 = (int)Math.Pow(2, (int)Math.Log(fightersCnt, 2));
+            int totalRounds = (int)Math.Log(closestPowerOf2, 2);
+            return totalRounds;
+        }
+
+        private int CountTotalFighters(List<Match> matches)
+        {
+            int count = 0;
+            foreach (Match match in matches)
+            {
+                if (match.Fighter2Id == 7)
+                {
+                    count += 1; // Handle "Bye-Matches" correctly
+                }
+                else
+                {
+                    count += 2;
+                }
+            }
+
+            return count;
+
+        }
     }
 }

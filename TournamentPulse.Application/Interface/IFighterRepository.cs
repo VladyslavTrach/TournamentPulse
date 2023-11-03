@@ -12,6 +12,7 @@ namespace TournamentPulse.Application.Interface
     {
         ICollection<Fighter> GetAllFighters();
         Fighter GetFighterById(int id);
+        int GetFighterIdByFullName(string fullName);
         int CountFightersByAcademy(int id);
         public bool AddFighter(Fighter fighter);
         public bool AddFighters(IEnumerable<Fighter> fighters);

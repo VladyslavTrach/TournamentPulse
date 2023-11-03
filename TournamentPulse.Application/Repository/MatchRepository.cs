@@ -70,8 +70,6 @@ namespace TournamentPulse.Application.Repository
                 return false;
             }
         }
-
-
         public int ArchiveMatchesForCategory(ICollection<Match> matches)
         {
             int noOpponentWinnerId = 0;
@@ -84,7 +82,7 @@ namespace TournamentPulse.Application.Repository
                     _context.Matches.Update(match);
                 }
 
-                
+
 
                 if (match.WinningMethod == "No Opponent")
                 {
@@ -99,8 +97,6 @@ namespace TournamentPulse.Application.Repository
 
             return noOpponentWinnerId;
         }
-
-
         public ICollection<Match> GetOccurredMatchesForCategory(int tournamentId, int categoryId)
         {
             return _context.Matches
@@ -109,7 +105,6 @@ namespace TournamentPulse.Application.Repository
                 .Include(m => m.Fighter2)
                 .Where(m => m.TournamentId == tournamentId && m.CategoryId == categoryId && m.MatchStatus == "Occurred").ToList();
         }
-
         public ICollection<Match> GetMatchesForTournament(int tournamentId)
         {
             return _context.Matches
@@ -125,6 +120,40 @@ namespace TournamentPulse.Application.Repository
             var existingMatch = _context.Matches.FirstOrDefault(m => m.Fighter1Id == match.Fighter1Id && m.Fighter2Id == match.Fighter2Id && m.TournamentId == match.TournamentId && m.CategoryId == match.CategoryId);
 
             return existingMatch != null;
+        }
+
+        public Match GetMatchById(int id)
+        {
+            return _context.Matches
+                .Include(m => m.Fighter1)
+                .Include(m => m.Fighter2)
+                .Where(m => m.Id == id).First();
+        }
+
+        public void UpdateMatch(Match match)
+        {
+            if (match == null)
+            {
+                throw new ArgumentNullException(nameof(match));
+            }
+
+            var existingMatch = _context.Matches.SingleOrDefault(m => m.Id == match.Id);
+            if (existingMatch != null)
+            {
+                existingMatch.Score1 = match.Score1;
+                existingMatch.Score2 = match.Score2;
+                existingMatch.MatchStatus = match.MatchStatus;
+                existingMatch.WinningMethod = match.WinningMethod;
+                existingMatch.WinnerId = match.WinnerId;
+
+                // Save changes to the database
+                _context.SaveChanges();
+            }
+            else
+            {
+                // Handle the case where the match with the provided ID is not found
+                throw new InvalidOperationException("Match not found");
+            }
         }
     }
 }

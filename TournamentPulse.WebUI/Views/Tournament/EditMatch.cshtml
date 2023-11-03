@@ -1,0 +1,53 @@
+﻿@using TournamentPulse.WebUI.Models.Match;
+@model MatchViewModel
+
+@{
+    ViewData["Title"] = "Edit Match";
+}
+<center>
+    <h1>@Model.Fighter1 VS @Model.Fighter2</h1>
+</center>
+
+<h2>Edit Match</h2>
+
+<form asp-action="EditMatch" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Score1">@Model.Fighter1 Score :</label>
+        <input asp-for="Score1" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Score2">@Model.Fighter2 Score :</label>
+        <input asp-for="Score2" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MatchStatus">Match Status:</label>
+        <input asp-for="MatchStatus" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="WinningMethod">Winning Method:</label>
+        <input asp-for="WinningMethod" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Winner">Winner:</label>
+        <select asp-for="Winner" class="form-control">
+            <option value="@Model.Fighter1">@Model.Fighter1</option>
+            <option value="@Model.Fighter2">@Model.Fighter2</option>
+        </select>
+    </div>
+
+
+
+    @* Add hidden fields for properties not included in the form *@
+    <input type="hidden" asp-for="TournamentId" />
+    <input type="hidden" asp-for="CategoryId" />
+    <input type="hidden" asp-for="Fighter1" />
+    <input type="hidden" asp-for="Fighter2" />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

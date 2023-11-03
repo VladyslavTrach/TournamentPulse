@@ -22,5 +22,10 @@ namespace TournamentPulse.Application.Repository
         {
             return _context.Categories.OrderBy(c => c.Id).ToList();
         }
+
+        public int GetCategoryId(string Name)
+        {
+            return _context.Categories.Where(c => c.Name == Name).First().Id;
+        }
     }
 }

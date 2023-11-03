@@ -36,7 +36,6 @@ builder.Services.Configure<RequestLocalizationOptions>(options => {
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddTransient<DataGenerator>();
 
 
@@ -56,7 +55,7 @@ builder.Services.AddScoped<IBracketGenerationService, BracketGenerationService>(
 builder.Services.AddScoped<ISeedFightersInDbService, SeedFightersInDbService>();
 
 
-
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 
 builder.Services.AddDbContext<ApplicationDataContext>(options =>

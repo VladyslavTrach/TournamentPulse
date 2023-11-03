@@ -80,5 +80,21 @@ namespace TournamentPulse.Application.Repository
                 return fighter;
         }
 
+        public int GetFighterIdByFullName(string fullName)
+        {
+            var fighter = _context.Fighters.FirstOrDefault(f => f.FullName == fullName);
+
+            if (fighter != null)
+            {
+                return fighter.Id;
+            }
+
+            // Handle the case where no matching fighter is found, e.g., return a default value or throw an exception.
+            // Example: throw new FighterNotFoundException("Fighter not found");
+
+            // Alternatively, return a default value (0) if no matching fighter is found.
+            return 0;
+        }
+
     }
 }

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TournamentPulse.Core.Entities;
+using Match = TournamentPulse.Core.Entities.Match;
 
 namespace TournamentPulse.Application.Interface
 {
@@ -16,5 +18,9 @@ namespace TournamentPulse.Application.Interface
         ICollection<Match> GetOccurredMatchesForCategory(int tournamentId, int categoryId);
 
         int ArchiveMatchesForCategory(ICollection<Match> matches);
+
+        Match GetMatchById(int id);
+
+        void UpdateMatch(Match match);
     }
 }

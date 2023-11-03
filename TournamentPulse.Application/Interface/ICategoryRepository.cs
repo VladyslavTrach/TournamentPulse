@@ -5,5 +5,6 @@ namespace TournamentPulse.Application.Interface
     public interface ICategoryRepository
     {
         ICollection<Category> GetAllCategories();
+        int GetCategoryId(string Name);
     }
 }

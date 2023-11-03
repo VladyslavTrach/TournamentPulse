@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TournamentPulse.Application.Interface;
+using TournamentPulse.Application.Repository;
 using TournamentPulse.Core.Entities;
 using Match = TournamentPulse.Core.Entities.Match;
 
@@ -15,19 +16,23 @@ namespace TournamentPulse.Application.Service
         private readonly ITournamentCategoryFighterRepository _tournamentCategoryFighterRepository;
         private readonly IMatchRepository _matchRepository;
         private readonly IFighterRepository _fighterRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
         public BracketGenerationService(
             ITournamentCategoryFighterRepository tournamentCategoryFighterRepository, 
             IMatchRepository matchRepository,
-            IFighterRepository fighterRepository)
+            IFighterRepository fighterRepository,
+            ICategoryRepository categoryRepository)
         {
             _tournamentCategoryFighterRepository = tournamentCategoryFighterRepository;
             _matchRepository = matchRepository;
             _fighterRepository = fighterRepository;
+            _categoryRepository = categoryRepository;
         }
 
-        public void GenerateMatchesForFirstRound(int tournamentId, int categoryId)
+        public void GenerateMatchesForFirstRound(int tournamentId, string categoryName)
         {
+            int categoryId = _categoryRepository.GetCategoryId(categoryName);
             IList<Fighter> fighters = (IList<Fighter>)_tournamentCategoryFighterRepository.GetFightersInCategoryAndTournament(tournamentId, categoryId);
 
             List<Match> matches = new List<Match>();
@@ -50,8 +55,9 @@ namespace TournamentPulse.Application.Service
         }
 
 
-        public void GenerateMatchesForNextRound(int tournamentId, int categoryId)
+        public void GenerateMatchesForNextRound(int tournamentId, string categoryName)
         {
+            int categoryId = _categoryRepository.GetCategoryId(categoryName);
             _matchRepository.AddMatches(GenerateNextRoundMatches(tournamentId, categoryId));
         }
 
@@ -134,7 +140,13 @@ namespace TournamentPulse.Application.Service
         }
         private List<Match> GenerateNextRoundMatches(int tournamentId, int categoryId)
         {
+            
             List<Match> previousRoundMatches = (List<Match>)_matchRepository.GetOccurredMatchesForCategory(tournamentId, categoryId);
+            if (previousRoundMatches.Count <= 1)
+            {
+                _matchRepository.ArchiveMatchesForCategory(previousRoundMatches);
+                return new List<Match>();
+            }
             int byes = (previousRoundMatches.Count % 2 == 0) ? 0 : 1;
 
             int ByeMatchWinnerId = _matchRepository.ArchiveMatchesForCategory(previousRoundMatches);

@@ -9,8 +9,8 @@ namespace TournamentPulse.Application.Interface
 {
     public interface IBracketGenerationService
     {
-        void GenerateMatchesForFirstRound(int tournamentId, int categoryId);
-        void GenerateMatchesForNextRound(int tournamentId, int categoryId);
+        public void GenerateMatchesForFirstRound(int tournamentId, string categoryName);
+        void GenerateMatchesForNextRound(int tournamentId, string categoryName);
         List<Fighter> GetFightersFromMatches(ICollection<Match> matches);
     }
 }
