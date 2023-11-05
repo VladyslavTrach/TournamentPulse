@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TournamentPulse.Application.Interface;
+using TournamentPulse.Application.Repository;
+using TournamentPulse.Core.Entities;
 
 namespace TournamentPulse.WebUI.Areas.Identity.Pages.Account.Manage
 {
@@ -16,13 +19,16 @@ namespace TournamentPulse.WebUI.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IFighterRepository _fighterRepository;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            IFighterRepository fighterRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _fighterRepository = fighterRepository;
         }
 
         /// <summary>
@@ -58,6 +64,18 @@ namespace TournamentPulse.WebUI.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Full Name")]
+            public string FullName { get; set; }
+
+            [Display(Name = "Age")]
+            public int Age { get; set; }
+
+            [Display(Name = "Weight")]
+            public float Weight { get; set; }
+
+            [Display(Name = "Rank")]
+            public string Rank { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -73,6 +91,7 @@ namespace TournamentPulse.WebUI.Areas.Identity.Pages.Account.Manage
             };
         }
 
+        public Fighter FighterWithSameEmail { get; set; }
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -82,6 +101,10 @@ namespace TournamentPulse.WebUI.Areas.Identity.Pages.Account.Manage
             }
 
             await LoadAsync(user);
+
+            // Retrieve the fighter with the same email as the user's email
+            FighterWithSameEmail = _fighterRepository.GetFighterByEmail(user.Email);
+
             return Page();
         }
 
@@ -99,20 +122,26 @@ namespace TournamentPulse.WebUI.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            FighterWithSameEmail = _fighterRepository.GetFighterByEmail(user.Email);
+
+            if (FighterWithSameEmail != null)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
-                }
+                // Update the fighter properties with the new values
+                FighterWithSameEmail.FullName = Input.FullName;
+                FighterWithSameEmail.Age = Input.Age;
+                FighterWithSameEmail.Weight = Input.Weight;
+                FighterWithSameEmail.Rank = Input.Rank;
+
+                // Update the fighter in the database or perform any other required actions
+                _fighterRepository.UpdateFighter(FighterWithSameEmail);
             }
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }
+
+
+
     }
 }

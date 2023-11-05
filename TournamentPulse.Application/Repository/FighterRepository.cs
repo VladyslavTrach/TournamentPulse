@@ -58,7 +58,7 @@ namespace TournamentPulse.Application.Repository
             return _context.Fighters.Where(f => f.AcademyId == id).Count();
         }
 
-    public bool FighterExists(Fighter fighter)
+        public bool FighterExists(Fighter fighter)
     {
         return _context.Fighters.Any(f => 
             f.FullName == fighter.FullName && 
@@ -72,6 +72,12 @@ namespace TournamentPulse.Application.Repository
         public ICollection<Fighter> GetAllFighters()
         {
             return _context.Fighters.Include(f => f.Academy).ToList();
+        }
+
+        public Fighter GetFighterByEmail(string email)
+        {
+            var fighter = _context.Fighters.FirstOrDefault(f => f.Email == email);
+            return fighter;
         }
 
         public Fighter GetFighterById(int id)
@@ -96,5 +102,26 @@ namespace TournamentPulse.Application.Repository
             return 0;
         }
 
+        public void UpdateFighter(Fighter fighter)
+        {
+            if (fighter == null)
+            {
+                throw new ArgumentNullException(nameof(fighter));
+            }
+
+            var existingFighter = _context.Fighters.FirstOrDefault(f => f.Id == fighter.Id);
+
+            if (existingFighter != null)
+            {
+                // Update the properties of the existing fighter
+                existingFighter.FullName = fighter.FullName;
+                existingFighter.Age = fighter.Age;
+                existingFighter.Weight = fighter.Weight;
+                existingFighter.Rank = fighter.Rank;
+
+                // Save the changes to the database
+                _context.SaveChanges();
+            }
+        }
     }
 }

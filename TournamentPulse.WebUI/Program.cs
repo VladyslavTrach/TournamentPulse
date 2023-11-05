@@ -10,6 +10,7 @@ using TournamentPulse.Application.Service;
 using TournamentPulse.Infrastructure.Data;
 using TournamentPulse.Infrastructure.Data.Generator;
 using Microsoft.AspNetCore.Identity;
+using TournamentPulse.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 #region Localization

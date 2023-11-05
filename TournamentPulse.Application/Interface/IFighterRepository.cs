@@ -11,11 +11,13 @@ namespace TournamentPulse.Application.Interface
     public interface IFighterRepository
     {
         ICollection<Fighter> GetAllFighters();
+        Fighter GetFighterByEmail(string email);
         Fighter GetFighterById(int id);
         int GetFighterIdByFullName(string fullName);
         int CountFightersByAcademy(int id);
         public bool AddFighter(Fighter fighter);
         public bool AddFighters(IEnumerable<Fighter> fighters);
         public bool FighterExists(Fighter fighter);
+        public void UpdateFighter(Fighter fighter);
     }
 }

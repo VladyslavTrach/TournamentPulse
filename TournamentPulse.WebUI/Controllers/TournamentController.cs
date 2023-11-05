@@ -149,17 +149,19 @@ namespace TournamentPulse.WebUI.Controllers
 
 
 
-        //[Authorize(Roles = "User")]
-        public IActionResult Register(int Id)
+        [Authorize(Roles = "User")]
+        public IActionResult Register(int id, string email)
         {
-            //_bracketGenerationService.GenerateMatchesForFirstRound(Id, 8);
-            //_bracketGenerationService.GenerateMatchesForNextRound(Id, 8);
+            var fighter = _fighterRepository.GetFighterByEmail(email);
 
-            //_tournamentRegistrationService.RegisterFighterForTournament(Id, 16);
-            //_tournamentRegistrationService.UnregisterFighterFromTournament(Id, 1); //Unregister
+            if (fighter != null)
+            {
+                _tournamentRegistrationService.RegisterFighterForTournament(id, fighter.Id);
+            }
 
-            return RedirectToAction("Detail", new { id = Id });
+            return RedirectToAction("Detail", new { id = id });
         }
+
 
         [Authorize(Roles = "Admin,Organizer")]
         public IActionResult Add()

@@ -23,6 +23,9 @@ internal class FighterEntityConfiguration : IEntityTypeConfiguration<Fighter>
         builder.Property(fighter => fighter.Rank)
             .HasMaxLength(255);
 
+        builder.Property(fighter => fighter.Email)
+            .HasMaxLength(255);
+
         builder.Property(fighter => fighter.AcademyId)
             .IsRequired();
 

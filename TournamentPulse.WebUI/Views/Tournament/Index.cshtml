@@ -27,7 +27,8 @@
                                 <p class="card-text"><strong>@_localization.Getkey("ep_Location"):</strong> @tournament.Country, @tournament.City</p>
                                 <p class="card-text"><strong>@_localization.Getkey("ep_Date"):</strong> @tournament.Date.ToString("yyyy-MM-dd")</p>
                                 <a href="@Url.Action("Detail", "Tournament", new { id = tournament.Id })" class="btn btn-primary">@_localization.Getkey("ep_ViewDetails")</a>
-                                <a href="@Url.Action("Register", "Tournament", new { id = tournament.Id })" class="btn btn-success">@_localization.Getkey("ep_Register")</a>
+                                <a href="@Url.Action("Register", "Tournament", new { id = tournament.Id, email = User.Identity.Name })" class="btn btn-success">@_localization.Getkey("ep_Register")</a>
+
                             </div>
                         </div>
                     </div>

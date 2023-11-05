@@ -13,6 +13,7 @@ namespace TournamentPulse.Core.Entities
         public int Age { get; set; }
         public float Weight { get; set; }
         public string Rank { get; set; }
+        public string Email { get; set; }
 
         public int AcademyId { get; set; }
 

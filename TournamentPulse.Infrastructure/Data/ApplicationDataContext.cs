@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using TournamentPulse.Core;
 using TournamentPulse.Core.Entities;
 using TournamentPulse.Infrastructure.Data.EntityTypeConfiguration;
 
@@ -36,8 +38,6 @@ namespace TournamentPulse.Infrastructure.Data
         //public DbSet<RankClass> RankClasses { get; set; }
         //public DbSet<WeightClass> WeightClasses { get; set; }
 
-        public DbSet<User> Users { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,7 +55,10 @@ namespace TournamentPulse.Infrastructure.Data
             //modelBuilder.ApplyConfiguration(new WeightClassEntityConfiguration());
             modelBuilder.ApplyConfiguration(new TournamentEntityConfiguration());
             modelBuilder.ApplyConfiguration(new MatchEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+
+
+            //-----------//
+            modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(ul => ul.UserId);
         }
 
         //-----Fix "Unable to create an object of type DataContext" Bug-----//
