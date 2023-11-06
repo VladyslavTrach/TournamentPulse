@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TournamentPulse.Application.Interface;
+using TournamentPulse.Application.Repository;
 using TournamentPulse.Application.Service;
 using TournamentPulse.Core.Entities;
 using TournamentPulse.WebUI.Models.CategoryFighter;
@@ -17,6 +18,7 @@ namespace TournamentPulse.WebUI.Controllers
         private readonly ITournamentRepository _tournamentRepository;
         private readonly IMatchRepository _matchRepository;
         private readonly IFighterRepository _fighterRepository;
+        private readonly ITournamentCategoryFighterRepository _tournamentCategoryFighterRepository;
         private readonly IMapper _mapper;
         private readonly ITournamentRegistrationService _tournamentRegistrationService;
         private readonly IBracketGenerationService _bracketGenerationService;
@@ -25,6 +27,7 @@ namespace TournamentPulse.WebUI.Controllers
             ITournamentRepository tournamentRepository,
             IMatchRepository matchRepository,
             IFighterRepository fighterRepository,
+            ITournamentCategoryFighterRepository tournamentCategoryFighterRepository,
             IMapper mapper,
             ITournamentRegistrationService tournamentRegistrationService,
             IBracketGenerationService bracketGenerationService)
@@ -32,6 +35,7 @@ namespace TournamentPulse.WebUI.Controllers
             _tournamentRepository = tournamentRepository;
             _matchRepository = matchRepository;
             _fighterRepository = fighterRepository;
+            _tournamentCategoryFighterRepository = tournamentCategoryFighterRepository;
             _mapper = mapper;
             _tournamentRegistrationService = tournamentRegistrationService;
             _bracketGenerationService = bracketGenerationService;
@@ -50,10 +54,14 @@ namespace TournamentPulse.WebUI.Controllers
             var tournamentFromDb = _tournamentRepository.GetById(id);
             var tournament = _mapper.Map<TournamentDetailsViewModel>(tournamentFromDb);
 
+            int fightersCount = _tournamentCategoryFighterRepository.CntFighters(id);
+
+            // Set the FightersCnt property in the view model
+            tournament.FightersCnt = fightersCount;
+
             ViewData["TournamentId"] = id;
             return View(tournament);
         }
-
         public IActionResult Category(int id)
         {
             var categoryFightersFromDb = _tournamentRegistrationService.GetCategoryFighter(id);
@@ -77,7 +85,6 @@ namespace TournamentPulse.WebUI.Controllers
             ViewData["TournamentId"] = id;
             return View(categoryFighterGroups);
         }
-
         public IActionResult Bracket(int id)
         {
             var matchesFromDb = _matchRepository.GetMatchesForTournament(id);
@@ -96,6 +103,7 @@ namespace TournamentPulse.WebUI.Controllers
             return View(matches);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult GenerateFirstRoundBracket(int tournamentId, string categoryName)
         {
             _bracketGenerationService.GenerateMatchesForFirstRound(tournamentId, categoryName);
@@ -103,6 +111,7 @@ namespace TournamentPulse.WebUI.Controllers
             return RedirectToAction("Bracket", new { id = tournamentId });
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult GenerateNextRoundBracket(int tournamentId, string categoryName)
         {
             _bracketGenerationService.GenerateMatchesForNextRound(tournamentId, categoryName);
@@ -110,12 +119,14 @@ namespace TournamentPulse.WebUI.Controllers
             return RedirectToAction("Bracket", new { id = tournamentId });
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult EditMatch(int matchId)
         {
             var match = _mapper.Map<MatchViewModel>(_matchRepository.GetMatchById(matchId));
             return View(match);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult EditMatch(MatchViewModel match)
         {
@@ -147,8 +158,6 @@ namespace TournamentPulse.WebUI.Controllers
             return View(match);
         }
 
-
-
         [Authorize(Roles = "User")]
         public IActionResult Register(int id, string email)
         {
@@ -162,6 +171,18 @@ namespace TournamentPulse.WebUI.Controllers
             return RedirectToAction("Detail", new { id = id });
         }
 
+        [Authorize(Roles = "User")]
+        public IActionResult Unregister(int id, string email)
+        {
+            var fighter = _fighterRepository.GetFighterByEmail(email);
+
+            if (fighter != null)
+            {
+                _tournamentRegistrationService.UnregisterFighterFromTournament(id, fighter.Id);
+            }
+
+            return RedirectToAction("Detail", new { id = id });
+        }
 
         [Authorize(Roles = "Admin,Organizer")]
         public IActionResult Add()

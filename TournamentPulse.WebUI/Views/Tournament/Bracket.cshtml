@@ -8,6 +8,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="styles.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
    </head>
     <body>
     <!-- Navigation Menu -->
@@ -42,25 +43,53 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table fighter-table">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 5%;">Round</th>
-                                                <th style="width: 20%;">F1</th>
-                                                <th style="width: 20%;">F2</th>
-                                                <th style="width: 15%;">Status</th>
-                                                <th style="width: 10%;">Score</th>
-                                                <th style="width: 25%;">Winning Method</th>
-                                                <th style="width: 5%;">Operations</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                <table class="table fighter-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 5%;">Round</th>
+                                            <th style="width: 20%;">F1</th>
+                                            <th style="width: 20%;">F2</th>
+                                            <th style="width: 15%;">Status</th>
+                                            <th style="width: 10%;">Score</th>
+                                            <th style="width: 25%;">Winning Method</th>
+                                            <th style="width: 5%;">Operations</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         @foreach (var match in categoryMatch.Matches)
                                         {
+                                            var winner = match.Winner; // Replace with the actual winner identifier property.
+
                                             <tr>
                                                 <td>@match.Round/@categoryMatch.TotalRounds</td>
-                                                <td>@match.Fighter1</td>
-                                                <td>@match.Fighter2</td>
+                                                <td>
+                                                    @if (winner == match.Fighter1)
+                                                    {
+                                                        <i class="fas fa-trophy winner-icon"></i> @match.Fighter1
+                                                    }
+                                                    else if (winner == match.Fighter2)
+                                                    {
+                                                        <i class="fas fa-times loser-icon"></i> @match.Fighter1
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fas fa-question-circle question-icon"></i> @match.Fighter1
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @if (winner == match.Fighter2)
+                                                    {
+                                                        <i class="fas fa-trophy winner-icon"></i> @match.Fighter2
+                                                    }
+                                                    else if (winner == match.Fighter1)
+                                                    {
+                                                        <i class="fas fa-times loser-icon"></i> @match.Fighter2
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fas fa-question-circle question-icon"></i> @match.Fighter2
+                                                    }
+                                                </td>
                                                 <td>@match.MatchStatus</td>
                                                 <td>@match.Score1 : @match.Score2</td>
                                                 <td>@match.WinningMethod</td>
@@ -69,8 +98,8 @@
                                                 </td>
                                             </tr>
                                         }
-                                        </tbody>
-                                    </table>
+                                    </tbody>
+                                </table>
                                 </div>
                             </div>
                         </div>
@@ -80,8 +109,7 @@
         </div>
 
 
-
-
+    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

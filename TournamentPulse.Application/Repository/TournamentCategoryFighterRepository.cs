@@ -34,6 +34,12 @@ namespace TournamentPulse.Application.Repository
             }
         }
 
+        public TournamentCategoryFighter GetTCFRecord(int tournamentId, int fighterId)
+        {
+            return _context.TournamentCategoryFighter
+                .FirstOrDefault(tcf => tcf.TournamentId == tournamentId && tcf.FighterId == fighterId);
+        }
+
         public ICollection<TournamentCategoryFighter> GetCategoryFighter(int tournamentId)
         {
             return _context.TournamentCategoryFighter.Where(tcf => tcf.TournamentId == tournamentId)
@@ -58,8 +64,6 @@ namespace TournamentPulse.Application.Repository
             return fighters;
         }
 
-
-
         public void UnregisterFighterFromTournament(int tournamentId, int fighterId)
         {
             var entry = _context.TournamentCategoryFighter
@@ -70,6 +74,11 @@ namespace TournamentPulse.Application.Repository
                 _context.TournamentCategoryFighter.Remove(entry);
                 _context.SaveChanges();
             }
+        }
+
+        public int CntFighters(int tournamentId)
+        {
+            return _context.TournamentCategoryFighter.Count(f => f.TournamentId == tournamentId);
         }
     }
 }

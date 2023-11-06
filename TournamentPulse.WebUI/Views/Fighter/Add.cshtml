@@ -1,0 +1,55 @@
+﻿@using TournamentPulse.Core.Enums;
+@model TournamentPulse.Core.Entities.Fighter
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Fighter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body custom-card-add-fighter">
+                        <h2 class="card-title">Add New Fighter(Should be fixed)</h2>
+
+                        @using (Html.BeginForm("Add", "Fighter", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group">
+                                <label for="FullName">Full Name:</label>
+                                @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", required = "required" })
+                                <div class="invalid-feedback">Please enter the fighter's full name.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Age">Age:</label>
+                                @Html.TextBoxFor(model => model.Age, new { @class = "form-control", required = "required" })
+                                <div class="invalid-feedback">Please enter the fighter's age.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Weight">Weight:</label>
+                                @Html.TextBoxFor(model => model.Weight, new { @class = "form-control", required = "required" })
+                                <div class="invalid-feedback">Please enter the fighter's weight.</div>
+                            </div>
+
+@*                             <div class="form-group">
+                                <label for="Rank">Rank:</label>
+                                @Html.DropDownListFor(model => model.Rank, new SelectList(Enum.GetValues(typeof(BeltColorEnum)), Model.Rank), new { @class = "form-control", required = "required" })
+                                <div class="invalid-feedback">Please select the fighter's rank.</div>
+                            </div> *@
+
+
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

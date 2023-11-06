@@ -30,34 +30,39 @@ namespace TournamentPulse.Application.Service
 
         public void RegisterFighterForTournament(int tournamentId, int fighterId)
         {
-            // Fetch the tournament, fighter, and their respective categories
-            var tournament = _tournamentRepository.GetById(tournamentId);
-            var fighter = _fighterRepository.GetFighterById(fighterId);
-            var categories = _categoryRepository.GetAllCategories();
-
-            // Determine the suitable category for the fighter
-            var suitableCategory = DetermineSuitableCategory(fighter, categories);
-
-            if (suitableCategory == null)
+            if(!IsRegistered(tournamentId, fighterId))
             {
-                // Handle the case where no suitable category is found
-                return;
+                // Fetch the tournament, fighter, and their respective categories
+                var tournament = _tournamentRepository.GetById(tournamentId);
+                var fighter = _fighterRepository.GetFighterById(fighterId);
+                var categories = _categoryRepository.GetAllCategories();
+
+                // Determine the suitable category for the fighter
+                var suitableCategory = DetermineSuitableCategory(fighter, categories);
+
+                if (suitableCategory == null)
+                {
+                    // Handle the case where no suitable category is found
+                    return;
+                }
+
+                // Create a new record in the TournamentCategoryFighter table
+                var tournamentCategoryFighter = new TournamentCategoryFighter
+                {
+                    Tournament = tournament,
+                    Category = suitableCategory,
+                    Fighter = fighter,
+                };
+
+                _tournamentCategoryFighterRepository.AddTCFRecord(tournamentCategoryFighter);
             }
-
-            // Create a new record in the TournamentCategoryFighter table
-            var tournamentCategoryFighter = new TournamentCategoryFighter
-            {
-                Tournament = tournament,
-                Category = suitableCategory,
-                Fighter = fighter,
-            };
-
-            _tournamentCategoryFighterRepository.AddTCFRecord(tournamentCategoryFighter);
+           
         }
 
         public void UnregisterFighterFromTournament(int tournamentId, int fighterId)
         {
-            _tournamentCategoryFighterRepository.UnregisterFighterFromTournament(tournamentId, fighterId);
+            if (IsRegistered(tournamentId, fighterId))
+                _tournamentCategoryFighterRepository.UnregisterFighterFromTournament(tournamentId, fighterId);
         }
 
         public ICollection<TournamentCategoryFighter> GetCategoryFighter(int tournamentId)
@@ -79,6 +84,13 @@ namespace TournamentPulse.Application.Service
                     return category;
             }
             return null;
+        }
+
+        private bool IsRegistered(int tournamentId, int fighterId)
+        {
+            var existingRecord = _tournamentCategoryFighterRepository.GetTCFRecord(tournamentId, fighterId);
+
+            return existingRecord != null;
         }
     }
 

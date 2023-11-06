@@ -1,5 +1,5 @@
 ﻿@page
-@using TournamentPulse.Core.Enums;
+@using TournamentPulse.Core.Enums
 @model IndexModel
 @{
     ViewData["Title"] = "Information";
@@ -15,37 +15,44 @@
                 <h5 class="card-title">Fighter Information</h5>
             </div>
             <div class="card-body">
-                <form method="post">
-                    <p class="card-text">
-                        <label for="FullName">Full Name:</label>
-                        <input type="text" id="FullName" name="FullName" class="form-control" value="@Model.FighterWithSameEmail.FullName" />
-                    </p>
-                    <p class="card-text">
-                        <label for="Age">Age:</label>
-                        <input type="number" id="Age" name="Age" class="form-control" value="@Model.FighterWithSameEmail.Age" />
-                    </p>
-                    <p class="card-text">
-                        <label for="Weight">Weight:</label>
-                        <input type="number" id="Weight" name="Weight" class="form-control" value="@Model.FighterWithSameEmail.Weight" />
-                    </p>
-                    <p class="card-text">
-                    <label for="Rank">Rank:</label>
-                    <select id="Rank" name="Rank" class="form-control">
-                        @foreach (var bc in Enum.GetValues(typeof(BeltColorEnum)).Cast<BeltColorEnum>())
-                        {
-                            <option value="@bc"> @bc</option>
-                        }
-                    </select>
-                </p>
+                @if (Model.FighterWithSameEmail != null)
+                {
+                    <form method="post">
+                        <p class="card-text">
+                            <label for="FullName">Full Name:</label>
+                            <input type="text" id="FullName" name="FullName" class="form-control" value="@Model.FighterWithSameEmail?.FullName" />
+                        </p>
+                        <p class="card-text">
+                            <label for="Age">Age:</label>
+                            <input type="number" id="Age" name="Age" class="form-control" value="@Model.FighterWithSameEmail?.Age" />
+                        </p>
+                        <p class="card-text">
+                            <label for="Weight">Weight:</label>
+                            <input type="number" id="Weight" name="Weight" class="form-control" value="@Model.FighterWithSameEmail?.Weight" />
+                        </p>
+                        <p class="card-text">
+                            <label for="Rank">Rank:</label>
+                            <select id="Rank" name="Rank" class="form-control">
+                                @foreach (var bc in Enum.GetValues(typeof(BeltColorEnum)).Cast<BeltColorEnum>())
+                                {
+                                    <option value="@bc"> @bc</option>
+                                }
+                            </select>
+                        </p>
 
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </form>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                }
+                else
+                {
+                    <p class="card-text">No fighter found with the same email.</p>
+                    <a href="@Url.Page("Add", "Fighter")" class="btn btn-success">Add Fighter</a>
+
+                }
             </div>
         </div>
     </div>
 </div>
-
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

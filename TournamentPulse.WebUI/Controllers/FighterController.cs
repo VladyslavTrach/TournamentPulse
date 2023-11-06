@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TournamentPulse.Application.Interface;
 using TournamentPulse.Application.Repository;
@@ -31,6 +32,12 @@ namespace TournamentPulse.WebUI.Controllers
             var fighters = _mapper.Map<List<FighterListViewModel>>(fightersFromDb);
 
             return View(fighters);
+        }
+
+        [Authorize(Roles = "User")]
+        public IActionResult Add()
+        {
+            return View();
         }
     }
 }

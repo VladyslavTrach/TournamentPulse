@@ -3,6 +3,7 @@ using TournamentPulse.Application.Interface;
 using TournamentPulse.WebUI.Models.Academy;
 using AutoMapper;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TournamentPulse.WebUI.Controllers
 {

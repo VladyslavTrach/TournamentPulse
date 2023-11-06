@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TournamentPulse.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UserRolesController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
