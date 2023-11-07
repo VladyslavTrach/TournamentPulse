@@ -5,8 +5,22 @@
 <head>
     <title>Centered Card Layout</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add a custom CSS style for the table */
+        .custom-table {
+            background-color: #999999;
+        }
+
+        /* Remove margin for the card element */
+        .custom-card {
+            margin: 0 !important;
+        }
+
+        .row {
+            margin: 0;
+        }
+    </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -27,37 +41,38 @@
         </div>
     </nav>
 
-    <div class="container" id="content-container">
-            <h1>Participants</h1>
+    <div class="container-fluid m-0 p-0" id="content-container">
+
+        <h1 class="text-white">Participants</h1>
         @foreach (var categoryFighter in Model)
         {
             <div class="row mb-4">
                 <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2>
+                    <div class="card custom-card">
+                        <div class="card-header" style="background-color: #808080">
+                            <h2 class="d-flex justify-content-between">
                                 @categoryFighter.Category
-                                <a href="@Url.Action("GenerateFirstRoundBracket", "Tournament", new { tournamentId = ViewData["TournamentId"],  categoryName = categoryFighter.Category })" class="btn btn-primary" style="float: right;">Generate First Round</a>
+                                <a href="@Url.Action("GenerateFirstRoundBracket", "Tournament", new { tournamentId = ViewData["TournamentId"],  categoryName = categoryFighter.Category })" class="btn btn-primary">Generate First Round</a>
                             </h2>
-
                         </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table fighter-table">
+                        <div class="card-body" style="background-color: #808080">
+                            <div class="table-hover">
+                                <table class="table custom-table">
+                                    <!-- Apply the custom table class here -->
                                     <thead>
                                         <tr>
-                                            <th style="width: 20%;">Full Name</th>
-                                            <th style="width: 30%;">Academy</th>
-                                            <th style="width: 10%;">Age</th>
-                                            <th style="width: 10%;">Weight</th>
+                                            <th>Full Name</th>
+                                            <th>Academy</th>
+                                            <th>Age</th>
+                                            <th>Weight</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach (var fighter in categoryFighter.Fighters)
                                         {
                                             <tr>
-                                                <td>@fighter.FullName</td>
-                                                <td>@fighter.Academy</td>
+                                                <td><a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = fighter.FullName })">@fighter.FullName</a></td>
+                                                <td><a class="nav-link" href="@Url.Action("Detail", "Academy", new { academyName = fighter.Academy })">@fighter.Academy</a></td>
                                                 <td>@fighter.Age</td>
                                                 <td>@fighter.Weight</td>
                                             </tr>
@@ -70,12 +85,7 @@
                 </div>
             </div>
         }
-
-        </div>
-
-
-
-
+    </div>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

@@ -34,6 +34,25 @@ namespace TournamentPulse.WebUI.Controllers
             return View(fighters);
         }
 
+        public IActionResult Details(string fighterName)
+        {
+            if (string.IsNullOrEmpty(fighterName))
+            {
+                return NotFound();
+            }
+
+            var fighterFromDb = _fighterRepository.GetFighterByFullName(fighterName);
+
+            if (fighterFromDb == null)
+            {
+                return NotFound();
+            }
+
+            var fighter = _mapper.Map<FighterListViewModel>(fighterFromDb);
+
+            return View(fighter);
+        }
+
         [Authorize(Roles = "User")]
         public IActionResult Add()
         {

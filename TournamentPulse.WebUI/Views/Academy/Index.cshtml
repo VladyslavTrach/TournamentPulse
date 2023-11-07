@@ -28,7 +28,7 @@
                     @foreach (var academy in Model)
                     {
                         <tr>
-                            <td>@academy.Name</td>
+                            <td><a class="nav-link" href="@Url.Action("Detail", "Academy", new { academyName = academy.Name })">@academy.Name</a></td>
                             <td>@academy.Association</td>
                             <td>@academy.Country</td>
                             <td>@academy.FightersCnt</td>

@@ -79,13 +79,16 @@ namespace TournamentPulse.Application.Repository
             var fighter = _context.Fighters.FirstOrDefault(f => f.Email == email);
             return fighter;
         }
-
+        public Fighter GetFighterByFullName(string fullName)
+        {
+            var fighter = _context.Fighters.Include(f => f.Academy).FirstOrDefault(f => f.FullName == fullName);
+            return fighter;
+        }
         public Fighter GetFighterById(int id)
         {
             var fighter = _context.Fighters.FirstOrDefault(f => f.Id == id);
                 return fighter;
         }
-
         public int GetFighterIdByFullName(string fullName)
         {
             var fighter = _context.Fighters.FirstOrDefault(f => f.FullName == fullName);
@@ -100,6 +103,10 @@ namespace TournamentPulse.Application.Repository
 
             // Alternatively, return a default value (0) if no matching fighter is found.
             return 0;
+        }
+        public ICollection<Fighter> GetFightersByAcademy(int academyId)
+        {
+            return _context.Fighters.Where(f => f.AcademyId == academyId).ToList();
         }
 
         public void UpdateFighter(Fighter fighter)

@@ -1,0 +1,79 @@
+﻿@model TournamentPulse.WebUI.Models.Academy.AcademyDetailsViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Model.Name</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 800px; /* You can adjust this value to make it wider */
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>@Model.Name</h1>
+
+        <p><strong>Name:</strong> @Model.Name</p>
+        <p><strong>Association:</strong> @Model.Association</p>
+        <p><strong>Country:</strong> @Model.Country</p>
+        <p><strong>Fighter Count:</strong> @Model.FightersCnt</p>
+
+        <h2>Fighters:</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Rank</th>
+                <th>Weight</th>
+            </tr>
+            @foreach (var fighter in Model.Fighters)
+            {
+                <tr>
+                    <td><a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = fighter.FullName })">@fighter.FullName</a></td>
+                    <td>@fighter.Age</td>
+                    <td>@(fighter.Rank ?? "N/A")</td>
+                    <td>@fighter.Weight kg</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

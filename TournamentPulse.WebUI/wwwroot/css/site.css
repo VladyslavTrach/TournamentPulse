@@ -18,15 +18,17 @@ body {
 }
 
 .custom-card-main {
-    background-color: #696969;
+    background-color: #999999;
     border-radius: 20px;
     overflow: hidden;
+    color: white;
 }
 
 .custom-card-secondary {
     background-color: #999999;
     border-radius: 20px;
     overflow: hidden;
+    color: white;
 }
 
 .card-img {
@@ -41,7 +43,7 @@ body {
 }
 
 .card-body {
-    margin-left: 20px; /* Add margin to the card body */
+    margin-left: 0; /* Add margin to the card body */
 }
 
 .second-card-container {

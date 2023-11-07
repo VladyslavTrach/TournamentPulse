@@ -1,0 +1,73 @@
+﻿@model TournamentPulse.WebUI.Models.Fighter.FighterListViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fighter Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        .centered-big-text {
+            text-align: center;
+            font-size: 24px;
+            color: #007bff; /* Blue color */
+        }
+
+        .cool-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fighter Details</h1>
+
+        @if (Model != null)
+        {
+            <p><strong>Full Name:</strong> <span class="centered-big-text">@Model.FullName</span></p>
+            <p><strong>Age:</strong> @(Model.Age)</p>
+            <p><strong>Weight:</strong> @(Model.Weight) lbs</p>
+            <p><strong>Rank:</strong> @(Model.Rank ?? "N/A")</p>
+            <p><strong>Academy:</strong> <a class="nav-link" href="@Url.Action("Detail", "Academy", new { academyName = Model.Academy })">@Model.Academy</a></p>
+        }
+        else
+        {
+            <p>Fighter details not found.</p>
+        }
+
+        <a href="/Fighter" class="cool-button">Check All Fighters</a>
+
+    </div>
+</body>
+</html>

@@ -7,6 +7,6 @@
         public int Age { get; set; }
         public float Weight { get; set; }
         public string Rank { get; set; }
-        public string Academy { get; set; }
+        public string? Academy { get; set; }
     }
 }
