@@ -39,5 +39,10 @@ namespace TournamentPulse.Application.Repository
         {
             return _context.Associations.Where(a => a.Id == id).FirstOrDefault();
         }
+
+        public Association GetAssociationByName(string Name)
+        {
+            return _context.Associations.Where(a => a.Name == Name).FirstOrDefault();
+        }
     }
 }

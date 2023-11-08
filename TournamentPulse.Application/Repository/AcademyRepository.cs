@@ -24,6 +24,14 @@ namespace TournamentPulse.Application.Repository
             return _context.Academies.Where(a => a.AssociationId == id).Count();
         }
 
+        public List<Academy> GetAcademiesByAssociation(int associationId)
+        {
+            return _context.Academies
+                .Include(a => a.Country)
+                .Include(a => a.Fighters)
+                .Where(a => a.AssociationId == associationId).ToList();
+        }
+
         public Academy GetAcademyById(int id)
         {
             return _context.Academies.Where(a => a.Id == id).FirstOrDefault();

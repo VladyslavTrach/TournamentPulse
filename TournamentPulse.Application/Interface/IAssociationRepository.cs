@@ -11,6 +11,7 @@ namespace TournamentPulse.Application.Interface
     {
         ICollection<Association> GetAllAssociations();
         Association GetAssociationById(int id);
+        Association GetAssociationByName(string Name);
         int CountFightersByAssociation(int id);
     }
 }

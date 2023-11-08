@@ -1,4 +1,4 @@
-﻿@model TournamentPulse.WebUI.Models.Academy.AcademyDetailsViewModel
+﻿@model TournamentPulse.WebUI.Models.Association.AssociationDetailsListViewModel
 
 <!DOCTYPE html>
 <html>
@@ -23,15 +23,6 @@
             text-align: center;
             color: #333;
         }
-
-        p strong {
-            display: inline; /* Ensure that the strong element does not start on a new line */
-        }
-
-        p a {
-            display: inline-block;
-        }
-
 
         p {
             margin-bottom: 10px;
@@ -61,25 +52,22 @@
         <h1>@Model.Name</h1>
 
         <p><strong>Name:</strong> @Model.Name</p>
-        <p><strong>Association:</strong> <span><a class="nav-link" href="@Url.Action("Detail", "Association", new { associationName = Model.Association })">@Model.Association</a></span></p>
-        <p><strong>Country:</strong> @Model.Country</p>
-        <p><strong>Fighter Count:</strong> @Model.FightersCnt</p>
+        <p><strong>Academies Count:</strong> @Model.AcademiesCnt</p>
+        <p><strong>Fighters Count:</strong> @Model.FightersCnt</p>
 
-        <h2>Fighters:</h2>
+        <h2>Academies:</h2>
         <table>
             <tr>
                 <th>Name</th>
-                <th>Age</th>
-                <th>Rank</th>
-                <th>Weight</th>
+                <th>Location</th>
+                <th>Students Count</th>
             </tr>
-            @foreach (var fighter in Model.Fighters)
+            @foreach (var academy in Model.Academies)
             {
                 <tr>
-                    <td><a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = fighter.FullName })">@fighter.FullName</a></td>
-                    <td>@fighter.Age</td>
-                    <td>@(fighter.Rank ?? "N/A")</td>
-                    <td>@fighter.Weight kg</td>
+                    <td><a class="nav-link" href="@Url.Action("Detail", "Academy", new { academyName = academy.Name })">@academy.Name</a></td>
+                    <td>@academy.Country</td>
+                    <td>@academy.FightersCnt</td>
                 </tr>
             }
         </table>
