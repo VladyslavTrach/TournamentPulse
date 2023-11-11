@@ -16,6 +16,9 @@ namespace TournamentPulse.WebUI.Mapper
             CreateMap<Fighter, FighterRecordModel>();
 
             CreateMap<FighterRecordModel, Fighter>();
+
+            CreateMap<Fighter, FighterWithMatchesViewModel>()
+                .ForMember(dest => dest.Academy, opt => opt.MapFrom(src => src.Academy.Name));
         }
     }
 

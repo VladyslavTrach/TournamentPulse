@@ -152,5 +152,13 @@ namespace TournamentPulse.Application.Repository
                 throw new InvalidOperationException("Match not found");
             }
         }
+        public List<Match> GetMatchesForFighter(int fighterId)
+        {
+            return _context.Matches
+                .Include(m => m.Category)
+                .Include(m => m.Fighter1)
+                .Include(m => m.Fighter2)
+                .Where(m => m.Fighter1Id == fighterId || m.Fighter2Id == fighterId).ToList();
+        }
     }
 }

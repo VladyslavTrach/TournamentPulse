@@ -1,4 +1,4 @@
-﻿@model TournamentPulse.WebUI.Models.Fighter.FighterListViewModel
+﻿@model TournamentPulse.WebUI.Models.Fighter.FighterWithMatchesViewModel
 
 <!DOCTYPE html>
 <html>
@@ -47,6 +47,23 @@
             border-radius: 3px;
             cursor: pointer;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -57,16 +74,63 @@
         {
             <p><strong>Full Name:</strong> <span class="centered-big-text">@Model.FullName</span></p>
             <p><strong>Age:</strong> @(Model.Age)</p>
-            <p><strong>Weight:</strong> @(Model.Weight) lbs</p>
+            <p><strong>Weight:</strong> @(Model.Weight) kg</p>
             <p><strong>Rank:</strong> @(Model.Rank ?? "N/A")</p>
             <p><strong>Academy:</strong> <a class="nav-link" href="@Url.Action("Detail", "Academy", new { academyName = Model.Academy })">@Model.Academy</a></p>
+
+            <h2>Matches</h2>
+            @if (Model.Matches != null && Model.Matches.Any())
+            {
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Opponent</th>
+                            <th>Result</th>                            
+                            <th>Win/Loss Method</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var match in Model.Matches)
+                        {
+                            @if(match.MatchStatus != "Canceled")
+                            {
+                                <tr>
+                                    <td>@(match.MatchStatus == "Scheduled" ? "TBD" : "Done")</td>
+                                    <td>@(Model.FullName == match.Fighter1 ? match.Fighter2 : match.Fighter1)</td>
+                                    @if (match.MatchStatus == "Scheduled")
+                                    {
+                                        <td> </td>
+                                    }
+                                    else
+                                    {
+                                        <td>@(Model.FullName == match.Winner ? "Win" : "Loss")</td>
+                                    }                                    
+                                    <td>@(match.WinningMethod == "NoWinYet" ? " " : match.WinningMethod)</td>
+                                    @if (match.MatchStatus == "Scheduled")
+                                    {
+                                        <td> </td>
+                                    }
+                                    else
+                                    {
+                                        <td>@(Model.FullName == match.Fighter1 ? $"{match.Score1} : {match.Score2}" : $"{match.Score2} : {match.Score1}")</td>
+                                    }                                    
+                                </tr>
+                            }                           
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No matches found for this fighter.</p>
+            }
         }
         else
         {
             <p>Fighter details not found.</p>
         }
-
-        <a href="/Fighter" class="cool-button">Check All Fighters</a>
 
     </div>
 </body>
