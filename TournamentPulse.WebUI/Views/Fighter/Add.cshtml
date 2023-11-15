@@ -1,5 +1,5 @@
 ﻿@using TournamentPulse.Core.Enums;
-@model TournamentPulse.Core.Entities.Fighter
+@model TournamentPulse.WebUI.Models.Fighter.CreateFighterViewModel
 
 <!DOCTYPE html>
 <html>
@@ -37,12 +37,23 @@
                                 <div class="invalid-feedback">Please enter the fighter's weight.</div>
                             </div>
 
-@*                             <div class="form-group">
+                            <div class="form-group">
                                 <label for="Rank">Rank:</label>
-                                @Html.DropDownListFor(model => model.Rank, new SelectList(Enum.GetValues(typeof(BeltColorEnum)), Model.Rank), new { @class = "form-control", required = "required" })
+                                @Html.DropDownListFor(model => model.Rank, Enum.GetValues(typeof(BeltColorEnum)).Cast<BeltColorEnum>().Select(item =>
+                            new SelectListItem
+                            {
+                            Text = item.ToString(),
+                            Value = item.ToString(),
+                            }), new { @class = "form-control", required = "required" })
                                 <div class="invalid-feedback">Please select the fighter's rank.</div>
-                            </div> *@
+                            </div>
 
+
+                            <div class="form-group">
+                                <label for="Academy">Academy:</label>
+                                @Html.TextBoxFor(model => model.Academy, new { @class = "form-control", required = "required" })
+                                <div class="invalid-feedback">Please enter the fighter's academy.</div>
+                            </div>
 
                             <button type="submit" class="btn btn-primary">Create</button>
                         }

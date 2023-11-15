@@ -3,6 +3,7 @@ using Entity = TournamentPulse.Core.Entities;
 using TournamentPulse.WebUI.Models.Fighter;
 using TournamentPulse.Core.Entities;
 using TournamentPulse.Infrastructure.Data.Generator;
+using Microsoft.AspNet.Identity;
 
 namespace TournamentPulse.WebUI.Mapper
 {
@@ -16,6 +17,7 @@ namespace TournamentPulse.WebUI.Mapper
             CreateMap<Fighter, FighterRecordModel>();
 
             CreateMap<FighterRecordModel, Fighter>();
+
 
             CreateMap<Fighter, FighterWithMatchesViewModel>()
                 .ForMember(dest => dest.Academy, opt => opt.MapFrom(src => src.Academy.Name));

@@ -15,13 +15,15 @@ namespace TournamentPulse.WebUI.Controllers
     {
         private readonly IFighterRepository _fighterRepository;
         private readonly IMatchRepository _matchRepository;
+        private readonly IAcademyRepository _academyrepository;
         private readonly IMapper _mapper;
         private readonly ISeedFightersInDbService _seedFightersInDbService;
 
-        public FighterController(IFighterRepository fighterRepository, IMatchRepository matchRepository, IMapper mapper, ISeedFightersInDbService seedFightersInDbService)
+        public FighterController(IFighterRepository fighterRepository, IMatchRepository matchRepository, IAcademyRepository academyrepository, IMapper mapper, ISeedFightersInDbService seedFightersInDbService)
         {
             _fighterRepository = fighterRepository;
             _matchRepository = matchRepository;
+            _academyrepository = academyrepository;
             _seedFightersInDbService = seedFightersInDbService;
 
             _mapper = mapper;
@@ -64,6 +66,25 @@ namespace TournamentPulse.WebUI.Controllers
         [Authorize(Roles = "User")]
         public IActionResult Add()
         {
+            return View();
+        }
+
+        [Authorize(Roles = "User")]
+        [HttpPost]
+        public IActionResult Add(CreateFighterViewModel model)
+        {
+            Fighter fighter = new Fighter
+            {
+                FullName = model.FullName,
+                Weight = model.Weight,
+                Age = model.Age,
+                Rank = model.Rank,
+                AcademyId = _academyrepository.GetAcademyByName(model.Academy).Id,
+                Email = User.Identity.Name
+            };
+
+            _fighterRepository.AddFighter(fighter);
+
             return View();
         }
     }

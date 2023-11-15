@@ -14,5 +14,6 @@ namespace TournamentPulse.Application.Interface
         Academy GetAcademyById(int id);
         Academy GetAcademyByName(string academyName);
         int CountAcademiesByAssociation(int id);
+        void AddAcademy(Academy academy);
     }
 }

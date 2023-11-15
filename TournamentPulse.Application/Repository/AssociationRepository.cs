@@ -21,6 +21,22 @@ namespace TournamentPulse.Application.Repository
             _fighterRepository = fighterRepository;
         }
 
+        public void AddAssociation(Association association)
+        {
+            if (IsAssociationNameUnique(association.Name))
+            {
+                _context.Associations.Add(association);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new InvalidOperationException("Association with the same name already exists.");
+            }
+        }
+
+       
+
+
         public int CountFightersByAssociation(int id)
         {
             return _context.Fighters.Count(f => _context.Academies.Any(a => a.AssociationId == id && a.Id == f.AcademyId));
@@ -43,6 +59,11 @@ namespace TournamentPulse.Application.Repository
         public Association GetAssociationByName(string Name)
         {
             return _context.Associations.Where(a => a.Name == Name).FirstOrDefault();
+        }
+
+        private bool IsAssociationNameUnique(string name)
+        {
+            return !_context.Associations.Any(a => a.Name == name);
         }
     }
 }

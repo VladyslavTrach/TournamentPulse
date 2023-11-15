@@ -13,5 +13,6 @@ namespace TournamentPulse.Application.Interface
         Association GetAssociationById(int id);
         Association GetAssociationByName(string Name);
         int CountFightersByAssociation(int id);
+        void AddAssociation(Association association);
     }
 }

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using TournamentPulse.Application.Repository;
 using TournamentPulse.WebUI.Models.Academy;
 using TournamentPulse.WebUI.Models.Fighter;
+using Microsoft.AspNetCore.Authorization;
+using TournamentPulse.Core.Entities;
 
 namespace TournamentPulse.WebUI.Controllers
 {
@@ -42,6 +44,33 @@ namespace TournamentPulse.WebUI.Controllers
             association.Academies = academies;
 
             return View(association);
+        }
+
+        [Authorize(Roles = "Admin,Organizer")]
+        public IActionResult Add()
+        {
+
+            return View();
+        }
+
+        [Authorize(Roles = "Admin,Organizer")]
+        [HttpPost]
+        public IActionResult Add(AssociationViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Association association = new Association();
+                association.Name = model.Name;
+                
+
+                _associationRepository.AddAssociation(association);
+
+                return RedirectToAction("Index");
+            }
+
+
+            // If the model is not valid, redisplay the form with validation errors
+            return View(model);
         }
     }
 }

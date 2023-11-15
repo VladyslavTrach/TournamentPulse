@@ -17,6 +17,9 @@ namespace TournamentPulse.WebUI.Mapper
                 .ForMember(dest => dest.Association, opt => opt.MapFrom(src => src.Association.Name))
                 .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country.Name))
                 .ForMember(dest => dest.FightersCnt, opt => opt.MapFrom(src => src.Fighters.Count));
+
+            CreateMap<Academy, AcademyViewModel>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
         }
     }
 }

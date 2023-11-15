@@ -11,5 +11,6 @@ namespace TournamentPulse.Application.Interface
     {
         ICollection<Country> GetAllCountries();
         Country GetCountryById(int id);
+        Country GetCountryByName(string name);
     }
 }

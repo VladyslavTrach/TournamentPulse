@@ -19,6 +19,19 @@ namespace TournamentPulse.Application.Repository
             _context = context;
         }
 
+        public void AddAcademy(Academy academy)
+        {
+            if (IsAcademyNameUnique(academy.Name))
+            {
+                _context.Academies.Add(academy);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new InvalidOperationException("Academy with the same name already exists.");
+            }
+        }       
+
         public int CountAcademiesByAssociation(int id)
         {
             return _context.Academies.Where(a => a.AssociationId == id).Count();
@@ -53,6 +66,11 @@ namespace TournamentPulse.Application.Repository
                 .Include(a => a.Country)
                 .Include(a => a.Fighters)
                 .ToList();
+        }
+        private bool IsAcademyNameUnique(string name)
+        {
+            // Check if there is any academy with the same name in the database
+            return !_context.Academies.Any(a => a.Name == name);
         }
     }
 }

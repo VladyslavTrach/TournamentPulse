@@ -5,6 +5,7 @@ using AutoMapper;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using TournamentPulse.WebUI.Models.Fighter;
+using TournamentPulse.Core.Entities;
 
 namespace TournamentPulse.WebUI.Controllers
 {
@@ -13,12 +14,16 @@ namespace TournamentPulse.WebUI.Controllers
         private readonly IAcademyRepository _academyRepository;
         private readonly IMapper _mapper;
         private readonly IFighterRepository _fighterRepository;
+        private readonly IAssociationRepository _associationRepository;
+        private readonly ICountryRepositry _countryRepository;
 
-        public AcademyController(IAcademyRepository academyRepository, IMapper mapper, IFighterRepository fighterRepository)
+        public AcademyController(IAcademyRepository academyRepository, IMapper mapper, IFighterRepository fighterRepository, IAssociationRepository associationRepository, ICountryRepositry countryRepository)
         {
             _academyRepository = academyRepository;
             _mapper = mapper;
             _fighterRepository = fighterRepository;
+            _associationRepository = associationRepository;
+            _countryRepository = countryRepository;
         }
 
         public IActionResult Index()
@@ -41,6 +46,35 @@ namespace TournamentPulse.WebUI.Controllers
             academy.Fighters = fighterListViewModels;
 
             return View(academy);
+        }
+
+        [Authorize(Roles = "Admin,Organizer")]
+        public IActionResult Add()
+        {
+            
+            return View();
+        }
+
+        [Authorize(Roles = "Admin,Organizer")]
+        [HttpPost]
+        public IActionResult Add(AcademyViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Academy academy = new Academy(); // Instantiate an instance of Academy
+
+                academy.Name = model.Name;
+                academy.AssociationId = _associationRepository.GetAssociationByName(model.Association).Id;
+                academy.CountryId = _countryRepository.GetCountryByName(model.Country).Id;
+
+                _academyRepository.AddAcademy(academy);
+
+                return RedirectToAction("Index");
+            }
+
+
+            // If the model is not valid, redisplay the form with validation errors
+            return View(model);
         }
 
     }

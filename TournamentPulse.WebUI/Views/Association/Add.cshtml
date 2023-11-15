@@ -1,0 +1,17 @@
+﻿@model TournamentPulse.WebUI.Models.Association.AssociationViewModel
+
+@{
+    ViewData["Title"] = "Add New Association";
+}
+
+<h1>Add New Association</h1>
+
+@using (Html.BeginForm("Add", "Association", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="Name">Name:</label>
+        <input type="text" class="form-control" id="Name" name="Name" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Academy</button>
+}

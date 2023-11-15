@@ -20,12 +20,17 @@ namespace TournamentPulse.Application.Repository
 
         public ICollection<Country> GetAllCountries()
         {
-            throw new NotImplementedException();
+            return _context.Countries.OrderBy(c => c.Id).ToList();
         }
 
         public Country GetCountryById(int id)
         {
             return _context.Countries.Where(c => c.Id == id).FirstOrDefault();
+        }
+
+        public Country GetCountryByName(string name)
+        {
+            return _context.Countries.Where(c => c.Name == name).FirstOrDefault();
         }
     }
 }
