@@ -30,4 +30,10 @@
     <ProjectReference Include="..\TournamentPulse.Infrastructure\TournamentPulse.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\SharedResource.en-US.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

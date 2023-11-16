@@ -51,16 +51,16 @@
     <div class="container">
         <h1>@Model.Name</h1>
 
-        <p><strong>Name:</strong> @Model.Name</p>
-        <p><strong>Academies Count:</strong> @Model.AcademiesCnt</p>
-        <p><strong>Fighters Count:</strong> @Model.FightersCnt</p>
+        <p><strong>@_localization.Getkey("asp_Name"):</strong> @Model.Name</p>
+        <p><strong>@_localization.Getkey("asp_Academies"):</strong> @Model.AcademiesCnt</p>
+        <p><strong>@_localization.Getkey("asp_Fighters"):</strong> @Model.FightersCnt</p>
 
-        <h2>Academies:</h2>
+        <h2>@_localization.Getkey("asp_Academies"):</h2>
         <table>
             <tr>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Students Count</th>
+                <th>@_localization.Getkey("acp_Name")</th>
+                <th>@_localization.Getkey("ep_Location")</th>
+                <th>@_localization.Getkey("acp_Fighters")</th>
             </tr>
             @foreach (var academy in Model.Academies)
             {

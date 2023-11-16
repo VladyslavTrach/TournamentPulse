@@ -117,6 +117,87 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="acp_AddNewAcademy" xml:space="preserve">
+    <value>Додати нову академію</value>
+  </data>
+  <data name="acp_Association" xml:space="preserve">
+    <value>Асоціація</value>
+  </data>
+  <data name="acp_Country" xml:space="preserve">
+    <value>Країна</value>
+  </data>
+  <data name="acp_Fighters" xml:space="preserve">
+    <value>Атлети</value>
+  </data>
+  <data name="acp_ListOfAcademies" xml:space="preserve">
+    <value>Список Академій</value>
+  </data>
+  <data name="acp_Name" xml:space="preserve">
+    <value>Назва</value>
+  </data>
+  <data name="asp_Academies" xml:space="preserve">
+    <value>Академії</value>
+  </data>
+  <data name="asp_AddNewAssociation" xml:space="preserve">
+    <value>Додати нову асоціацію</value>
+  </data>
+  <data name="asp_Fighters" xml:space="preserve">
+    <value>Атлети</value>
+  </data>
+  <data name="asp_ListOfAssociations" xml:space="preserve">
+    <value>Список Асоціацій</value>
+  </data>
+  <data name="asp_Name" xml:space="preserve">
+    <value>Назва</value>
+  </data>
+  <data name="bp_Brackets" xml:space="preserve">
+    <value>Турнірна сітка</value>
+  </data>
+  <data name="bp_Edit" xml:space="preserve">
+    <value>Редагувати</value>
+  </data>
+  <data name="bp_F1" xml:space="preserve">
+    <value>Б1</value>
+  </data>
+  <data name="bp_F2" xml:space="preserve">
+    <value>Б2</value>
+  </data>
+  <data name="bp_GenerateNextRound" xml:space="preserve">
+    <value>Згенерувати наступний раунд</value>
+  </data>
+  <data name="bp_Operations" xml:space="preserve">
+    <value>Операції</value>
+  </data>
+  <data name="bp_Round" xml:space="preserve">
+    <value>Раунд</value>
+  </data>
+  <data name="bp_Score" xml:space="preserve">
+    <value>Рахунок</value>
+  </data>
+  <data name="bp_Status" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="bp_WinningMethod" xml:space="preserve">
+    <value>Вид перемоги</value>
+  </data>
+  <data name="cp_Academy" xml:space="preserve">
+    <value>Академія</value>
+  </data>
+  <data name="cp_Age" xml:space="preserve">
+    <value>Вік</value>
+  </data>
+  <data name="cp_FullName" xml:space="preserve">
+    <value>Ім'я</value>
+  </data>
+  <data name="cp_GenerateFirstRound" xml:space="preserve">
+    <value>Згенерувати перший раунд</value>
+  </data>
+  <data name="cp_Participants" xml:space="preserve">
+    <value>Список учасників</value>
+  </data>
+  <data name="cp_Weight" xml:space="preserve">
+    <value>Вага</value>
+  </data>
   <data name="ep_AddNewTournament" xml:space="preserve">
     <value>Створити турнір</value>
   </data>
@@ -135,6 +216,36 @@
   <data name="ep_ViewDetails" xml:space="preserve">
     <value>Деталі</value>
   </data>
+  <data name="fd_Matches" xml:space="preserve">
+    <value>Матчі</value>
+  </data>
+  <data name="fd_Opponent" xml:space="preserve">
+    <value>Суперник</value>
+  </data>
+  <data name="fd_Result" xml:space="preserve">
+    <value>Результат</value>
+  </data>
+  <data name="fd_WLMethod" xml:space="preserve">
+    <value>Спосіб перемоги/програшу</value>
+  </data>
+  <data name="fp_Academy" xml:space="preserve">
+    <value>Академія</value>
+  </data>
+  <data name="fp_Age" xml:space="preserve">
+    <value>Вік</value>
+  </data>
+  <data name="fp_ListOfFighters" xml:space="preserve">
+    <value>Список атлетів</value>
+  </data>
+  <data name="fp_Name" xml:space="preserve">
+    <value>Ім'я</value>
+  </data>
+  <data name="fp_Rank" xml:space="preserve">
+    <value>Пояс</value>
+  </data>
+  <data name="fp_Weight" xml:space="preserve">
+    <value>Вага</value>
+  </data>
   <data name="nb_Academies" xml:space="preserve">
     <value>Академії</value>
   </data>
@@ -152,5 +263,41 @@
   </data>
   <data name="nb_SignIn" xml:space="preserve">
     <value>Увійти</value>
+  </data>
+  <data name="td_ContactOrganisator" xml:space="preserve">
+    <value>Зв'язатись з організатором</value>
+  </data>
+  <data name="td_DateOfHolding" xml:space="preserve">
+    <value>Дата проведення :</value>
+  </data>
+  <data name="td_Description" xml:space="preserve">
+    <value>Опис</value>
+  </data>
+  <data name="td_Location" xml:space="preserve">
+    <value>Локація</value>
+  </data>
+  <data name="td_NumberOfParticipants" xml:space="preserve">
+    <value>Кількість учасників</value>
+  </data>
+  <data name="td_OutOf" xml:space="preserve">
+    <value>з</value>
+  </data>
+  <data name="td_Price" xml:space="preserve">
+    <value>Ціна</value>
+  </data>
+  <data name="td_RegisterToEvent" xml:space="preserve">
+    <value>Зареєструватись</value>
+  </data>
+  <data name="td_UnregisterFromEvent" xml:space="preserve">
+    <value>Відмінити реєстрацію</value>
+  </data>
+  <data name="tnb_Bracket" xml:space="preserve">
+    <value>Сітка</value>
+  </data>
+  <data name="tnb_Category" xml:space="preserve">
+    <value>Категорії</value>
+  </data>
+  <data name="tnb_Detail" xml:space="preserve">
+    <value>Деталі</value>
   </data>
 </root>

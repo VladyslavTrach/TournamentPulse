@@ -29,13 +29,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Detail", "Tournament", new { id = ViewData["TournamentId"] })">Detail</a>
+                    <a class="nav-link" href="@Url.Action("Detail", "Tournament", new { id = ViewData["TournamentId"] })">@_localization.Getkey("tnb_Detail")</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Category", "Tournament", new { id = ViewData["TournamentId"] })">Category</a>
+                    <a class="nav-link" href="@Url.Action("Category", "Tournament", new { id = ViewData["TournamentId"] })">@_localization.Getkey("tnb_Category")</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Bracket", "Tournament", new { id = ViewData["TournamentId"] })">Bracket</a>
+                    <a class="nav-link" href="@Url.Action("Bracket", "Tournament", new { id = ViewData["TournamentId"] })">@_localization.Getkey("tnb_Bracket")</a>
                 </li>
             </ul>
         </div>
@@ -43,7 +43,7 @@
 
     <div class="container-fluid m-0 p-0" id="content-container">
 
-        <h1 class="text-white">Participants</h1>
+        <h1>@_localization.Getkey("cp_Participants")</h1>
         @foreach (var categoryFighter in Model)
         {
             <div class="row mb-4">
@@ -52,7 +52,7 @@
                         <div class="card-header" style="background-color: #808080">
                             <h2 class="d-flex justify-content-between">
                                 @categoryFighter.Category
-                                <a href="@Url.Action("GenerateFirstRoundBracket", "Tournament", new { tournamentId = ViewData["TournamentId"],  categoryName = categoryFighter.Category })" class="btn btn-primary">Generate First Round</a>
+                                <a href="@Url.Action("GenerateFirstRoundBracket", "Tournament", new { tournamentId = ViewData["TournamentId"],  categoryName = categoryFighter.Category })" class="btn btn-primary">@_localization.Getkey("cp_GenerateFirstRound")</a>
                             </h2>
                         </div>
                         <div class="card-body" style="background-color: #808080">
@@ -61,10 +61,10 @@
                                     <!-- Apply the custom table class here -->
                                     <thead>
                                         <tr>
-                                            <th>Full Name</th>
-                                            <th>Academy</th>
-                                            <th>Age</th>
-                                            <th>Weight</th>
+                                            <th>@_localization.Getkey("cp_FullName")</th>
+                                            <th>@_localization.Getkey("cp_Academy")</th>
+                                            <th>@_localization.Getkey("cp_Age")</th>
+                                            <th>@_localization.Getkey("cp_Weight")</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -16,7 +16,7 @@
 
 </head>
 <body>
-    <h1>List of Fighters</h1>
+    <h1>@_localization.Getkey("fp_ListOfFighters")</h1>
 
     @if (Model.Any())
     {
@@ -24,11 +24,11 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Academy</th>
-                        <th>Age</th>
-                        <th>Rank</th>
-                        <th>Weight</th>
+                        <th>@_localization.Getkey("fp_Name")</th>
+                        <th>@_localization.Getkey("fp_Academy")</th>
+                        <th>@_localization.Getkey("fp_Age")</th>
+                        <th>@_localization.Getkey("fp_Rank")</th>
+                        <th>@_localization.Getkey("fp_Weight")</th>
                     </tr>
                 </thead>
                 <tbody>

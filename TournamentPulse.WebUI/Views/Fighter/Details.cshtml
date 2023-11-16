@@ -68,27 +68,26 @@
 </head>
 <body>
     <div class="container">
-        <h1>Fighter Details</h1>
+        <h1>@Model.FullName</h1>
 
         @if (Model != null)
         {
-            <p><strong>Full Name:</strong> <span class="centered-big-text">@Model.FullName</span></p>
-            <p><strong>Age:</strong> @(Model.Age)</p>
-            <p><strong>Weight:</strong> @(Model.Weight) kg</p>
-            <p><strong>Rank:</strong> @(Model.Rank ?? "N/A")</p>
-            <p><strong>Academy:</strong> <a class="nav-link" href="@Url.Action("Detail", "Academy", new { academyName = Model.Academy })">@Model.Academy</a></p>
+            <p><strong>@_localization.Getkey("fp_Age"):</strong> @(Model.Age)</p>
+            <p><strong>@_localization.Getkey("fp_Weight"):</strong> @(Model.Weight) kg</p>
+            <p><strong>@_localization.Getkey("fp_Rank"):</strong> @(Model.Rank ?? "N/A")</p>
+            <p><strong>@_localization.Getkey("fp_Academy"):</strong> <a class="nav-link" href="@Url.Action("Detail", "Academy", new { academyName = Model.Academy })">@Model.Academy</a></p>
 
-            <h2>Matches</h2>
+            <h2>@_localization.Getkey("fd_Matches")</h2>
             @if (Model.Matches != null && Model.Matches.Any())
             {
                 <table>
                     <thead>
                         <tr>
-                            <th>Status</th>
-                            <th>Opponent</th>
-                            <th>Result</th>                            
-                            <th>Win/Loss Method</th>
-                            <th>Score</th>
+                            <th>@_localization.Getkey("bp_Status")</th>
+                            <th>@_localization.Getkey("fd_Opponent")</th>
+                            <th>@_localization.Getkey("fd_Result")</th>
+                            <th>@_localization.Getkey("fd_WLMethod")</th>
+                            <th>@_localization.Getkey("bp_Score")</th>
                         </tr>
                     </thead>
                     <tbody>

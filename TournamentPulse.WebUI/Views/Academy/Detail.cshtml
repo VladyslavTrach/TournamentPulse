@@ -60,18 +60,18 @@
     <div class="container">
         <h1>@Model.Name</h1>
 
-        <p><strong>Name:</strong> @Model.Name</p>
-        <p><strong>Association:</strong> <span><a class="nav-link" href="@Url.Action("Detail", "Association", new { associationName = Model.Association })">@Model.Association</a></span></p>
-        <p><strong>Country:</strong> @Model.Country</p>
-        <p><strong>Fighter Count:</strong> @Model.FightersCnt</p>
+        <p><strong>@_localization.Getkey("acp_Name"):</strong> @Model.Name</p>
+        <p><strong>@_localization.Getkey("acp_Association"):</strong> <span><a class="nav-link" href="@Url.Action("Detail", "Association", new { associationName = Model.Association })">@Model.Association</a></span></p>
+        <p><strong>@_localization.Getkey("acp_Country"):</strong> @Model.Country</p>
+        <p><strong>@_localization.Getkey("acp_Fighters"):</strong> @Model.FightersCnt</p>
 
-        <h2>Fighters:</h2>
+        <h2>@_localization.Getkey("acp_Fighters"):</h2>
         <table>
             <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Rank</th>
-                <th>Weight</th>
+                <th>@_localization.Getkey("fp_Name")</th>
+                <th>@_localization.Getkey("fp_Age")</th>
+                <th>@_localization.Getkey("fp_Rank")</th>
+                <th>@_localization.Getkey("fp_Weight")</th>
             </tr>
             @foreach (var fighter in Model.Fighters)
             {

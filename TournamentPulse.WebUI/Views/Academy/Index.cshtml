@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>List of Academies</h1>
+    <h1>@_localization.Getkey("acp_ListOfAcademies")</h1>
 
-    <a href="@Url.Action("Add", "Academy")" class="btn btn-success mb-3">Add New Academy</a>
+    <a href="@Url.Action("Add", "Academy")" class="btn btn-success mb-3">@_localization.Getkey("acp_AddNewAcademy")</a>
 
     @if (Model.Any())
     {
@@ -18,10 +18,10 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Association</th>
-                        <th>Country</th>
-                        <th>Figthers</th>
+                        <th>@_localization.Getkey("acp_Name")</th>
+                        <th>@_localization.Getkey("acp_Association")</th>
+                        <th>@_localization.Getkey("acp_Country")</th>
+                        <th>@_localization.Getkey("acp_Fighters")</th>
                     </tr>
                 </thead>
                 <tbody>

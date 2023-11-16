@@ -117,6 +117,87 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="acp_AddNewAcademy" xml:space="preserve">
+    <value>Add New Academy</value>
+  </data>
+  <data name="acp_Association" xml:space="preserve">
+    <value>Association</value>
+  </data>
+  <data name="acp_Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="acp_Fighters" xml:space="preserve">
+    <value>Fighters</value>
+  </data>
+  <data name="acp_ListOfAcademies" xml:space="preserve">
+    <value>List of Academies</value>
+  </data>
+  <data name="acp_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="asp_Academies" xml:space="preserve">
+    <value>Academies</value>
+  </data>
+  <data name="asp_AddNewAssociation" xml:space="preserve">
+    <value>Add New Association</value>
+  </data>
+  <data name="asp_Fighters" xml:space="preserve">
+    <value>Fighters</value>
+  </data>
+  <data name="asp_ListOfAssociations" xml:space="preserve">
+    <value>List of Associations</value>
+  </data>
+  <data name="asp_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="bp_Brackets" xml:space="preserve">
+    <value>Brackets</value>
+  </data>
+  <data name="bp_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="bp_F1" xml:space="preserve">
+    <value>F1</value>
+  </data>
+  <data name="bp_F2" xml:space="preserve">
+    <value>F2</value>
+  </data>
+  <data name="bp_GenerateNextRound" xml:space="preserve">
+    <value>GenerateNextRound</value>
+  </data>
+  <data name="bp_Operations" xml:space="preserve">
+    <value>Operations</value>
+  </data>
+  <data name="bp_Round" xml:space="preserve">
+    <value>Round</value>
+  </data>
+  <data name="bp_Score" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="bp_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="bp_WinningMethod" xml:space="preserve">
+    <value>Winning Method</value>
+  </data>
+  <data name="cp_Academy" xml:space="preserve">
+    <value>Academy</value>
+  </data>
+  <data name="cp_Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="cp_FullName" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="cp_GenerateFirstRound" xml:space="preserve">
+    <value>Generate First Round</value>
+  </data>
+  <data name="cp_Participants" xml:space="preserve">
+    <value>List of Participants</value>
+  </data>
+  <data name="cp_Weight" xml:space="preserve">
+    <value>Weight</value>
+  </data>
   <data name="ep_AddNewTournament" xml:space="preserve">
     <value>Add New Tournament</value>
   </data>
@@ -135,6 +216,36 @@
   <data name="ep_ViewDetails" xml:space="preserve">
     <value>View Details</value>
   </data>
+  <data name="fd_Matches" xml:space="preserve">
+    <value>Matches</value>
+  </data>
+  <data name="fd_Opponent" xml:space="preserve">
+    <value>Opponent</value>
+  </data>
+  <data name="fd_Result" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="fd_WLMethod" xml:space="preserve">
+    <value>Win/Loss Method</value>
+  </data>
+  <data name="fp_Academy" xml:space="preserve">
+    <value>Academy</value>
+  </data>
+  <data name="fp_Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="fp_ListOfFighters" xml:space="preserve">
+    <value>List of Fighters</value>
+  </data>
+  <data name="fp_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="fp_Rank" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="fp_Weight" xml:space="preserve">
+    <value>Weight</value>
+  </data>
   <data name="nb_Academies" xml:space="preserve">
     <value>Academies</value>
   </data>
@@ -152,5 +263,41 @@
   </data>
   <data name="nb_SignIn" xml:space="preserve">
     <value>Sign In</value>
+  </data>
+  <data name="td_ContactOrganisator" xml:space="preserve">
+    <value>Contact Organisator</value>
+  </data>
+  <data name="td_DateOfHolding" xml:space="preserve">
+    <value>Date of Holding</value>
+  </data>
+  <data name="td_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="td_Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="td_NumberOfParticipants" xml:space="preserve">
+    <value>Number of Participants</value>
+  </data>
+  <data name="td_OutOf" xml:space="preserve">
+    <value>out of</value>
+  </data>
+  <data name="td_Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="td_RegisterToEvent" xml:space="preserve">
+    <value>Register to Event</value>
+  </data>
+  <data name="td_UnregisterFromEvent" xml:space="preserve">
+    <value>Unregister from Event</value>
+  </data>
+  <data name="tnb_Bracket" xml:space="preserve">
+    <value>Bracket</value>
+  </data>
+  <data name="tnb_Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="tnb_Detail" xml:space="preserve">
+    <value>Detail</value>
   </data>
 </root>
