@@ -1,4 +1,5 @@
 using Localization.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -9,20 +10,21 @@ using TournamentPulse.Application.Repository;
 using TournamentPulse.Application.Service;
 using TournamentPulse.Infrastructure.Data;
 using TournamentPulse.Infrastructure.Data.Generator;
-using Microsoft.AspNetCore.Identity;
-using TournamentPulse.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 #region Localization
 builder.Services.AddSingleton<LanguageService>();
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
-builder.Services.AddMvc().AddViewLocalization().AddDataAnnotationsLocalization(options => {
-    options.DataAnnotationLocalizerProvider = (type, factory) => {
+builder.Services.AddMvc().AddViewLocalization().AddDataAnnotationsLocalization(options =>
+{
+    options.DataAnnotationLocalizerProvider = (type, factory) =>
+    {
         var assemblyName = new AssemblyName(typeof(SharedResource).GetTypeInfo().Assembly.FullName);
         return factory.Create("ShareResource", assemblyName.Name);
     };
 });
-builder.Services.Configure<RequestLocalizationOptions>(options => {
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
     var supportedCultures = new List<CultureInfo> {
         new CultureInfo("uk-UA"),
         new CultureInfo("en-US")
@@ -88,7 +90,7 @@ app.UseStaticFiles();
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
 app.UseRouting();
-app.UseAuthentication();;
+app.UseAuthentication(); ;
 
 app.UseAuthorization();
 

@@ -1,6 +1,4 @@
-﻿using TournamentPulse.WebUI.Models.Fighter;
-
-namespace TournamentPulse.WebUI.Models.Match
+﻿namespace TournamentPulse.WebUI.Models.Match
 {
     public class CategoryMatchListViewModel
     {

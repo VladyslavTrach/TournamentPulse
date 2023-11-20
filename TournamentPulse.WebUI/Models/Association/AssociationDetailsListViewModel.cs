@@ -8,6 +8,6 @@ namespace TournamentPulse.WebUI.Models.Association
         public string Name { get; set; }
         public int AcademiesCnt { get; set; }
         public int FightersCnt { get; set; }
-        public List<AcademyListViewModel> Academies { get; set;}
+        public List<AcademyListViewModel> Academies { get; set; }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TournamentPulse.Application.Interface;
+﻿using TournamentPulse.Application.Interface;
 using TournamentPulse.Core.Entities;
 using TournamentPulse.Infrastructure.Data;
 
@@ -22,7 +17,7 @@ namespace TournamentPulse.Application.Repository
         {
             try
             {
-                if(!TournamentExist(tournament))
+                if (!TournamentExist(tournament))
                 {
                     _context.Tournaments.Add(tournament);
                     _context.SaveChanges();

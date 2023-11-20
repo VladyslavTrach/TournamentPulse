@@ -1,6 +1,4 @@
-﻿using TournamentPulse.Core.Entities;
-
-namespace TournamentPulse.WebUI.Models.Match
+﻿namespace TournamentPulse.WebUI.Models.Match
 {
     public class MatchViewModel
     {

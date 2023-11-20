@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using Entity = TournamentPulse.Core.Entities;
-using TournamentPulse.WebUI.Models.Fighter;
 using TournamentPulse.Core.Entities;
 using TournamentPulse.Infrastructure.Data.Generator;
-using Microsoft.AspNet.Identity;
+using TournamentPulse.WebUI.Models.Fighter;
 
 namespace TournamentPulse.WebUI.Mapper
 {

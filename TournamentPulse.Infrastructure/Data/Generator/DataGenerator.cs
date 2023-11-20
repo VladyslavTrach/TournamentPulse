@@ -1,9 +1,4 @@
 ﻿using Bogus;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TournamentPulse.Infrastructure.Data.Generator
 {
@@ -23,12 +18,12 @@ namespace TournamentPulse.Infrastructure.Data.Generator
             //    .RuleFor(f => f.Rank, fk => fk.PickRandom<Rank>())
             //    .RuleFor(f => f.AcademyId, fk => fk.Random.Int(1, 2));
 
-                fighterRecordModelFake = new Faker<FighterRecordModel>()
-        .RuleFor(f => f.FullName, fk => fk.Name.FullName())
-        .RuleFor(f => f.Age, fk => fk.Random.Int(18, 25))
-        .RuleFor(f => f.Weight, fk => fk.Random.Float(70, 72))
-        .RuleFor(f => f.Rank, fk => fk.PickRandom<Rank>())
-        .RuleFor(f => f.AcademyId, fk => fk.Random.Int(1, 2));
+            fighterRecordModelFake = new Faker<FighterRecordModel>()
+    .RuleFor(f => f.FullName, fk => fk.Name.FullName())
+    .RuleFor(f => f.Age, fk => fk.Random.Int(18, 25))
+    .RuleFor(f => f.Weight, fk => fk.Random.Float(70, 72))
+    .RuleFor(f => f.Rank, fk => fk.PickRandom<Rank>())
+    .RuleFor(f => f.AcademyId, fk => fk.Random.Int(1, 2));
         }
 
         public FighterRecordModel GenerateFighter() //Generate 1

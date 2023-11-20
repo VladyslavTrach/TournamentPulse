@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TournamentPulse.Application.Interface;
-using TournamentPulse.WebUI.Models.Academy;
-using AutoMapper;
-using System.Collections.Generic;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using TournamentPulse.WebUI.Models.Fighter;
+using Microsoft.AspNetCore.Mvc;
+using TournamentPulse.Application.Interface;
 using TournamentPulse.Core.Entities;
+using TournamentPulse.WebUI.Models.Academy;
+using TournamentPulse.WebUI.Models.Fighter;
 
 namespace TournamentPulse.WebUI.Controllers
 {
@@ -51,7 +50,7 @@ namespace TournamentPulse.WebUI.Controllers
         [Authorize(Roles = "Admin,Organizer")]
         public IActionResult Add()
         {
-            
+
             return View();
         }
 

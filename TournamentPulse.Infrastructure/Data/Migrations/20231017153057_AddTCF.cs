@@ -59,4 +59,4 @@ namespace TournamentPulse.Infrastructure.Data.Migrations
                 name: "TournamentCategoryFighter");
         }
     }
-} 
+}

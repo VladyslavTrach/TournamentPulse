@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TournamentPulse.Application.Interface;
-using TournamentPulse.WebUI.Models.Association;
-using AutoMapper;
-using System.Collections.Generic;
-using TournamentPulse.Application.Repository;
-using TournamentPulse.WebUI.Models.Academy;
-using TournamentPulse.WebUI.Models.Fighter;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using TournamentPulse.Application.Interface;
 using TournamentPulse.Core.Entities;
+using TournamentPulse.WebUI.Models.Academy;
+using TournamentPulse.WebUI.Models.Association;
 
 namespace TournamentPulse.WebUI.Controllers
 {
@@ -61,7 +58,7 @@ namespace TournamentPulse.WebUI.Controllers
             {
                 Association association = new Association();
                 association.Name = model.Name;
-                
+
 
                 _associationRepository.AddAssociation(association);
 

@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TournamentPulse.WebUI.Controllers
 {
@@ -31,7 +31,7 @@ namespace TournamentPulse.WebUI.Controllers
         public async Task<IActionResult> Create(IdentityRole model)
         {
             //avoid duplicate role
-            if(!_roleManager.RoleExistsAsync(model.Name).GetAwaiter().GetResult())
+            if (!_roleManager.RoleExistsAsync(model.Name).GetAwaiter().GetResult())
             {
                 _roleManager.CreateAsync(new IdentityRole(model.Name)).GetAwaiter().GetResult();
             }

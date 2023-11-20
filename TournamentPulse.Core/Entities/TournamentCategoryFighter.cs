@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace TournamentPulse.Core.Entities
+﻿namespace TournamentPulse.Core.Entities
 {
     public class TournamentCategoryFighter
     {

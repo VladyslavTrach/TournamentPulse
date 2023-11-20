@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using TournamentPulse.Application.Interface;
-using TournamentPulse.Application.Repository;
 using TournamentPulse.Core.Entities;
 using TournamentPulse.Core.Enums;
 using TournamentPulse.WebUI.Models.Match;

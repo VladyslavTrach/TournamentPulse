@@ -1,10 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TournamentPulse.Application.Interface;
+﻿using TournamentPulse.Application.Interface;
 using TournamentPulse.Core.Entities;
 
 namespace TournamentPulse.Application.Service
@@ -30,7 +24,7 @@ namespace TournamentPulse.Application.Service
 
         public void RegisterFighterForTournament(int tournamentId, int fighterId)
         {
-            if(!IsRegistered(tournamentId, fighterId))
+            if (!IsRegistered(tournamentId, fighterId))
             {
                 // Fetch the tournament, fighter, and their respective categories
                 var tournament = _tournamentRepository.GetById(tournamentId);
@@ -56,7 +50,7 @@ namespace TournamentPulse.Application.Service
 
                 _tournamentCategoryFighterRepository.AddTCFRecord(tournamentCategoryFighter);
             }
-           
+
         }
 
         public void UnregisterFighterFromTournament(int tournamentId, int fighterId)
@@ -74,11 +68,11 @@ namespace TournamentPulse.Application.Service
         {
             foreach (var category in categories)
             {
-                if (fighter.Weight >= category.MinWeight 
+                if (fighter.Weight >= category.MinWeight
                     && fighter.Weight < category.MaxWeight
-                    && fighter.Age >= category.MinAge 
+                    && fighter.Age >= category.MinAge
                     && fighter.Age < category.MaxAge
-                    && fighter.Weight >= category.MinWeight 
+                    && fighter.Weight >= category.MinWeight
                     && fighter.Weight < category.MaxWeight
                     && fighter.Rank == category.Rank)
                     return category;

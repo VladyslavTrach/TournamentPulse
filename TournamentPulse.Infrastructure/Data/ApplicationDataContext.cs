@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using TournamentPulse.Core;
 using TournamentPulse.Core.Entities;
 using TournamentPulse.Infrastructure.Data.EntityTypeConfiguration;
 

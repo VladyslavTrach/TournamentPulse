@@ -2,10 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TournamentPulse.Application.Interface;
-using TournamentPulse.Application.Repository;
-using TournamentPulse.Application.Service;
 using TournamentPulse.Core.Entities;
-using TournamentPulse.Infrastructure.Data.Generator;
 using TournamentPulse.WebUI.Models.Fighter;
 using TournamentPulse.WebUI.Models.Match;
 

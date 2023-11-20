@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TournamentPulse.Application.Interface;
 using TournamentPulse.Core.Entities;
 using TournamentPulse.Infrastructure.Data;
@@ -59,13 +54,13 @@ namespace TournamentPulse.Application.Repository
         }
 
         public bool FighterExists(Fighter fighter)
-    {
-        return _context.Fighters.Any(f => 
-            f.FullName == fighter.FullName && 
-            f.AcademyId == fighter.AcademyId && 
-            f.Age == fighter.Age
-        );
-    }
+        {
+            return _context.Fighters.Any(f =>
+                f.FullName == fighter.FullName &&
+                f.AcademyId == fighter.AcademyId &&
+                f.Age == fighter.Age
+            );
+        }
 
 
 
@@ -87,7 +82,7 @@ namespace TournamentPulse.Application.Repository
         public Fighter GetFighterById(int id)
         {
             var fighter = _context.Fighters.FirstOrDefault(f => f.Id == id);
-                return fighter;
+            return fighter;
         }
         public int GetFighterIdByFullName(string fullName)
         {

@@ -1,5 +1,4 @@
-﻿using TournamentPulse.Core.Entities;
-using TournamentPulse.WebUI.Models.Fighter;
+﻿using TournamentPulse.WebUI.Models.Fighter;
 
 namespace TournamentPulse.WebUI.Models.CategoryFighter
 {
