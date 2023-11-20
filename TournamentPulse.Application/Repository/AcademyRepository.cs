@@ -32,6 +32,17 @@ namespace TournamentPulse.Application.Repository
             return _context.Academies.Where(a => a.AssociationId == id).Count();
         }
 
+        public void DeleteAcademy(int id)
+        {
+            var academy = _context.Academies.FirstOrDefault(a => a.Id == id);
+
+            if (academy != null)
+            {
+                _context.Academies.Remove(academy);
+                _context.SaveChanges();
+            }
+        }
+
         public List<Academy> GetAcademiesByAssociation(int associationId)
         {
             return _context.Academies
@@ -62,6 +73,12 @@ namespace TournamentPulse.Application.Repository
                 .Include(a => a.Fighters)
                 .ToList();
         }
+
+        public ICollection<Academy> GetAllAcademiesAPI()
+        {
+            return _context.Academies.ToList();
+        }
+
         private bool IsAcademyNameUnique(string name)
         {
             // Check if there is any academy with the same name in the database

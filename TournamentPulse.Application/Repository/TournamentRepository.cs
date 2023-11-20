@@ -31,6 +31,16 @@ namespace TournamentPulse.Application.Repository
             }
         }
 
+        public void DeleteTournament(int id)
+        {
+            var tournament = _context.Tournaments.FirstOrDefault(x => x.Id == id);
+
+            if (tournament != null)
+            {
+                _context.Tournaments.Remove(tournament);
+                _context.SaveChanges();
+            }
+        }
 
         public Tournament GetById(int id)
         {

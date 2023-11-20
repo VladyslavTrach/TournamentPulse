@@ -8,5 +8,6 @@ namespace TournamentPulse.Application.Interface
         Tournament GetById(int id);
         bool CreateTournament(Tournament tournament);
         bool TournamentExist(Tournament tournament);
+        void DeleteTournament(int id);
     }
 }

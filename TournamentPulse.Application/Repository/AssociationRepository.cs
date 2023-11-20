@@ -37,6 +37,16 @@ namespace TournamentPulse.Application.Repository
             return _context.Fighters.Count(f => _context.Academies.Any(a => a.AssociationId == id && a.Id == f.AcademyId));
         }
 
+        public void DeleteAssociation(int id)
+        {
+            var association = _context.Associations.FirstOrDefault(a => a.Id == id);
+
+            if (association != null)
+            {
+                _context.Associations.Remove(association);
+                _context.SaveChanges();
+            }
+        }
 
         public ICollection<Association> GetAllAssociations()
         {

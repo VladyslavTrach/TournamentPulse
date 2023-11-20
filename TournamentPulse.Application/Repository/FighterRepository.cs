@@ -50,7 +50,18 @@ namespace TournamentPulse.Application.Repository
 
         public int CountFightersByAcademy(int id)
         {
-            return _context.Fighters.Where(f => f.AcademyId == id).Count();
+            return _context.Fighters.Where(f => f.AcademyId == id && f.Id != 7).Count();
+        }
+
+        public void DeleteFighter(int id)
+        {
+            var fighter = _context.Fighters.FirstOrDefault(f => f.Id == id);
+
+            if(fighter != null)
+            {
+                _context.Fighters.Remove(fighter);
+                _context.SaveChanges();
+            }
         }
 
         public bool FighterExists(Fighter fighter)
@@ -66,7 +77,7 @@ namespace TournamentPulse.Application.Repository
 
         public ICollection<Fighter> GetAllFighters()
         {
-            return _context.Fighters.Include(f => f.Academy).ToList();
+            return _context.Fighters.Include(f => f.Academy).Where(f => f.Id != 7).ToList();
         }
 
         public Fighter GetFighterByEmail(string email)
@@ -101,7 +112,7 @@ namespace TournamentPulse.Application.Repository
         }
         public ICollection<Fighter> GetFightersByAcademy(int academyId)
         {
-            return _context.Fighters.Where(f => f.AcademyId == academyId).ToList();
+            return _context.Fighters.Where(f => f.AcademyId == academyId && f.Id != 7).ToList();
         }
 
         public void UpdateFighter(Fighter fighter)

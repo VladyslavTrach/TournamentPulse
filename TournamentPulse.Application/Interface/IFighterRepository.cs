@@ -15,5 +15,6 @@ namespace TournamentPulse.Application.Interface
         public bool AddFighters(IEnumerable<Fighter> fighters);
         public bool FighterExists(Fighter fighter);
         public void UpdateFighter(Fighter fighter);
+        public void DeleteFighter(int id);
     }
 }
