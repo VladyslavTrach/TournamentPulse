@@ -190,8 +190,6 @@ namespace TournamentPulse.WebUI.Controllers
             return View();
         }
 
-
-
         //-----------------------------------------//
 
         private int CountTotalRounds(int fightersCnt)

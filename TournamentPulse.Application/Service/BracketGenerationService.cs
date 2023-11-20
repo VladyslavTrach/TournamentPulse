@@ -141,9 +141,21 @@ namespace TournamentPulse.Application.Service
         }
         private List<Match> GenerateNextRoundMatches(int tournamentId, int categoryId)
         {
-            
-            List<Match> previousRoundMatches = (List<Match>)_matchRepository.GetOccurredMatchesForCategory(tournamentId, categoryId);
-            if (previousRoundMatches.Count <= 1)
+            List<Match> previousRoundMatches = (List<Match>)_matchRepository.GetNotArchivedMatchesForCategory(tournamentId, categoryId);
+
+            IList<Fighter> fighters = (IList<Fighter>)_tournamentCategoryFighterRepository.GetFightersInCategoryAndTournament(tournamentId, categoryId);
+
+            if (fighters.Count == previousRoundMatches.Count)
+            {
+                _matchRepository.ArchiveMatchesForCategory(previousRoundMatches);
+                return new List<Match>();
+            }
+
+            if (!CheckIfAllMatchesOccured(previousRoundMatches)) 
+            { 
+                return new List<Match>();
+            }
+            else if (previousRoundMatches.Count <= 1)
             {
                 _matchRepository.ArchiveMatchesForCategory(previousRoundMatches);
                 return new List<Match>();
@@ -176,6 +188,7 @@ namespace TournamentPulse.Application.Service
                     WinnerId = (int)previousRoundMatches[(byeFighterIndex)].WinnerId,
                     MatchStatus = MatchStatusEnum.Occurred.ToString()
                 };
+
                 previousRoundMatches.Remove(previousRoundMatches[byeFighterIndex]);
                 nextRoundMatches.Add(byeMatch);
             }
@@ -196,6 +209,17 @@ namespace TournamentPulse.Application.Service
             }
 
             return nextRoundMatches;
+        }
+        private bool CheckIfAllMatchesOccured(List<Match> matches)
+        {
+            foreach (Match match in matches)
+            {
+                if (!(match.MatchStatus == MatchStatusEnum.Occurred.ToString()))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

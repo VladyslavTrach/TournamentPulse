@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>Centered Card Layout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -80,29 +81,29 @@
                                                 <td>
                                                     @if (winner == match.Fighter1)
                                                     {
-                                                        <i class="fas fa-trophy winner-icon"></i> <a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = match.Fighter1 })">@match.Fighter1</a>
+                                                        <a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = match.Fighter1 })"> <i class="fas fa-trophy winner-icon"></i> @match.Fighter1</a>
                                                     }
                                                     else if (winner == match.Fighter2)
                                                     {
-                                                        <i class="fas fa-times loser-icon"></i> <a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = match.Fighter1 })">@match.Fighter1</a>
+                                                        <a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = match.Fighter1 })"> <i class="fas fa-times loser-icon"></i>@match.Fighter1</a>
                                                     }
                                                     else
                                                     {
-                                                        <i class="fas fa-question-circle question-icon"></i> <a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = match.Fighter1 })">@match.Fighter1</a>
+                                                        <a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = match.Fighter1 })"><i class="fas fa-question-circle question-icon"></i>@match.Fighter1</a>
                                                     }
                                                 </td>
                                                 <td>
                                                     @if (winner == match.Fighter2)
                                                     {
-                                                        <i class="fas fa-trophy winner-icon"></i> <a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = match.Fighter2 })">@match.Fighter2</a>
+                                                        <a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = match.Fighter2 })"><i class="fas fa-trophy winner-icon"></i>@match.Fighter2</a>
                                                     }
                                                     else if (winner == match.Fighter1)
                                                     {
-                                                        <i class="fas fa-times loser-icon"></i> <a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = match.Fighter2 })">@match.Fighter2</a>
+                                                        <a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = match.Fighter2 })"> <i class="fas fa-times loser-icon"></i>@match.Fighter2</a>
                                                     }
                                                     else
                                                     {
-                                                        <i class="fas fa-question-circle question-icon"></i> <a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = match.Fighter2 })">@match.Fighter2</a>
+                                                        <a class="nav-link" href="@Url.Action("Details", "Fighter", new { fighterName = match.Fighter2 })"> <i class="fas fa-question-circle question-icon"></i>@match.Fighter2</a>
                                                     }
                                                 </td>
                                                 <td>@match.MatchStatus</td>

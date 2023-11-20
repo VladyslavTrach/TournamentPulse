@@ -160,5 +160,14 @@ namespace TournamentPulse.Application.Repository
                 .Include(m => m.Fighter2)
                 .Where(m => m.Fighter1Id == fighterId || m.Fighter2Id == fighterId).ToList();
         }
+
+        public ICollection<Match> GetNotArchivedMatchesForCategory(int tournamentId, int categoryId)
+        {
+            return _context.Matches
+                .Include(m => m.Category)
+                .Include(m => m.Fighter1)
+                .Include(m => m.Fighter2)
+                .Where(m => m.TournamentId == tournamentId && m.CategoryId == categoryId && m.MatchStatus != MatchStatusEnum.Archived.ToString()).ToList();
+        }
     }
 }

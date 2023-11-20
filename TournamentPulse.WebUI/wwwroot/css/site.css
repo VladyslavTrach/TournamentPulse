@@ -23,11 +23,38 @@ body {
     overflow: hidden;
     color: white;
 }
-
+    
 .custom-card-secondary {
     background-color: #999999;
     border-radius: 20px;
     overflow: hidden;
+    color: white;
+}
+
+.bg-purple {
+    background-color: #585858; /* Replace with your desired purple color */
+}
+
+
+.footer {
+    bottom: 0;
+    color: #707070;
+    height: 2em;
+    left: 0;
+    position: relative;
+
+    width: 100%;
+}
+
+.winner-icon {
+    color: gold;
+}
+
+.loser-icon {
+    color: red;
+}
+
+.question-icon {
     color: white;
 }
 
